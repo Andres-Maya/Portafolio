@@ -1,6 +1,7 @@
 import './style.css'
 import profilePhoto from './assets/Andres.jpeg'
 import cvFile from './assets/pdf/AndresCV.pdf'
+import { setupIntro } from './intro.js'
 
 const icon = (name) => {
   const paths = {
@@ -10,6 +11,8 @@ const icon = (name) => {
     phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 3 5.2 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L9.1 10.8a16 16 0 0 0 4.1 4.1l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>',
     github: '<path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.3-.4 6.8-1.6 6.8-7.4A5.8 5.8 0 0 0 19.3 3 5.4 5.4 0 0 0 19.1 0S17.9-.4 15 1.5a13.4 13.4 0 0 0-7 0C5.1-.4 3.9 0 3.9 0A5.4 5.4 0 0 0 3.7 3a5.8 5.8 0 0 0-1.5 4.1c0 5.8 3.5 7 6.8 7.4A4.8 4.8 0 0 0 8 18v4m0-3c-3 .9-3-1.5-4.2-2"/>',
     linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6ZM2 9h4v12H2z"/><path d="M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>',
+    sun: '<circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    moon: '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/>',
   }
   return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name]}</svg>`
 }
@@ -48,7 +51,44 @@ const skills = [
   ['DevOps y herramientas', ['Docker', 'Git', 'GitHub']],
 ]
 
+const musicalNotes = [
+  ['♫', 3, 8, 44, -12, 10, 8.8], ['♪', 10, 31, 30, 9, 18, 7.4],
+  ['♬', 6, 62, 50, -8, 26, 10.2], ['♩', 14, 86, 32, 14, 34, 8.1],
+  ['♭', 21, 13, 36, 10, 42, 9.4], ['♫', 19, 72, 54, -14, 50, 10.8],
+  ['♪', 27, 42, 34, 11, 58, 7.8], ['♬', 31, 94, 46, -9, 66, 9.7],
+  ['♩', 35, 22, 28, 13, 74, 8.5], ['♫', 40, 63, 48, -11, 82, 11.2],
+  ['♭', 45, 5, 34, 8, 90, 9.1], ['♪', 48, 84, 31, -13, 98, 7.7],
+  ['♬', 53, 34, 52, 12, 106, 10.4], ['♩', 57, 70, 29, -8, 114, 8.3],
+  ['♫', 61, 12, 45, 10, 122, 9.8], ['♪', 65, 92, 33, -12, 130, 7.5],
+  ['♭', 69, 48, 39, 15, 138, 9.2], ['♬', 73, 78, 50, -10, 146, 10.6],
+  ['♫', 77, 27, 56, 8, 154, 11.4], ['♩', 81, 60, 30, -15, 162, 8.4],
+  ['♪', 85, 6, 36, 12, 170, 7.9], ['♬', 89, 39, 49, -9, 178, 10.1],
+  ['♭', 94, 72, 38, 14, 186, 9.3], ['♫', 97, 19, 52, -11, 194, 10.9],
+  ['♪', 2, 96, 35, 7, 202, 8.2], ['♩', 24, 57, 29, -14, 210, 7.6],
+  ['♬', 37, 80, 44, 11, 218, 9.9], ['♫', 51, 52, 50, -8, 226, 11.1],
+  ['♪', 63, 25, 32, 13, 234, 7.8], ['♭', 76, 96, 37, -12, 242, 9.5],
+  ['♩', 88, 88, 31, 9, 250, 8.6], ['♬', 98, 52, 48, -10, 258, 10.3],
+]
+
 document.querySelector('#app').innerHTML = `
+  <div class="intro-overlay" id="introOverlay" aria-label="Presentación de Andrés Maya">
+    <svg width="0" height="0" class="intro-defs" aria-hidden="true"><defs>
+      <symbol id="intro-note-quarter" viewBox="0 0 24 34"><ellipse cx="7.5" cy="27" rx="6.2" ry="4.4" transform="rotate(-18 7.5 27)"/><rect x="12.4" y="2" width="2.3" height="25.5" rx="1"/></symbol>
+      <symbol id="intro-note-eighth" viewBox="0 0 24 34"><ellipse cx="7.5" cy="27" rx="6.2" ry="4.4" transform="rotate(-18 7.5 27)"/><rect x="12.4" y="2" width="2.3" height="25.5" rx="1"/><path d="M14.7 2.2C19 3.4 22.5 6.8 21.6 12.3C21.1 15.2 19.2 16.9 16.9 17.8C19.4 15.9 20 13.6 19.4 11.2C18.8 8.7 16.9 6.5 14.7 5.6Z"/></symbol>
+    </defs></svg>
+    <svg class="intro-guides" id="introGuides" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    <div class="intro-glow" id="introGlow"></div>
+    <div class="intro-note-stage" id="introNoteStage" aria-hidden="true"></div>
+    <div class="intro-wordmark" id="introWordmark"><span>AM</span><h1>Andrés Maya</h1><div></div><p>Software · Música · Creatividad</p></div>
+    <button class="intro-skip" id="introSkip" type="button">Saltar intro</button>
+  </div>
+  <div class="music-background" aria-hidden="true">
+    <div class="music-parallax" id="musicParallax">
+      ${musicalNotes.map(([symbol, x, y, size, rotation, delay, duration]) => `
+        <span class="music-note" style="--x:${x}%;--y:${y}%;--size:${size}px;--rotation:${rotation}deg;--delay:${delay}ms;--duration:${duration}s"><i>${symbol}</i></span>
+      `).join('')}
+    </div>
+  </div>
   <a class="skip-link" href="#main">Ir al contenido</a>
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
@@ -56,6 +96,7 @@ document.querySelector('#app').innerHTML = `
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
       </nav>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true"><span class="theme-icon theme-sun">${icon('sun')}</span><span class="theme-icon theme-moon">${icon('moon')}</span></button>
       <a class="nav-cv" href="${cvFile}" target="_blank" rel="noopener">Ver CV ${icon('external')}</a>
       <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -132,6 +173,28 @@ document.querySelector('#app').innerHTML = `
 const menuButton = document.querySelector('#menuButton')
 const navLinks = document.querySelector('#navLinks')
 const navbar = document.querySelector('#navbar')
+const musicParallax = document.querySelector('#musicParallax')
+const musicBackground = document.querySelector('.music-background')
+const themeToggle = document.querySelector('#themeToggle')
+
+const syncThemeToggle = () => {
+  const isDark = document.documentElement.dataset.theme === 'dark'
+  themeToggle.setAttribute('aria-pressed', String(isDark))
+  themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro')
+  themeToggle.title = isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+}
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
+  document.documentElement.dataset.theme = nextTheme
+  document.documentElement.style.colorScheme = nextTheme
+  localStorage.setItem('portfolio-theme', nextTheme)
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', nextTheme === 'dark' ? '#0b0e14' : '#f7f5ef')
+  syncThemeToggle()
+})
+syncThemeToggle()
+document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0b0e14' : '#f7f5ef')
+setupIntro()
 
 menuButton.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('is-open')
@@ -143,6 +206,34 @@ navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', 
   navLinks.classList.remove('is-open'); menuButton.classList.remove('is-open'); menuButton.setAttribute('aria-expanded', 'false')
 }))
 window.addEventListener('scroll', () => navbar.classList.toggle('is-scrolled', window.scrollY > 24), { passive: true })
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let pointerX = 0
+  let pointerY = 0
+  let frameRequested = false
+
+  const updateMusicParallax = () => {
+    const scrollProgress = window.scrollY / Math.max(document.documentElement.scrollHeight - window.innerHeight, 1)
+    musicBackground.style.setProperty('--music-x', `${pointerX * 18}px`)
+    musicBackground.style.setProperty('--music-y', `${(pointerY * 12) - (scrollProgress * 95)}px`)
+    frameRequested = false
+  }
+
+  const requestMusicFrame = () => {
+    if (!frameRequested) {
+      frameRequested = true
+      requestAnimationFrame(updateMusicParallax)
+    }
+  }
+
+  window.addEventListener('pointermove', (event) => {
+    pointerX = (event.clientX / window.innerWidth) - 0.5
+    pointerY = (event.clientY / window.innerHeight) - 0.5
+    requestMusicFrame()
+  }, { passive: true })
+  window.addEventListener('scroll', requestMusicFrame, { passive: true })
+  requestMusicFrame()
+}
 
 const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
   if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target) }

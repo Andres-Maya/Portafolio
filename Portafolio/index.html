@@ -6,6 +6,17 @@
     <meta name="description" content="Portafolio de Andrés Camilo Maya Rosero, estudiante de Ingeniería de Software, músico y presentador colombiano." />
     <meta name="theme-color" content="#f7f5ef" />
     <title>Andrés Camilo Maya Rosero | Portafolio</title>
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme')
+        const theme = savedTheme === 'light' ? 'light' : 'dark'
+        document.documentElement.dataset.theme = theme
+        document.documentElement.style.colorScheme = theme
+      } catch (_) {
+        document.documentElement.dataset.theme = 'dark'
+        document.documentElement.style.colorScheme = 'dark'
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
