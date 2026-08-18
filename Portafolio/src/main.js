@@ -92,7 +92,7 @@ document.querySelector('#app').innerHTML = `
   <a class="skip-link" href="#main">Ir al contenido</a>
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-mark">AM</span><span class="brand-name">Andrés Maya</span></a>
+      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar" id="brandAvatar"><span class="brand-initials">AM</span><img src="${profilePhoto}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
       </nav>
@@ -176,6 +176,9 @@ const navbar = document.querySelector('#navbar')
 const musicParallax = document.querySelector('#musicParallax')
 const musicBackground = document.querySelector('.music-background')
 const themeToggle = document.querySelector('#themeToggle')
+const portraitImage = document.querySelector('.portrait-frame img')
+const brandAvatar = document.querySelector('#brandAvatar')
+const heroSection = document.querySelector('#inicio')
 
 const syncThemeToggle = () => {
   const isDark = document.documentElement.dataset.theme === 'dark'
@@ -195,6 +198,16 @@ themeToggle.addEventListener('click', () => {
 syncThemeToggle()
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0b0e14' : '#f7f5ef')
 setupIntro()
+
+const syncPortraitVisibility = () => {
+  const showAvatar = heroSection.getBoundingClientRect().bottom <= navbar.offsetHeight + 120
+  portraitImage.classList.toggle('is-hidden', showAvatar)
+  brandAvatar.classList.toggle('has-photo', showAvatar)
+}
+
+window.addEventListener('scroll', syncPortraitVisibility, { passive: true })
+window.addEventListener('resize', syncPortraitVisibility, { passive: true })
+syncPortraitVisibility()
 
 menuButton.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('is-open')
