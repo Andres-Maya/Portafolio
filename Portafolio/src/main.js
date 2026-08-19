@@ -2,6 +2,23 @@ import './style.css'
 import profilePhoto from './assets/Andres.jpeg'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import { setupIntro } from './intro.js'
+import htmlLogo from './assets/skills/html5.svg'
+import cssLogo from './assets/skills/css3.svg'
+import javascriptLogo from './assets/skills/javascript.svg'
+import typescriptLogo from './assets/skills/typescript.svg'
+import claudeLogo from './assets/skills/claude.svg'
+import pythonLogo from './assets/skills/python.svg'
+import javaLogo from './assets/skills/java.svg'
+import djangoLogo from './assets/skills/django.svg'
+import nodejsLogo from './assets/skills/nodejs.svg'
+import springBootLogo from './assets/skills/springboot.svg'
+import jwtLogo from './assets/skills/jwt.svg'
+import ollamaLogo from './assets/skills/ollama.svg'
+import mysqlLogo from './assets/skills/mysql.svg'
+import mongodbLogo from './assets/skills/mongodb.svg'
+import dockerLogo from './assets/skills/docker.svg'
+import gitLogo from './assets/skills/git.svg'
+import githubLogo from './assets/skills/github.svg'
 
 const icon = (name) => {
   const paths = {
@@ -45,10 +62,11 @@ const projects = [
 ]
 
 const skills = [
-  ['Lenguajes de programación', ['Python', 'Java']],
-  ['Frameworks, librerías y protocolos', ['Ollama', 'Django', 'Node.js', 'Spring Boot', 'JWT']],
-  ['Bases de datos', ['MySQL', 'MongoDB']],
-  ['DevOps y herramientas', ['Docker', 'Git', 'GitHub']],
+  ['Lenguajes de programación', [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }, { name: 'TypeScript', icon: typescriptLogo }]],
+  ['Desarrollo web, frameworks y protocolos', [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }, { name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }]],
+  ['IA y asistentes', [{ name: 'Ollama', icon: ollamaLogo }, { name: 'Claude', icon: claudeLogo }]],
+  ['Bases de datos', [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }]],
+  ['DevOps y herramientas', [{ name: 'Docker', icon: dockerLogo }, { name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo }]],
 ]
 
 const musicalNotes = [
@@ -155,7 +173,10 @@ document.querySelector('#app').innerHTML = `
 
     <section class="section skills" id="habilidades"><div class="container">
       <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Caja de herramientas</p><h2>Habilidades<br><em>técnicas.</em></h2></div><p>Tecnologías y herramientas con las que he trabajado durante mi formación y proyectos personales.</p></div>
-      <div class="skills-grid">${skills.map(([title, items], index) => `<article class="skill-card reveal"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => `<span>${item}</span>`).join('')}</div></article>`).join('')}</div>
+      <div class="skills-grid">${skills.map(([title, items], index) => `<article class="skill-card reveal"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => {
+        const skill = typeof item === 'string' ? { name: item } : item
+        return `<div class="skill-item ${skill.icon ? 'has-logo' : ''}">${skill.icon ? `<img src="${skill.icon}" alt="" loading="lazy">` : ''}<b>${skill.name}</b></div>`
+      }).join('')}</div></article>`).join('')}</div>
       <div class="languages reveal"><div><span>Idioma nativo</span><strong>Español</strong><div class="language-bar"><i style="width:100%"></i></div></div><div><span>Competencia intermedia alta</span><strong>Inglés · B2</strong><div class="language-bar"><i style="width:72%"></i></div></div></div>
     </div></section>
 
