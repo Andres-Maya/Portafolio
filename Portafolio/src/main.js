@@ -1,5 +1,8 @@
 import './style.css'
 import profilePhoto from './assets/Andres.jpeg'
+import tecnodesafioCertificate from './assets/CertificadoTecnodesafio2019.jpeg'
+import heritageCertificate from './assets/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
+import scienceClubsCertificate from './assets/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import { setupIntro } from './intro.js'
 import htmlLogo from './assets/skills/html5.svg'
@@ -58,6 +61,27 @@ const projects = [
     description: 'Sistema académico de notificaciones construido en Java, acompañado por su diagrama de clases y una estructura orientada a objetos para modelar el dominio universitario.',
     tags: ['Java', 'POO', 'UML', 'Patrones'],
     links: [['Ver repositorio', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']],
+  },
+]
+
+const certificates = [
+  {
+    title: 'Tecnodesafío 2019',
+    issuer: 'SENA · Tecnoacademia · SENNOVA',
+    year: '2019',
+    image: tecnodesafioCertificate,
+  },
+  {
+    title: 'Investigación para la Recuperación del Patrimonio Bibliográfico',
+    issuer: 'Alcaldía Municipal de Túquerres',
+    year: '2015',
+    image: heritageCertificate,
+  },
+  {
+    title: '5.ª edición de Clubes de Ciencia Colombia',
+    issuer: 'Clubes de Ciencia Colombia · SENA',
+    year: '2019',
+    image: scienceClubsCertificate,
   },
 ]
 
@@ -188,7 +212,17 @@ document.querySelector('#app').innerHTML = `
       </div>
     </div></section>
 
-    <section class="section credentials" id="credenciales"><div class="container credentials-inner reveal"><p class="eyebrow"><span></span> Aprendizaje continuo</p><h2>Credenciales</h2><div class="credentials-empty" aria-hidden="true"></div></div></section>
+    <section class="section credentials" id="credenciales"><div class="container credentials-inner">
+      <div class="credentials-heading reveal"><p class="eyebrow"><span></span> Aprendizaje continuo</p><h2>Certificados</h2><p>Reconocimientos y experiencias que han acompañado mi formación académica, tecnológica y creativa.</p></div>
+      <div class="certificate-grid">${certificates.map((certificate) => `
+        <article class="certificate-card reveal">
+          <a class="certificate-preview" href="${certificate.image}" target="_blank" rel="noopener" aria-label="Abrir certificado: ${certificate.title}">
+            <img src="${certificate.image}" alt="Certificado ${certificate.title}" loading="lazy">
+            <span>Ver certificado ${icon('external')}</span>
+          </a>
+          <div class="certificate-content"><span>${certificate.year}</span><h3>${certificate.title}</h3><p>${certificate.issuer}</p></div>
+        </article>`).join('')}</div>
+    </div></section>
 
     <section class="section contact" id="contacto"><div class="container contact-card reveal">
       <p class="eyebrow light"><span></span> Contacto</p><h2>¿Creamos algo<br><em>juntos?</em></h2><p>Estoy abierto a conversar sobre software, proyectos creativos, música y nuevas oportunidades de aprendizaje.</p>
@@ -278,7 +312,7 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 }
 
 const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-  if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target) }
-}), { threshold: 0.12 })
+  entry.target.classList.toggle('is-visible', entry.isIntersecting)
+}), { threshold: 0.12, rootMargin: '0px 0px -5% 0px' })
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element))
 document.querySelector('#year').textContent = new Date().getFullYear()
