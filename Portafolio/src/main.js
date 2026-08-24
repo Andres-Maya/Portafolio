@@ -176,8 +176,16 @@ document.querySelector('#app').innerHTML = `
       <div class="skills-grid">${skills.map(([title, items], index) => `<article class="skill-card reveal"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => {
         const skill = typeof item === 'string' ? { name: item } : item
         return `<div class="skill-item ${skill.icon ? 'has-logo' : ''}">${skill.icon ? `<img src="${skill.icon}" alt="" loading="lazy">` : ''}<b>${skill.name}</b></div>`
-      }).join('')}</div></article>`).join('')}</div>
-      <div class="languages reveal"><div><span>Idioma nativo</span><strong>Español</strong><div class="language-bar"><i style="width:100%"></i></div></div><div><span>Competencia intermedia alta</span><strong>Inglés · B2</strong><div class="language-bar"><i style="width:72%"></i></div></div></div>
+      }).join('')}</div></article>`).join('')}
+        <article class="skill-card language-card reveal">
+          <span class="skill-index">06</span>
+          <h3>Idiomas</h3>
+          <div class="language-list">
+            <div class="language-item"><span>Español</span><strong>Nativo</strong></div>
+            <div class="language-item"><span>Inglés</span><strong>B2</strong></div>
+          </div>
+        </article>
+      </div>
     </div></section>
 
     <section class="section credentials" id="credenciales"><div class="container credentials-inner reveal"><p class="eyebrow"><span></span> Aprendizaje continuo</p><h2>Credenciales</h2><div class="credentials-empty" aria-hidden="true"></div></div></section>
