@@ -662,9 +662,12 @@ em{
 }
 .about-copy p{
     margin:0 0 18px;
-    color:var(--muted);
-    font-size:16px;
-    line-height:1.8
+    color:var(--ink);
+    font-size:18px;
+    font-weight:500;
+    line-height:1.75;
+    text-align:justify;
+    hyphens:auto
 }
 .interest-row,
 .tag-list{
