@@ -1,5 +1,6 @@
 import './style.css'
 import profilePhoto from './assets/Andres.jpeg'
+import profileLogo from './assets/logoperfil.png'
 import tecnodesafioCertificate from './assets/CertificadoTecnodesafio2019.jpeg'
 import heritageCertificate from './assets/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
 import scienceClubsCertificate from './assets/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
@@ -122,7 +123,7 @@ document.querySelector('#app').innerHTML = `
   <a class="skip-link" href="#main">Ir al contenido</a>
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar" id="brandAvatar"><span class="brand-initials">AM</span><img src="${profilePhoto}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
+      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar"><img src="${profileLogo}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
       </nav>
@@ -152,7 +153,6 @@ document.querySelector('#app').innerHTML = `
             <img src="${profilePhoto}" alt="Retrato de Andrés Camilo Maya Rosero">
             <div class="portrait-caption"><span>Andrés Camilo</span><span>Software &amp; Música</span></div>
           </div>
-          <div class="floating-note note-code"><span>&lt;/&gt;</span> Desarrollo</div><div class="floating-note note-music"><span>♪</span> Músico</div>
         </div>
       </div>
       <a class="scroll-hint" href="#perfil"><span></span> Descubre más</a>
@@ -227,9 +227,6 @@ const navbar = document.querySelector('#navbar')
 const musicParallax = document.querySelector('#musicParallax')
 const musicBackground = document.querySelector('.music-background')
 const themeToggle = document.querySelector('#themeToggle')
-const portraitImage = document.querySelector('.portrait-frame img')
-const brandAvatar = document.querySelector('#brandAvatar')
-const heroSection = document.querySelector('#inicio')
 
 const syncThemeToggle = () => {
   const isDark = document.documentElement.dataset.theme === 'dark'
@@ -248,16 +245,6 @@ themeToggle.addEventListener('click', () => {
 })
 syncThemeToggle()
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0b0e14' : '#f7f5ef')
-
-const syncPortraitVisibility = () => {
-  const showAvatar = heroSection.getBoundingClientRect().bottom <= navbar.offsetHeight + 120
-  portraitImage.classList.toggle('is-hidden', showAvatar)
-  brandAvatar.classList.toggle('has-photo', showAvatar)
-}
-
-window.addEventListener('scroll', syncPortraitVisibility, { passive: true })
-window.addEventListener('resize', syncPortraitVisibility, { passive: true })
-syncPortraitVisibility()
 
 menuButton.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('is-open')
