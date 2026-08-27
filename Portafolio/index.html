@@ -12,14 +12,136 @@
         const theme = savedTheme === 'light' ? 'light' : 'dark'
         document.documentElement.dataset.theme = theme
         document.documentElement.style.colorScheme = theme
+        document.documentElement.style.setProperty('--loader-bg', theme === 'dark' ? '#0b0e14' : '#f7f5ef')
+        document.documentElement.style.setProperty('--loader-glow', theme === 'dark' ? '#f0c85d' : '#ea7149')
       } catch (_) {
         document.documentElement.dataset.theme = 'dark'
         document.documentElement.style.colorScheme = 'dark'
+        document.documentElement.style.setProperty('--loader-bg', '#0b0e14')
+        document.documentElement.style.setProperty('--loader-glow', '#f0c85d')
       }
     </script>
   </head>
   <body>
     <div id="app"></div>
+    <div class="page-loader" id="pageLoader" aria-label="Cargando">
+      <div class="page-loader-inner" aria-hidden="true">
+        <div class="page-loader-keyboard" id="pageLoaderKeyboard"></div>
+        <div class="page-loader-label">Cargando</div>
+      </div>
+    </div>
+    <script>
+      var pageLoaderKeyboard = document.getElementById('pageLoaderKeyboard')
+      var pageLoaderKeys = []
+      for (var i = 0; i < 3; i++) {
+        var key = document.createElement('div')
+        key.className = 'page-loader-key'
+        pageLoaderKeyboard.appendChild(key)
+        pageLoaderKeys.push(key)
+      }
+      function placePageBlackKeys() {
+        var blackKeys = pageLoaderKeyboard.querySelectorAll('.page-loader-black')
+        for (var b = 0; b < blackKeys.length; b++) blackKeys[b].remove()
+        for (var j = 0; j < pageLoaderKeys.length - 1; j++) {
+          var boundary = pageLoaderKeys[j].offsetLeft + pageLoaderKeys[j].offsetWidth + 1.5
+          var bk = document.createElement('div')
+          bk.className = 'page-loader-black'
+          bk.style.left = boundary + 'px'
+          pageLoaderKeyboard.appendChild(bk)
+        }
+      }
+      placePageBlackKeys()
+      window.addEventListener('resize', placePageBlackKeys)
+
+      var pageNoteDuration = 260
+      var pageGap = 90
+      function pagePressKey(index) {
+        var k = pageLoaderKeys[index]
+        if (!k) return
+        k.classList.add('is-on')
+        setTimeout(function () { k.classList.remove('is-on') }, pageNoteDuration)
+      }
+      var pageStep = 0
+      var pageLoopTimer = 0
+      function pageLoop() {
+        pagePressKey(pageStep % pageLoaderKeys.length)
+        pageStep++
+        pageLoopTimer = setTimeout(pageLoop, pageNoteDuration + pageGap)
+      }
+      pageLoop()
+
+      function hidePageLoader() {
+        var loader = document.getElementById('pageLoader')
+        if (!loader || loader.classList.contains('is-hidden')) return
+        clearTimeout(pageLoopTimer)
+        loader.classList.add('is-hidden')
+        setTimeout(function () {
+          loader.parentNode && loader.parentNode.removeChild(loader)
+        }, 600)
+      }
+      window.addEventListener('load', hidePageLoader)
+      setTimeout(hidePageLoader, 4000)
+      window.hidePageLoader = hidePageLoader
+    </script>
+    <style>
+      .page-loader{
+        position:fixed;
+        inset:0;
+        z-index:2000;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:var(--loader-bg,#0b0e14);
+        transition:opacity .6s ease,visibility .6s ease
+      }
+      .page-loader.is-hidden{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none
+      }
+      .page-loader-inner{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:22px
+      }
+      .page-loader-keyboard{
+        position:relative;
+        display:flex
+      }
+      .page-loader-key{
+        position:relative;
+        width:14px;
+        height:44px;
+        margin:0 1.5px;
+        border-radius:1px 1px 2px 2px;
+        background:#3a2418;
+        transition:background 140ms ease,box-shadow 140ms ease,transform 140ms ease;
+        transform-origin:top center
+      }
+      .page-loader-key.is-on{
+        background:var(--loader-glow,#f0c85d);
+        box-shadow:0 0 10px 2px rgba(240,200,93,.5);
+        transform:translateY(3px) scaleY(.88)
+      }
+      .page-loader-black{
+        position:absolute;
+        top:0;
+        width:8px;
+        height:30px;
+        border-radius:0 0 1px 1px;
+        background:#0a0a0a;
+        transform:translateX(-50%);
+        z-index:2
+      }
+      .page-loader-label{
+        color:rgba(242,239,233,.58);
+        font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+        font-size:11px;
+        letter-spacing:.25em;
+        text-transform:uppercase
+      }
+    </style>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

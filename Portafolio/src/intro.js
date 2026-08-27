@@ -13,7 +13,8 @@ export function setupIntro() {
   const NUM_KEYS = 3
   const NOTE_DURATION = 260
   const GAP = 90
-  const RUN_LOOPS = 5
+  const RUN_LOOPS = 2
+  const WORDMARK_DELAY = 700
 
   let loopTimer = 0
   let stepIndex = 0
@@ -56,9 +57,9 @@ export function setupIntro() {
 
   const showWordmark = window.setTimeout(() => {
     if (!finished) wordmark.classList.add('is-visible')
-  }, 1300)
+  }, WORDMARK_DELAY)
 
-  const closeIntro = (delay = 800) => {
+  const closeIntro = (delay = 550) => {
     if (finished) return
     finished = true
     clearTimeout(loopTimer)

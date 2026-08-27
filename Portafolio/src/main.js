@@ -4,7 +4,6 @@ import tecnodesafioCertificate from './assets/CertificadoTecnodesafio2019.jpeg'
 import heritageCertificate from './assets/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
 import scienceClubsCertificate from './assets/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
 import cvFile from './assets/pdf/AndresCV.pdf'
-import { setupIntro } from './intro.js'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
 import javascriptLogo from './assets/skills/javascript.svg'
@@ -113,14 +112,6 @@ const musicalNotes = [
 ]
 
 document.querySelector('#app').innerHTML = `
-  <div class="intro-overlay" id="introOverlay" aria-label="Presentación de Andrés Maya">
-    <div class="intro-loader" aria-hidden="true">
-      <div class="intro-keyboard" id="introKeyboard"></div>
-      <div class="intro-label">Cargando</div>
-    </div>
-    <div class="intro-wordmark" id="introWordmark"><span>AM</span><h1>Andrés Maya</h1><div></div><p>Software · Música · Creatividad</p></div>
-    <button class="intro-skip" id="introSkip" type="button">Saltar intro</button>
-  </div>
   <div class="music-background" aria-hidden="true">
     <div class="music-parallax" id="musicParallax">
       ${musicalNotes.map(([symbol, x, y, size, rotation, delay, duration]) => `
@@ -257,7 +248,6 @@ themeToggle.addEventListener('click', () => {
 })
 syncThemeToggle()
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0b0e14' : '#f7f5ef')
-setupIntro()
 
 const syncPortraitVisibility = () => {
   const showAvatar = heroSection.getBoundingClientRect().bottom <= navbar.offsetHeight + 120
