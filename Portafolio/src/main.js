@@ -161,8 +161,7 @@ document.querySelector('#app').innerHTML = `
     <section class="section about" id="perfil"><div class="container">
       <div class="section-heading reveal"><p class="eyebrow"><span></span> Perfil</p><h2>Más que código,<br><em>ideas que conectan.</em></h2></div>
       <div class="about-grid">
-        <div class="about-lead reveal"><p>Soy estudiante de quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia. Combino mi formación tecnológica con la música y la presentación.</p></div>
-        <div class="about-copy reveal"><p>Tengo conocimientos en Java, Python, HTML, GitHub, MongoDB, diseño de software y escritura de prompts para IA. Me motiva aprender mediante proyectos y convertir conceptos en experiencias que otras personas puedan usar.</p><p>En la música interpreto batería, guitarra, bajo y voz, con formación en teoría musical. Ese lado creativo influye en mi forma de comunicar, trabajar en equipo y resolver problemas.</p><div class="interest-row"><span>Desarrollo de software</span><span>Inteligencia artificial</span><span>Música</span><span>Comunicación</span></div></div>
+        <div class="about-copy reveal"><p>Soy estudiante de quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia. Combino mi formación tecnológica con la música y la presentación.</p><p>Tengo conocimientos en Java, Python, HTML, GitHub, MongoDB, diseño de software y escritura de prompts para IA. Me motiva aprender mediante proyectos y convertir conceptos en experiencias que otras personas puedan usar.</p><p>En la música interpreto batería, guitarra, bajo y voz, con formación en teoría musical. Ese lado creativo influye en mi forma de comunicar, trabajar en equipo y resolver problemas.</p><div class="interest-row"><span>Desarrollo de software</span><span>Batería, guitarra, bajo y voz</span><span>Comunicación</span></div></div>
       </div>
     </div></section>
 
