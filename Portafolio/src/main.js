@@ -114,13 +114,10 @@ const musicalNotes = [
 
 document.querySelector('#app').innerHTML = `
   <div class="intro-overlay" id="introOverlay" aria-label="Presentación de Andrés Maya">
-    <svg width="0" height="0" class="intro-defs" aria-hidden="true"><defs>
-      <symbol id="intro-note-quarter" viewBox="0 0 24 34"><ellipse cx="7.5" cy="27" rx="6.2" ry="4.4" transform="rotate(-18 7.5 27)"/><rect x="12.4" y="2" width="2.3" height="25.5" rx="1"/></symbol>
-      <symbol id="intro-note-eighth" viewBox="0 0 24 34"><ellipse cx="7.5" cy="27" rx="6.2" ry="4.4" transform="rotate(-18 7.5 27)"/><rect x="12.4" y="2" width="2.3" height="25.5" rx="1"/><path d="M14.7 2.2C19 3.4 22.5 6.8 21.6 12.3C21.1 15.2 19.2 16.9 16.9 17.8C19.4 15.9 20 13.6 19.4 11.2C18.8 8.7 16.9 6.5 14.7 5.6Z"/></symbol>
-    </defs></svg>
-    <svg class="intro-guides" id="introGuides" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
-    <div class="intro-glow" id="introGlow"></div>
-    <div class="intro-note-stage" id="introNoteStage" aria-hidden="true"></div>
+    <div class="intro-loader" aria-hidden="true">
+      <div class="intro-keyboard" id="introKeyboard"></div>
+      <div class="intro-label">Cargando</div>
+    </div>
     <div class="intro-wordmark" id="introWordmark"><span>AM</span><h1>Andrés Maya</h1><div></div><p>Software · Música · Creatividad</p></div>
     <button class="intro-skip" id="introSkip" type="button">Saltar intro</button>
   </div>

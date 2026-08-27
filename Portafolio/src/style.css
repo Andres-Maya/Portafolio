@@ -38,7 +38,9 @@
     --intro-muted:rgba(242,239,233,.58);
     --intro-note-a:#f0c85d;
     --intro-note-b:#ee8652;
-    --intro-line:rgba(240,200,93,.42)
+    --intro-line:rgba(240,200,93,.42);
+    --intro-key:#3a2418;
+    --intro-black:#0a0a0a
 }
 
 [data-theme="light"]{
@@ -48,7 +50,9 @@
     --intro-muted:rgba(22,32,28,.58);
     --intro-note-a:#2f7557;
     --intro-note-b:#ea7149;
-    --intro-line:rgba(33,79,60,.32)
+    --intro-line:rgba(33,79,60,.32);
+    --intro-key:#3a2418;
+    --intro-black:#0a0a0a
 }
 
 *{box-sizing:border-box}
@@ -257,7 +261,7 @@ h1,h2,h3,p{margin-top:0}
     transform:rotate(45deg) scale(.65)
 }
 
-/* Intro musical en espiral, adaptada de intro-notas-musicales.html. */
+/* Intro con movimiento de teclas de piano. */
 body.intro-active{
     overflow:hidden
 }
@@ -266,8 +270,10 @@ body.intro-active{
     inset:0;
     z-index:500;
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
+    gap:48px;
     overflow:hidden;
     background:radial-gradient(80% 70% at 50% 45%,color-mix(in srgb,var(--intro-bg) 84%,var(--intro-note-a) 16%) 0%,var(--intro-deep) 75%);
     color:var(--intro-ink);
@@ -278,66 +284,46 @@ body.intro-active{
     visibility:hidden;
     pointer-events:none
 }
-.intro-defs{
-    position:absolute
+.intro-loader{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:22px
 }
-.intro-note-stage{
-    position:absolute;
-    inset:0;
-    overflow:hidden
+.intro-keyboard{
+    position:relative;
+    display:flex
 }
-.intro-guides{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    opacity:0;
-    transition:opacity 1s ease
+.intro-white{
+    position:relative;
+    width:14px;
+    height:44px;
+    margin:0 1.5px;
+    border-radius:1px 1px 2px 2px;
+    background:var(--intro-key);
+    transition:background 140ms ease,box-shadow 140ms ease,transform 140ms ease;
+    transform-origin:top center
 }
-.intro-guides.is-visible{
-    opacity:1
+.intro-white.is-on{
+    background:var(--intro-note-a);
+    box-shadow:0 0 10px 2px color-mix(in srgb,var(--intro-note-a) 50%,transparent);
+    transform:translateY(3px) scaleY(.88)
 }
-.intro-guides.is-fading{
-    opacity:0;
-    transition:opacity 1.4s ease
-}
-.intro-spiral-arm{
-    fill:none;
-    stroke:var(--intro-line);
-    stroke-width:1
-}
-.intro-note{
+.intro-black{
     position:absolute;
     top:0;
-    left:0;
-    width:26px;
-    height:36px;
-    margin:-18px 0 0 -13px;
-    opacity:0;
-    filter:drop-shadow(0 0 8px currentColor);
-    will-change:transform,opacity
+    width:8px;
+    height:30px;
+    border-radius:0 0 1px 1px;
+    background:var(--intro-black);
+    transform:translateX(-50%);
+    z-index:2
 }
-.intro-note svg{
-    width:100%;
-    height:100%;
-    fill:currentColor;
-    stroke:none
-}
-.intro-glow{
-    position:absolute;
-    left:50%;
-    top:45%;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:var(--intro-note-a);
-    transform:translate(-50%,-50%);
-    box-shadow:0 0 70px 34px color-mix(in srgb,var(--intro-note-a) 28%,transparent);
-    opacity:0;
-    transition:opacity 1.2s ease
-}
-.intro-glow.is-visible{
-    opacity:1
+.intro-label{
+    color:var(--intro-muted);
+    font-size:11px;
+    letter-spacing:.25em;
+    text-transform:uppercase
 }
 .intro-wordmark{
     position:relative;
