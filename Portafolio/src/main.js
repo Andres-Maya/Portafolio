@@ -22,6 +22,11 @@ import mongodbLogo from './assets/skills/mongodb.svg'
 import dockerLogo from './assets/skills/docker.svg'
 import gitLogo from './assets/skills/git.svg'
 import githubLogo from './assets/skills/github.svg'
+import vercelLogo from './assets/skills/vercel.svg'
+import codexLogo from './assets/skills/codex.svg'
+import visualStudioCodeLogo from './assets/skills/visualstudiocode.svg'
+import intellijIdeaLogo from './assets/skills/intellijidea.svg'
+import opencodeLogo from './assets/skills/opencode.svg'
 
 const icon = (name) => {
   const paths = {
@@ -33,6 +38,8 @@ const icon = (name) => {
     linkedin: '<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6ZM2 9h4v12H2z"/><path d="M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>',
     sun: '<circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     moon: '<path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/>',
+    previous: '<path d="m15 18-6-6 6-6"/>',
+    next: '<path d="m9 18 6-6-6-6"/>',
   }
   return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name]}</svg>`
 }
@@ -87,11 +94,19 @@ const certificates = [
 
 const skills = [
   ['Lenguajes de programación', [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }, { name: 'TypeScript', icon: typescriptLogo }]],
-  ['Desarrollo web, frameworks y protocolos', [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }, { name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }]],
-  ['IA y asistentes', [{ name: 'Ollama', icon: ollamaLogo }, { name: 'Claude', icon: claudeLogo }]],
-  ['Bases de datos', [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }]],
-  ['DevOps y herramientas', [{ name: 'Docker', icon: dockerLogo }, { name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo }]],
+  ['Desarrollo web y frameworks', [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }]],
+  ['Backend y despliegue', [{ name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }]],
+  ['Datos e infraestructura', [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }, { name: 'Docker', icon: dockerLogo }]],
+  ['IA y asistentes', [{ name: 'Ollama', icon: ollamaLogo, monochrome: true }, { name: 'Claude', icon: claudeLogo }, { name: 'Codex', icon: codexLogo, monochrome: true }, { name: 'OpenCode', icon: opencodeLogo, monochrome: true }]],
+  ['Herramientas de desarrollo', [{ name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }, { name: 'Visual Studio Code', icon: visualStudioCodeLogo }, { name: 'IntelliJ IDEA', icon: intellijIdeaLogo }]],
 ]
+
+const carouselControls = (label) => `
+  <div class="carousel-controls">
+    <button class="carousel-button carousel-previous" type="button" aria-label="Anterior: ${label}">${icon('previous')}</button>
+    <span class="carousel-status" aria-live="polite">1 / 1</span>
+    <button class="carousel-button carousel-next" type="button" aria-label="Siguiente: ${label}">${icon('next')}</button>
+  </div>`
 
 const musicalNotes = [
   ['♫', 3, 8, 44, -12, 10, 8.8], ['♪', 10, 31, 30, 9, 18, 7.4],
@@ -167,13 +182,16 @@ document.querySelector('#app').innerHTML = `
 
     <section class="section projects" id="proyectos"><div class="container">
       <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Trabajo seleccionado</p><h2>Proyectos<br><em>destacados.</em></h2></div><p>Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.</p></div>
-      <div class="project-grid">${projects.map((project, index) => `
-        <article class="project-card reveal ${index === 0 ? 'project-featured' : ''}">
+      <div class="carousel reveal" data-carousel data-label="proyectos destacados">
+        <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project) => `
+        <article class="project-card">
           <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label">${project.label}</span></div>
           <h3>${project.title}</h3><p>${project.description}</p>
           <div class="tag-list">${project.tags.map((tag) => `<span>${tag}</span>`).join('')}</div>
           <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${label} ${icon('external')}</a>`).join('')}</div>
-        </article>`).join('')}</div>
+        </article>`).join('')}</div></div>
+        ${carouselControls('proyectos destacados')}
+      </div>
       <a class="all-projects reveal" href="https://github.com/Andres-Maya?tab=repositories" target="_blank" rel="noopener">Ver todos los proyectos en GitHub ${icon('arrow')}</a>
     </div></section>
 
@@ -184,31 +202,36 @@ document.querySelector('#app').innerHTML = `
 
     <section class="section skills" id="habilidades"><div class="container">
       <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Caja de herramientas</p><h2>Habilidades<br><em>técnicas.</em></h2></div><p>Tecnologías y herramientas con las que he trabajado durante mi formación y proyectos personales.</p></div>
-      <div class="skills-grid">${skills.map(([title, items], index) => `<article class="skill-card reveal"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => {
+      <div class="carousel reveal" data-carousel data-label="habilidades técnicas">
+        <div class="carousel-viewport"><div class="carousel-track skills-grid">${skills.map(([title, items], index) => `<article class="skill-card"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => {
         const skill = typeof item === 'string' ? { name: item } : item
-        return `<div class="skill-item ${skill.icon ? 'has-logo' : ''}">${skill.icon ? `<img src="${skill.icon}" alt="" loading="lazy">` : ''}<b>${skill.name}</b></div>`
-      }).join('')}</div></article>`).join('')}
-        <article class="skill-card language-card reveal">
-          <span class="skill-index">06</span>
+        return `<div class="skill-item ${skill.icon ? 'has-logo' : ''} ${skill.monochrome ? 'is-monochrome' : ''}">${skill.icon ? `<img src="${skill.icon}" alt="" loading="lazy">` : ''}<b>${skill.name}</b></div>`
+      }).join('')}</div></article>`).join('')}</div></div>
+        ${carouselControls('habilidades técnicas')}
+      </div>
+      <article class="skill-card language-card reveal">
+          <span class="skill-index">07</span>
           <h3>Idiomas</h3>
           <div class="language-list">
             <div class="language-item"><span>Español</span><strong>Nativo</strong></div>
             <div class="language-item"><span>Inglés</span><strong>B2</strong></div>
           </div>
-        </article>
-      </div>
+      </article>
     </div></section>
 
     <section class="section credentials" id="credenciales"><div class="container credentials-inner">
       <div class="credentials-heading reveal"><p class="eyebrow"><span></span> Aprendizaje continuo</p><h2>Certificados</h2><p>Reconocimientos y experiencias que han acompañado mi formación académica, tecnológica y creativa.</p></div>
-      <div class="certificate-grid">${certificates.map((certificate) => `
-        <article class="certificate-card reveal">
+      <div class="carousel reveal" data-carousel data-label="certificados">
+        <div class="carousel-viewport"><div class="carousel-track certificate-grid">${certificates.map((certificate) => `
+        <article class="certificate-card">
           <a class="certificate-preview" href="${certificate.image}" target="_blank" rel="noopener" aria-label="Abrir certificado: ${certificate.title}">
             <img src="${certificate.image}" alt="Certificado ${certificate.title}" loading="lazy">
             <span>Ver certificado ${icon('external')}</span>
           </a>
           <div class="certificate-content"><span>${certificate.year}</span><h3>${certificate.title}</h3><p>${certificate.issuer}</p></div>
-        </article>`).join('')}</div>
+        </article>`).join('')}</div></div>
+        ${carouselControls('certificados')}
+      </div>
     </div></section>
 
     <section class="section contact" id="contacto"><div class="container contact-card reveal">
@@ -288,4 +311,58 @@ const observer = new IntersectionObserver((entries) => entries.forEach((entry) =
   entry.target.classList.toggle('is-visible', entry.isIntersecting)
 }), { threshold: 0.12, rootMargin: '0px 0px -5% 0px' })
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element))
+
+document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+  const viewport = carousel.querySelector('.carousel-viewport')
+  const track = carousel.querySelector('.carousel-track')
+  const items = [...track.children]
+  const previousButton = carousel.querySelector('.carousel-previous')
+  const nextButton = carousel.querySelector('.carousel-next')
+  const status = carousel.querySelector('.carousel-status')
+  let page = 0
+
+  const getItemsPerPage = () => window.matchMedia('(max-width: 760px)').matches ? 1 : 2
+  const getPageCount = () => Math.ceil(items.length / getItemsPerPage())
+
+  const updateControls = () => {
+    const pageCount = getPageCount()
+    page = Math.min(page, pageCount - 1)
+    status.textContent = `${page + 1} / ${pageCount}`
+    previousButton.disabled = page === 0
+    nextButton.disabled = page === pageCount - 1
+  }
+
+  const goToPage = (nextPage) => {
+    page = Math.max(0, Math.min(nextPage, getPageCount() - 1))
+    const itemsPerPage = getItemsPerPage()
+    const startIndex = Math.min(page * itemsPerPage, items.length - itemsPerPage)
+    viewport.scrollTo({ left: items[startIndex].offsetLeft - track.offsetLeft, behavior: 'smooth' })
+    updateControls()
+  }
+
+  previousButton.addEventListener('click', () => goToPage(page - 1))
+  nextButton.addEventListener('click', () => goToPage(page + 1))
+  let scrollTimer
+  viewport.addEventListener('scroll', () => {
+    clearTimeout(scrollTimer)
+    scrollTimer = setTimeout(() => {
+      const pageCount = getPageCount()
+      const maxScroll = viewport.scrollWidth - viewport.clientWidth
+      page = maxScroll > 0 ? Math.round((viewport.scrollLeft / maxScroll) * (pageCount - 1)) : 0
+      updateControls()
+    }, 80)
+  }, { passive: true })
+  carousel.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') goToPage(page - 1)
+    if (event.key === 'ArrowRight') goToPage(page + 1)
+  })
+
+  let resizeTimer
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer)
+    resizeTimer = setTimeout(() => goToPage(page), 120)
+  })
+  updateControls()
+})
+
 document.querySelector('#year').textContent = new Date().getFullYear()
