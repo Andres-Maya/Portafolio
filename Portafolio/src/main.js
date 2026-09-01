@@ -4,6 +4,10 @@ import profileLogo from './assets/logoperfil.png'
 import tecnodesafioCertificate from './assets/CertificadoTecnodesafio2019.jpeg'
 import heritageCertificate from './assets/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
 import scienceClubsCertificate from './assets/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
+import cambridgeDiplomaOne from './assets/DiplomaCambridge1.jpeg'
+import cambridgeDiplomaTwo from './assets/DiplomaCambridge2.jpeg'
+import cambridgeDiplomaThree from './assets/DiplomaCambridge3.jpeg'
+import picnicFestCertificate from './assets/CertificadoSolistaPrimerPuestoBatallaBandasPicnicFest.jpeg.jpg'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
@@ -72,6 +76,18 @@ const projects = [
 ]
 
 const certificates = [
+  {
+    title: 'Diploma de inglés B2–C1',
+    issuer: 'Cambridge Academy of Languages · British Council Aptis',
+    year: '2025',
+    images: [cambridgeDiplomaOne, cambridgeDiplomaTwo, cambridgeDiplomaThree],
+  },
+  {
+    title: 'Primer puesto como músico solista · Batalla de Bandas Francisco Ponce',
+    issuer: 'Colectivo Picnic Fest',
+    year: '2023',
+    image: picnicFestCertificate,
+  },
   {
     title: 'Tecnodesafío 2019',
     issuer: 'SENA · Tecnoacademia · SENNOVA',
@@ -224,10 +240,13 @@ document.querySelector('#app').innerHTML = `
       <div class="carousel reveal" data-carousel data-label="certificados">
         <div class="carousel-viewport"><div class="carousel-track certificate-grid">${certificates.map((certificate) => `
         <article class="certificate-card">
-          <a class="certificate-preview" href="${certificate.image}" target="_blank" rel="noopener" aria-label="Abrir certificado: ${certificate.title}">
-            <img src="${certificate.image}" alt="Certificado ${certificate.title}" loading="lazy">
-            <span>Ver certificado ${icon('external')}</span>
-          </a>
+          <div class="certificate-media ${(certificate.images?.length ?? 1) > 1 ? 'certificate-gallery' : ''}">
+            ${(certificate.images ?? [certificate.image]).map((image, index) => `
+            <a class="certificate-preview" href="${image}" target="_blank" rel="noopener" aria-label="Abrir ${certificate.title}${certificate.images ? `, documento ${index + 1}` : ''}">
+              <img src="${image}" alt="${certificate.title}${certificate.images ? `, documento ${index + 1}` : ''}" loading="lazy">
+              <span>Ver ${certificate.images ? `documento ${index + 1}` : 'certificado'} ${icon('external')}</span>
+            </a>`).join('')}
+          </div>
           <div class="certificate-content"><span>${certificate.year}</span><h3>${certificate.title}</h3><p>${certificate.issuer}</p></div>
         </article>`).join('')}</div></div>
         ${carouselControls('certificados')}
@@ -321,7 +340,7 @@ document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   const status = carousel.querySelector('.carousel-status')
   let page = 0
 
-  const getItemsPerPage = () => window.matchMedia('(max-width: 760px)').matches ? 1 : 2
+  const getItemsPerPage = () => 1
   const getPageCount = () => Math.ceil(items.length / getItemsPerPage())
 
   const updateControls = () => {
