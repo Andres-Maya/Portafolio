@@ -8,6 +8,7 @@ import cambridgeDiplomaOne from './assets/DiplomaCambridge1.jpeg'
 import cambridgeDiplomaTwo from './assets/DiplomaCambridge2.jpeg'
 import cambridgeDiplomaThree from './assets/DiplomaCambridge3.jpeg'
 import picnicFestCertificate from './assets/CertificadoSolistaPrimerPuestoBatallaBandasPicnicFest.jpeg.jpg'
+import aiInitiationCertificate from './assets/Certificado asistencia curso iniciación a la IA.png'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
@@ -76,6 +77,12 @@ const projects = [
 ]
 
 const certificates = [
+  {
+    title: 'Curso de iniciación a la IA',
+    issuer: 'BIG school · Jon Hernández',
+    year: '2026',
+    image: aiInitiationCertificate,
+  },
   {
     title: 'Diploma de inglés B2–C1',
     issuer: 'Cambridge Academy of Languages · British Council Aptis',
