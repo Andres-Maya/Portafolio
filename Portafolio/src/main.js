@@ -1,14 +1,15 @@
 import './style.css'
-import profilePhoto from './assets/Andres.jpeg'
-import profileLogo from './assets/logoperfil.png'
-import tecnodesafioCertificate from './assets/CertificadoTecnodesafio2019.jpeg'
-import heritageCertificate from './assets/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
-import scienceClubsCertificate from './assets/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
-import cambridgeDiplomaOne from './assets/DiplomaCambridge1.jpeg'
-import cambridgeDiplomaTwo from './assets/DiplomaCambridge2.jpeg'
-import cambridgeDiplomaThree from './assets/DiplomaCambridge3.jpeg'
-import picnicFestCertificate from './assets/CertificadoSolistaPrimerPuestoBatallaBandasPicnicFest.jpeg.jpg'
-import aiInitiationCertificate from './assets/Certificado asistencia curso iniciación a la IA.png'
+import profilePhoto from './assets/profile/Andres.jpeg'
+import profileLogo from './assets/profile/logoperfil.png'
+import uccLogo from './assets/education/logo_ucc.png'
+import tecnodesafioCertificate from './assets/certificates/CertificadoTecnodesafio2019.jpeg'
+import heritageCertificate from './assets/certificates/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
+import scienceClubsCertificate from './assets/certificates/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
+import cambridgeDiplomaOne from './assets/certificates/DiplomaCambridge1.jpeg'
+import cambridgeDiplomaTwo from './assets/certificates/DiplomaCambridge2.jpeg'
+import cambridgeDiplomaThree from './assets/certificates/DiplomaCambridge3.jpeg'
+import picnicFestCertificate from './assets/certificates/CertificadoSolistaPrimerPuestoBatallaBandasPicnicFest.jpeg.jpg'
+import aiInitiationCertificate from './assets/certificates/Certificado asistencia curso iniciación a la IA.png'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
@@ -163,7 +164,7 @@ document.querySelector('#app').innerHTML = `
     <div class="container nav-inner">
       <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar"><img src="${profileLogo}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
-        <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
+        <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#experiencia">Experiencia</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
       </nav>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true"><span class="theme-icon theme-sun">${icon('sun')}</span><span class="theme-icon theme-moon">${icon('moon')}</span></button>
       <a class="nav-cv" href="${cvFile}" target="_blank" rel="noopener">Ver CV ${icon('external')}</a>
@@ -220,7 +221,12 @@ document.querySelector('#app').innerHTML = `
 
     <section class="section education" id="formacion"><div class="container education-grid">
       <div class="section-heading reveal"><p class="eyebrow"><span></span> Formación</p><h2>Aprender para<br><em>construir mejor.</em></h2></div>
-      <article class="education-card reveal"><div class="education-year">Actualidad</div><div class="ucc-mark">UCC</div><div><p class="card-kicker">Pregrado · 5° semestre</p><h3>Ingeniería de Software</h3><p>Universidad Cooperativa de Colombia</p><span>Campus Pasto · Colombia</span></div></article>
+      <article class="education-card reveal"><div class="education-year">Actualidad</div><div class="ucc-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia"></div><div><p class="card-kicker">Pregrado · 5° semestre</p><h3>Ingeniería de Software</h3><p>Universidad Cooperativa de Colombia</p><span>Campus Pasto · Colombia</span></div></article>
+    </div></section>
+
+    <section class="section experience" id="experiencia"><div class="container education-grid">
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> Trayectoria</p><h2>Experiencia<br><em>laboral.</em></h2></div>
+      <article class="education-card experience-card reveal"><div class="mentor-mark" aria-hidden="true">AJ</div><div><p class="card-kicker">Monitoría académica</p><h3>Monitoría de idiomas</h3><p>Armando Javier Arteaga Unigarro</p><span>Profesor independiente</span></div></article>
     </div></section>
 
     <section class="section skills" id="habilidades"><div class="container">
