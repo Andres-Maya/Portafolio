@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,600&display=swap');
 
 :root{
-    --ink:#16201c;
-    --muted:#56615b;
-    --cream:#f7f5ef;
-    --paper:#fffefa;
-    --sage:#c9dccd;
-    --sage-soft:#e7efe7;
-    --green:#214f3c;
-    --orange:#ea7149;
-    --line:#dce1da;
+    --ink:#111111;
+    --muted:#5f5f68;
+    --cream:#f7f7f8;
+    --paper:#ffffff;
+    --accent:#6d28d9;
+    --accent-soft:#f1eafe;
+    --sage:var(--accent);
+    --sage-soft:var(--accent-soft);
+    --green:var(--accent);
+    --orange:var(--accent);
+    --line:#dddddf;
     --body:'DM Sans',sans-serif;
     --head:'Manrope',sans-serif;
     --serif:'Playfair Display',serif;
@@ -23,36 +25,38 @@
 }
 
 [data-theme="dark"]{
-    --ink:#f2efe9;
-    --muted:#a6afa9;
-    --cream:#0b0e14;
-    --paper:#111620;
-    --sage:#527760;
-    --sage-soft:#141e1a;
-    --green:#8fc5a3;
-    --orange:#f08a55;
-    --line:#29332e;
-    --intro-bg:#0b0e14;
-    --intro-deep:#05070b;
-    --intro-ink:#f2efe9;
-    --intro-muted:rgba(242,239,233,.58);
-    --intro-note-a:#f0c85d;
-    --intro-note-b:#ee8652;
-    --intro-line:rgba(240,200,93,.42);
-    --intro-key:#3a2418;
-    --intro-black:#0a0a0a
+    --ink:#ffffff;
+    --muted:#aaaaaf;
+    --cream:#090909;
+    --paper:#111111;
+    --accent:#ff7a1a;
+    --accent-soft:#24150b;
+    --sage:var(--accent);
+    --sage-soft:var(--accent-soft);
+    --green:var(--accent);
+    --orange:var(--accent);
+    --line:#303030;
+    --intro-bg:#090909;
+    --intro-deep:#000000;
+    --intro-ink:#ffffff;
+    --intro-muted:rgba(255,255,255,.58);
+    --intro-note-a:var(--accent);
+    --intro-note-b:var(--accent);
+    --intro-line:color-mix(in srgb,var(--accent) 42%,transparent);
+    --intro-key:#171717;
+    --intro-black:#000000
 }
 
 [data-theme="light"]{
-    --intro-bg:#f7f5ef;
-    --intro-deep:#ebe8df;
-    --intro-ink:#16201c;
-    --intro-muted:rgba(22,32,28,.58);
-    --intro-note-a:#2f7557;
-    --intro-note-b:#ea7149;
-    --intro-line:rgba(33,79,60,.32);
-    --intro-key:#3a2418;
-    --intro-black:#0a0a0a
+    --intro-bg:#f7f7f8;
+    --intro-deep:#ffffff;
+    --intro-ink:#111111;
+    --intro-muted:rgba(0,0,0,.58);
+    --intro-note-a:var(--accent);
+    --intro-note-b:var(--accent);
+    --intro-line:color-mix(in srgb,var(--accent) 32%,transparent);
+    --intro-key:#171717;
+    --intro-black:#000000
 }
 
 *{box-sizing:border-box}
@@ -1338,4 +1342,181 @@ body,.section,.navbar,footer{transition:background-color .35s ease,color .35s ea
     .certificate-media{height:190px}
     .certificate-content{padding:14px 16px 16px}
     .carousel-controls{margin-top:14px}
+}
+
+/* Paleta unificada: morado en claro y naranja en oscuro. */
+.navbar.is-scrolled{
+    background:color-mix(in srgb,var(--cream) 90%,transparent);
+    box-shadow:0 1px color-mix(in srgb,var(--ink) 8%,transparent)
+}
+.nav-links a{color:var(--muted)}
+.hero:before{
+    background-image:linear-gradient(color-mix(in srgb,var(--accent) 8%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--accent) 8%,transparent) 1px,transparent 1px)
+}
+.hero-glow-one{background:color-mix(in srgb,var(--accent) 15%,transparent)}
+.hero-glow-two{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.portrait-frame{
+    border-color:color-mix(in srgb,var(--accent) 22%,transparent);
+    background:color-mix(in srgb,var(--paper) 72%,transparent);
+    box-shadow:0 30px 70px color-mix(in srgb,var(--accent) 13%,transparent)
+}
+.project-card,
+.education-card{
+    border-color:var(--line);
+    background:color-mix(in srgb,var(--paper) 88%,transparent);
+    box-shadow:0 22px 60px color-mix(in srgb,var(--ink) 8%,transparent)
+}
+.button-primary{background:var(--accent);color:#ffffff}
+.button-primary:hover{background:color-mix(in srgb,var(--accent) 84%,#000000)}
+.project-card:hover,
+.certificate-card:hover{border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+.project-card:before{background:var(--accent-soft)}
+.education{background:var(--accent-soft)}
+.education-year{background:var(--accent-soft);color:var(--accent)}
+.ucc-mark{border-color:var(--line)}
+.ucc-mark img,
+.experience-mark img,
+.portrait-frame img,
+.certificate-preview img,
+.certificate-preview:hover img{filter:none}
+.skill-item.has-logo img,
+.skill-item.is-monochrome img{filter:none}
+[data-theme="dark"] .skill-item.is-monochrome img{
+    filter:invert(1) brightness(1.15) drop-shadow(0 5px 7px rgba(0,0,0,.18))
+}
+.contact-card{background:#000000}
+.eyebrow.light,
+.contact-email{color:var(--accent)}
+.music-background:before{
+    background:radial-gradient(circle at 18% 28%,color-mix(in srgb,var(--accent) 10%,transparent),transparent 26%),radial-gradient(circle at 82% 70%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 28%)
+}
+.music-note,
+.music-note:nth-child(3n+1),
+.music-note:nth-child(4n){color:color-mix(in srgb,var(--accent) 28%,transparent)}
+.music-note,
+.music-note:nth-child(5n){filter:drop-shadow(0 7px 10px color-mix(in srgb,var(--accent) 16%,transparent))}
+
+[data-theme="dark"] .navbar.is-scrolled{background:rgba(0,0,0,.9)}
+[data-theme="dark"] .brand-mark,
+[data-theme="dark"] .menu-button,
+[data-theme="dark"] .button-primary{background:var(--accent);color:#000000}
+[data-theme="dark"] .menu-button span{background:#000000}
+[data-theme="dark"] .nav-links.is-open,
+[data-theme="dark"] .skill-item,
+[data-theme="dark"] .language-item{background:#111111}
+[data-theme="dark"] .button-primary:hover{background:color-mix(in srgb,var(--accent) 82%,#ffffff)}
+[data-theme="dark"] .portrait-frame{border-color:color-mix(in srgb,var(--accent) 30%,transparent);background:rgba(17,17,17,.74)}
+[data-theme="dark"] .portrait-label{background:rgba(0,0,0,.84)}
+[data-theme="dark"] .project-card,
+[data-theme="dark"] .education-card,
+[data-theme="dark"] .certificate-card{background:rgba(17,17,17,.9)}
+[data-theme="dark"] .project-card:before{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+[data-theme="dark"] .project-links a{color:var(--accent)}
+[data-theme="dark"] .skill-card:hover{background:var(--accent-soft)}
+[data-theme="dark"] .certificate-card:hover{border-color:color-mix(in srgb,var(--accent) 42%,var(--line))}
+[data-theme="dark"] .music-background:before{
+    background:radial-gradient(circle at 18% 28%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 27%),radial-gradient(circle at 82% 70%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 30%)
+}
+[data-theme="dark"] .music-note,
+[data-theme="dark"] .music-note:nth-child(3n+1),
+[data-theme="dark"] .music-note:nth-child(4n){color:color-mix(in srgb,var(--accent) 36%,transparent)}
+[data-theme="dark"] .music-note,
+[data-theme="dark"] .music-note:nth-child(5n){filter:drop-shadow(0 0 10px color-mix(in srgb,var(--accent) 22%,transparent))}
+
+/* Experiencia laboral y musical. */
+.experience{background:var(--cream)}
+.experience-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px
+}
+.experience-card{
+    min-height:220px;
+    display:grid;
+    grid-template-columns:92px 1fr;
+    gap:24px;
+    align-items:center;
+    padding:30px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:color-mix(in srgb,var(--paper) 90%,transparent);
+    transition:transform .25s,border-color .25s,box-shadow .25s
+}
+.experience-card:last-child{grid-column:span 2}
+.experience-card:hover{
+    transform:translateY(-4px);
+    border-color:color-mix(in srgb,var(--accent) 38%,var(--line));
+    box-shadow:0 20px 44px color-mix(in srgb,var(--ink) 9%,transparent)
+}
+.experience-mark{
+    width:92px;
+    height:92px;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:#ffffff
+}
+.experience-mark img{width:100%;height:100%;object-fit:contain}
+.experience-mark.mentor-mark{border:0;background:var(--accent);color:#ffffff}
+.work-mark img{padding:10px}
+.work-mark-dark{background:#000000}
+.work-mark-dark img{filter:none}
+.experience-content h3{
+    margin-bottom:8px;
+    font-family:var(--head);
+    font-size:22px;
+    line-height:1.18;
+    letter-spacing:-.035em
+}
+.experience-content p:not(.card-kicker){margin-bottom:6px;color:var(--muted);line-height:1.45}
+.experience-content>span{color:var(--muted);font-size:12px;line-height:1.45}
+
+/* Hobbies. */
+.hobbies{background:var(--accent-soft)}
+.hobbies-grid{
+    display:grid;
+    grid-template-columns:.72fr 1.28fr;
+    gap:80px;
+    align-items:start
+}
+.hobbies-grid .section-heading{margin-bottom:0}
+.hobbies-card{
+    padding:42px;
+    border:1px solid color-mix(in srgb,var(--accent) 25%,var(--line));
+    border-radius:18px;
+    background:color-mix(in srgb,var(--paper) 90%,transparent);
+    box-shadow:0 22px 55px color-mix(in srgb,var(--ink) 8%,transparent)
+}
+.hobbies-card>p{margin-bottom:24px;font-size:17px;font-weight:600;line-height:1.7}
+.hobbies-card ul{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+.hobbies-card li{
+    position:relative;
+    padding-left:23px;
+    color:var(--muted);
+    line-height:1.72
+}
+.hobbies-card li:before{
+    content:'';
+    position:absolute;
+    top:.72em;
+    left:0;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent)
+}
+.hobbies-card strong{color:var(--ink)}
+
+@media(max-width:900px){
+    .experience-grid{grid-template-columns:1fr}
+    .experience-card:last-child{grid-column:auto}
+    .hobbies-grid{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:560px){
+    .experience-card{grid-template-columns:70px 1fr;gap:17px;padding:23px 19px}
+    .experience-mark{width:70px;height:70px;border-radius:12px}
+    .experience-content h3{font-size:19px}
+    .hobbies-card{padding:28px 23px}
 }

@@ -2,6 +2,8 @@ import './style.css'
 import profilePhoto from './assets/profile/Andres.jpeg'
 import profileLogo from './assets/profile/logoperfil.png'
 import uccLogo from './assets/education/logo_ucc.png'
+import rekiemLogo from './assets/work/RËKIËM.png'
+import estadoLarvalLogo from './assets/work/Estado_Larval.png'
 import tecnodesafioCertificate from './assets/certificates/CertificadoTecnodesafio2019.jpeg'
 import heritageCertificate from './assets/certificates/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
 import scienceClubsCertificate from './assets/certificates/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
@@ -164,7 +166,7 @@ document.querySelector('#app').innerHTML = `
     <div class="container nav-inner">
       <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar"><img src="${profileLogo}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
-        <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#experiencia">Experiencia</a><a href="#habilidades">Habilidades</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
+        <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#experiencia">Experiencia</a><a href="#habilidades">Habilidades</a><a href="#hobbies">Hobbies</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
       </nav>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true"><span class="theme-icon theme-sun">${icon('sun')}</span><span class="theme-icon theme-moon">${icon('moon')}</span></button>
       <a class="nav-cv" href="${cvFile}" target="_blank" rel="noopener">Ver CV ${icon('external')}</a>
@@ -224,9 +226,15 @@ document.querySelector('#app').innerHTML = `
       <article class="education-card reveal"><div class="education-year">Actualidad</div><div class="ucc-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia"></div><div><p class="card-kicker">Pregrado · 5° semestre</p><h3>Ingeniería de Software</h3><p>Universidad Cooperativa de Colombia</p><span>Campus Pasto · Colombia</span></div></article>
     </div></section>
 
-    <section class="section experience" id="experiencia"><div class="container education-grid">
-      <div class="section-heading reveal"><p class="eyebrow"><span></span> Trayectoria</p><h2>Experiencia<br><em>laboral.</em></h2></div>
-      <article class="education-card experience-card reveal"><div class="mentor-mark" aria-hidden="true">AJ</div><div><p class="card-kicker">Monitoría académica</p><h3>Monitoría de idiomas</h3><p>Armando Javier Arteaga Unigarro</p><span>Profesor independiente</span></div></article>
+    <section class="section experience" id="experiencia"><div class="container">
+      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Trayectoria</p><h2>Experiencia<br><em>laboral y creativa.</em></h2></div><p>Experiencias académicas, audiovisuales y musicales que fortalecen mi comunicación, creatividad y trabajo en equipo.</p></div>
+      <div class="experience-grid">
+        <article class="experience-card reveal"><div class="experience-mark mentor-mark" aria-hidden="true">AJ</div><div class="experience-content"><p class="card-kicker">Monitoría académica</p><h3>Monitoría de idiomas</h3><p>Armando Javier Arteaga Unigarro</p><span>Profesor independiente</span></div></article>
+        <article class="experience-card reveal"><div class="experience-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Publicidad audiovisual · 2025</p><h3>Publicidad audiovisual</h3><p>Universidad Cooperativa de Colombia</p><span>Producción y comunicación audiovisual</span></div></article>
+        <article class="experience-card reveal"><div class="experience-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Moderación · 2025</p><h3>Moderador de seminarios de semestre</h3><p>Universidad Cooperativa de Colombia</p><span>Presentación y acompañamiento académico</span></div></article>
+        <article class="experience-card reveal"><div class="experience-mark work-mark work-mark-light"><img src="${rekiemLogo}" alt="Logo de la banda RËKIËM" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Experiencia musical</p><h3>Bajista</h3><p>Banda de rock “RËKIËM”</p><span>Interpretación y trabajo en banda</span></div></article>
+        <article class="experience-card reveal"><div class="experience-mark work-mark work-mark-dark"><img src="${estadoLarvalLogo}" alt="Logo de Estado Larval" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Experiencia musical</p><h3>Baterista, vocalista y músico</h3><p>Estado Larval</p><span>Banda y fundación independiente de jam</span></div></article>
+      </div>
     </div></section>
 
     <section class="section skills" id="habilidades"><div class="container">
@@ -245,6 +253,18 @@ document.querySelector('#app').innerHTML = `
             <div class="language-item"><span>Español</span><strong>Nativo</strong></div>
             <div class="language-item"><span>Inglés</span><strong>B2</strong></div>
           </div>
+      </article>
+    </div></section>
+
+    <section class="section hobbies" id="hobbies"><div class="container hobbies-grid">
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> Fuera del código</p><h2>Mis<br><em>hobbies.</em></h2></div>
+      <article class="hobbies-card reveal">
+        <p>Mis pasatiempos combinan la música, la lectura y el deporte de manera directa y variada:</p>
+        <ul>
+          <li><strong>Música y energía:</strong> Toco el bajo, la batería y la guitarra, y también me gusta cantar. Además, disfruto mucho escuchar música agresiva y saltar para descargar energía.</li>
+          <li><strong>Lectura por curiosidad:</strong> Leo un poco de todo: desde filosofía, historia y teoría musical hasta novelas de cualquier tipo o cualquier tema suelto que despierte mi curiosidad.</li>
+          <li><strong>Deportes:</strong> Me mantengo activo jugando al vóleibol y al ping-pong, combinando el juego en equipo con la rapidez y los reflejos.</li>
+        </ul>
       </article>
     </div></section>
 
