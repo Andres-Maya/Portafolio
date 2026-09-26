@@ -35,6 +35,7 @@ import codexLogo from './assets/skills/codex.svg'
 import visualStudioCodeLogo from './assets/skills/visualstudiocode.svg'
 import intellijIdeaLogo from './assets/skills/intellijidea.svg'
 import opencodeLogo from './assets/skills/opencode.svg'
+import { translations, languages } from './i18n.js'
 
 const icon = (name) => {
   const paths = {
@@ -53,85 +54,40 @@ const icon = (name) => {
 }
 
 const projects = [
-  {
-    number: '01', label: 'Proyecto full-stack destacado', title: 'Plataforma de consumo de IA',
-    description: 'Aplicación para consumir servicios de IA mediante una cadena de proxies. Incluye chat, estimación de tokens, control de cuotas, planes de usuario y dashboard de consumo.',
-    tags: ['React', 'Spring Boot', 'Java', 'Docker', 'DDD'],
-    links: [['Frontend', 'https://github.com/Andres-Maya/Pagina-de-consumo-de-IA-Proxy-FRONTEND'], ['Backend', 'https://github.com/Andres-Maya/Pagina-de-consumo-de-IA-Proxy-BACKEND']],
-  },
-  {
-    number: '02', label: 'Música + estructuras de datos', title: 'Waveline Music Player',
-    description: 'API REST para administrar canciones y listas de reproducción. Modela el dominio con TypeScript, Express y una lista doblemente enlazada, aplicando separación por capas.',
-    tags: ['TypeScript', 'Node.js', 'Express', 'REST API'],
-    links: [['Ver repositorio', 'https://github.com/Andres-Maya/TallerReproductorDeMusica']],
-  },
-  {
-    number: '03', label: 'Arquitectura de software', title: 'Plataforma Contable',
-    description: 'Sistema en Java diseñado desde múltiples vistas arquitectónicas: contexto, funcional, lógica, desarrollo y despliegue. Una muestra del proceso de diseño antes de construir.',
-    tags: ['Java', 'Arquitectura', 'UML', 'Diseño de software'],
-    links: [['Ver repositorio', 'https://github.com/Andres-Maya/PLataformaContable']],
-  },
-  {
-    number: '04', label: 'Diseño orientado a objetos', title: 'Notificaciones Universitarias',
-    description: 'Sistema académico de notificaciones construido en Java, acompañado por su diagrama de clases y una estructura orientada a objetos para modelar el dominio universitario.',
-    tags: ['Java', 'POO', 'UML', 'Patrones'],
-    links: [['Ver repositorio', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']],
-  },
+  { number: '01', links: [['frontend', 'https://github.com/Andres-Maya/Pagina-de-consumo-de-IA-Proxy-FRONTEND'], ['backend', 'https://github.com/Andres-Maya/Pagina-de-consumo-de-IA-Proxy-BACKEND']] },
+  { number: '02', links: [['repo', 'https://github.com/Andres-Maya/TallerReproductorDeMusica']] },
+  { number: '03', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
+  { number: '04', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
 
 const certificates = [
-  {
-    title: 'Curso de iniciación a la IA',
-    issuer: 'BIG school · Jon Hernández',
-    year: '2026',
-    image: aiInitiationCertificate,
-  },
-  {
-    title: 'Diploma de inglés B2–C1',
-    issuer: 'Cambridge Academy of Languages · British Council Aptis',
-    year: '2025',
-    images: [cambridgeDiplomaOne, cambridgeDiplomaTwo, cambridgeDiplomaThree],
-  },
-  {
-    title: 'Primer puesto como músico solista · Batalla de Bandas Francisco Ponce',
-    issuer: 'Colectivo Picnic Fest',
-    year: '2023',
-    image: picnicFestCertificate,
-  },
-  {
-    title: 'Tecnodesafío 2019',
-    issuer: 'SENA · Tecnoacademia · SENNOVA',
-    year: '2019',
-    image: tecnodesafioCertificate,
-  },
-  {
-    title: 'Investigación para la Recuperación del Patrimonio Bibliográfico',
-    issuer: 'Alcaldía Municipal de Túquerres',
-    year: '2015',
-    image: heritageCertificate,
-  },
-  {
-    title: '5.ª edición de Clubes de Ciencia Colombia',
-    issuer: 'Clubes de Ciencia Colombia · SENA',
-    year: '2019',
-    image: scienceClubsCertificate,
-  },
+  { year: '2026', images: [aiInitiationCertificate] },
+  { year: '2025', images: [cambridgeDiplomaOne, cambridgeDiplomaTwo, cambridgeDiplomaThree] },
+  { year: '2023', images: [picnicFestCertificate] },
+  { year: '2019', images: [tecnodesafioCertificate] },
+  { year: '2015', images: [heritageCertificate] },
+  { year: '2019', images: [scienceClubsCertificate] },
 ]
 
 const skills = [
-  ['Lenguajes de programación', [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }, { name: 'TypeScript', icon: typescriptLogo }]],
-  ['Desarrollo web y frameworks', [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }]],
-  ['Backend y despliegue', [{ name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }]],
-  ['Datos e infraestructura', [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }, { name: 'Docker', icon: dockerLogo }]],
-  ['IA y asistentes', [{ name: 'Ollama', icon: ollamaLogo, monochrome: true }, { name: 'Claude', icon: claudeLogo }, { name: 'Codex', icon: codexLogo, monochrome: true }, { name: 'OpenCode', icon: opencodeLogo, monochrome: true }]],
-  ['Herramientas de desarrollo', [{ name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }, { name: 'Visual Studio Code', icon: visualStudioCodeLogo }, { name: 'IntelliJ IDEA', icon: intellijIdeaLogo }]],
+  [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }, { name: 'TypeScript', icon: typescriptLogo }],
+  [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }],
+  [{ name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }],
+  [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }, { name: 'Docker', icon: dockerLogo }],
+  [{ name: 'Ollama', icon: ollamaLogo, monochrome: true }, { name: 'Claude', icon: claudeLogo }, { name: 'Codex', icon: codexLogo, monochrome: true }, { name: 'OpenCode', icon: opencodeLogo, monochrome: true }],
+  [{ name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }, { name: 'Visual Studio Code', icon: visualStudioCodeLogo }, { name: 'IntelliJ IDEA', icon: intellijIdeaLogo }],
 ]
 
-const carouselControls = (label) => `
+let language = languages.includes(document.documentElement.lang) ? document.documentElement.lang : 'es'
+const t = (key) => key.split('.').reduce((value, part) => value?.[part], translations[language]) ?? key
+// Marca un elemento para traducir su contenido y, opcionalmente, atributos ("alt:clave;aria-label:clave").
+const i18n = (key, attributes) => `${key ? `data-i18n="${key}"` : ''}${attributes ? ` data-i18n-attr="${attributes}"` : ''}`
+
+const carouselControls = (name) => `
   <div class="carousel-controls">
-    <button class="carousel-button carousel-previous" type="button" aria-label="Anterior: ${label}">${icon('previous')}</button>
+    <button class="carousel-button carousel-previous" type="button" ${i18n('', `aria-label:carousels.${name}.previous`)}>${icon('previous')}</button>
     <span class="carousel-status" aria-live="polite">1 / 1</span>
-    <button class="carousel-button carousel-next" type="button" aria-label="Siguiente: ${label}">${icon('next')}</button>
+    <button class="carousel-button carousel-next" type="button" ${i18n('', `aria-label:carousels.${name}.next`)}>${icon('next')}</button>
   </div>`
 
 const musicalNotes = [
@@ -161,16 +117,17 @@ document.querySelector('#app').innerHTML = `
       `).join('')}
     </div>
   </div>
-  <a class="skip-link" href="#main">Ir al contenido</a>
+  <a class="skip-link" href="#main" ${i18n('skip')}></a>
   <header class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-avatar"><img src="${profileLogo}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
-      <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
-        <a href="#perfil">Perfil</a><a href="#proyectos">Proyectos</a><a href="#formacion">Formación</a><a href="#experiencia">Experiencia</a><a href="#habilidades">Habilidades</a><a href="#hobbies">Hobbies</a><a href="#credenciales">Credenciales</a><a href="#contacto">Contacto</a>
+      <a class="brand" href="#inicio" ${i18n('', 'aria-label:nav.home')}><span class="brand-avatar"><img src="${profileLogo}" alt=""></span><span class="brand-name">Andrés Maya</span></a>
+      <nav class="nav-links" id="navLinks" ${i18n('', 'aria-label:nav.label')}>
+        <a href="#perfil" ${i18n('nav.profile')}></a><a href="#proyectos" ${i18n('nav.projects')}></a><a href="#formacion" ${i18n('nav.education')}></a><a href="#experiencia" ${i18n('nav.experience')}></a><a href="#habilidades" ${i18n('nav.skills')}></a><a href="#hobbies" ${i18n('nav.hobbies')}></a><a href="#credenciales" ${i18n('nav.credentials')}></a><a href="#contacto" ${i18n('nav.contact')}></a>
       </nav>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true"><span class="theme-icon theme-sun">${icon('sun')}</span><span class="theme-icon theme-moon">${icon('moon')}</span></button>
-      <a class="nav-cv" href="${cvFile}" target="_blank" rel="noopener">Ver CV ${icon('external')}</a>
-      <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menú" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="language-toggle" id="languageToggle" type="button" ${i18n('', 'aria-label:nav.switchLanguage;title:nav.switchLanguage')}><span data-language="es">ES</span><span data-language="en">EN</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="true"><span class="theme-icon theme-sun">${icon('sun')}</span><span class="theme-icon theme-moon">${icon('moon')}</span></button>
+      <a class="nav-cv" href="${cvFile}" target="_blank" rel="noopener"><span ${i18n('nav.cv')}></span> ${icon('external')}</a>
+      <button class="menu-button" id="menuButton" type="button" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </header>
 
@@ -179,120 +136,116 @@ document.querySelector('#app').innerHTML = `
       <div class="hero-glow hero-glow-one"></div><div class="hero-glow hero-glow-two"></div>
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow"><span></span> Hola, soy Andrés</p>
-          <h1>Software, música<br>y <em>creatividad.</em></h1>
-          <p class="hero-lede">Estudiante de Ingeniería de Software, músico y presentador colombiano. Me interesa crear soluciones digitales claras, útiles y bien diseñadas.</p>
+          <p class="eyebrow"><span></span> <b ${i18n('hero.eyebrow')}></b></p>
+          <h1 ${i18n('hero.title')}></h1>
+          <p class="hero-lede" ${i18n('hero.lede')}></p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#proyectos">Conoce mi trabajo ${icon('arrow')}</a>
-            <a class="button button-secondary" href="${cvFile}" target="_blank" rel="noopener">${icon('download')} Ver CV</a>
+            <a class="button button-primary" href="#proyectos"><span ${i18n('hero.cta')}></span> ${icon('arrow')}</a>
+            <a class="button button-secondary" href="${cvFile}" target="_blank" rel="noopener">${icon('download')} <span ${i18n('hero.cv')}></span></a>
           </div>
-          <div class="hero-facts" aria-label="Datos destacados"><div><strong>5°</strong><span>Semestre</span></div><div><strong>2</strong><span>Lenguajes</span></div><div><strong>B2</strong><span>Inglés</span></div></div>
+          <div class="hero-facts" ${i18n('', 'aria-label:hero.factsLabel')}>${translations.es.hero.facts.map((_, index) => `<div><strong ${i18n(`hero.facts.${index}.0`)}></strong><span ${i18n(`hero.facts.${index}.1`)}></span></div>`).join('')}</div>
         </div>
         <div class="portrait-wrap reveal">
           <div class="portrait-frame">
             <div class="portrait-label">Pasto · Colombia</div>
-            <img src="${profilePhoto}" alt="Retrato de Andrés Camilo Maya Rosero">
-            <div class="portrait-caption"><span>Andrés Camilo</span><span>Software &amp; Música</span></div>
+            <img src="${profilePhoto}" ${i18n('', 'alt:hero.portraitAlt')}>
+            <div class="portrait-caption"><span>Andrés Camilo</span><span ${i18n('hero.caption')}></span></div>
           </div>
         </div>
       </div>
-      <a class="scroll-hint" href="#perfil"><span></span> Descubre más</a>
+      <a class="scroll-hint" href="#perfil"><span></span> <b ${i18n('hero.scroll')}></b></a>
     </section>
 
     <section class="section about" id="perfil"><div class="container">
-      <div class="section-heading reveal"><p class="eyebrow"><span></span> Perfil</p><h2>Más que código,<br><em>ideas que conectan.</em></h2></div>
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> <b ${i18n('about.eyebrow')}></b></p><h2 ${i18n('about.title')}></h2></div>
       <div class="about-grid">
-        <div class="about-copy reveal"><p>Soy estudiante de quinto semestre de Ingeniería de Software en la Universidad Cooperativa de Colombia. Combino mi formación tecnológica con la música y la presentación.</p><p>Tengo conocimientos en Java, Python, HTML, GitHub, MongoDB, diseño de software y escritura de prompts para IA. Me motiva aprender mediante proyectos y convertir conceptos en experiencias que otras personas puedan usar.</p><p>En la música interpreto batería, guitarra, bajo y voz, con formación en teoría musical. Ese lado creativo influye en mi forma de comunicar, trabajar en equipo y resolver problemas.</p><div class="interest-row"><span>Desarrollo de software</span><span>Batería, guitarra, bajo y voz</span><span>Comunicación</span></div></div>
+        <div class="about-copy reveal">${translations.es.about.paragraphs.map((_, index) => `<p ${i18n(`about.paragraphs.${index}`)}></p>`).join('')}<div class="interest-row">${translations.es.about.interests.map((_, index) => `<span ${i18n(`about.interests.${index}`)}></span>`).join('')}</div></div>
       </div>
     </div></section>
 
     <section class="section projects" id="proyectos"><div class="container">
-      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Trabajo seleccionado</p><h2>Proyectos<br><em>destacados.</em></h2></div><p>Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.</p></div>
-      <div class="carousel reveal" data-carousel data-label="proyectos destacados">
-        <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project) => `
+      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> <b ${i18n('projects.eyebrow')}></b></p><h2 ${i18n('projects.title')}></h2></div><p ${i18n('projects.intro')}></p></div>
+      <div class="carousel reveal" data-carousel>
+        <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project, index) => `
         <article class="project-card">
-          <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label">${project.label}</span></div>
-          <h3>${project.title}</h3><p>${project.description}</p>
-          <div class="tag-list">${project.tags.map((tag) => `<span>${tag}</span>`).join('')}</div>
-          <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${label} ${icon('external')}</a>`).join('')}</div>
+          <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label" ${i18n(`projects.items.${index}.label`)}></span></div>
+          <h3 ${i18n(`projects.items.${index}.title`)}></h3><p ${i18n(`projects.items.${index}.description`)}></p>
+          <div class="tag-list">${translations.es.projects.items[index].tags.map((_, tagIndex) => `<span ${i18n(`projects.items.${index}.tags.${tagIndex}`)}></span>`).join('')}</div>
+          <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener"><span ${i18n(`projects.links.${label}`)}></span> ${icon('external')}</a>`).join('')}</div>
         </article>`).join('')}</div></div>
-        ${carouselControls('proyectos destacados')}
+        ${carouselControls('projects')}
       </div>
-      <a class="all-projects reveal" href="https://github.com/Andres-Maya?tab=repositories" target="_blank" rel="noopener">Ver todos los proyectos en GitHub ${icon('arrow')}</a>
+      <a class="all-projects reveal" href="https://github.com/Andres-Maya?tab=repositories" target="_blank" rel="noopener"><span ${i18n('projects.all')}></span> ${icon('arrow')}</a>
     </div></section>
 
     <section class="section education" id="formacion"><div class="container education-grid">
-      <div class="section-heading reveal"><p class="eyebrow"><span></span> Formación</p><h2>Aprender para<br><em>construir mejor.</em></h2></div>
-      <article class="education-card reveal"><div class="education-year">Actualidad</div><div class="ucc-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia"></div><div><p class="card-kicker">Pregrado · 5° semestre</p><h3>Ingeniería de Software</h3><p>Universidad Cooperativa de Colombia</p><span>Campus Pasto · Colombia</span></div></article>
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> <b ${i18n('education.eyebrow')}></b></p><h2 ${i18n('education.title')}></h2></div>
+      <article class="education-card reveal"><div class="education-year" ${i18n('education.year')}></div><div class="ucc-mark"><img src="${uccLogo}" ${i18n('', 'alt:education.logoAlt')}></div><div><p class="card-kicker" ${i18n('education.kicker')}></p><h3 ${i18n('education.degree')}></h3><p ${i18n('education.school')}></p><span ${i18n('education.campus')}></span></div></article>
     </div></section>
 
     <section class="section experience" id="experiencia"><div class="container">
-      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Trayectoria</p><h2>Experiencia<br><em>laboral y creativa.</em></h2></div><p>Experiencias académicas, audiovisuales y musicales que fortalecen mi comunicación, creatividad y trabajo en equipo.</p></div>
-      <div class="experience-grid">
-        <article class="experience-card reveal"><div class="experience-mark mentor-mark" aria-hidden="true">AJ</div><div class="experience-content"><p class="card-kicker">Monitoría académica</p><h3>Monitoría de idiomas</h3><p>Armando Javier Arteaga Unigarro</p><span>Profesor independiente</span></div></article>
-        <article class="experience-card reveal"><div class="experience-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Publicidad audiovisual · 2025</p><h3>Publicidad audiovisual</h3><p>Universidad Cooperativa de Colombia</p><span>Producción y comunicación audiovisual</span></div></article>
-        <article class="experience-card reveal"><div class="experience-mark"><img src="${uccLogo}" alt="Logo de la Universidad Cooperativa de Colombia" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Moderación · 2025</p><h3>Moderador de seminarios de semestre</h3><p>Universidad Cooperativa de Colombia</p><span>Presentación y acompañamiento académico</span></div></article>
-        <article class="experience-card reveal"><div class="experience-mark work-mark work-mark-light"><img src="${rekiemLogo}" alt="Logo de la banda RËKIËM" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Experiencia musical</p><h3>Bajista</h3><p>Banda de rock “RËKIËM”</p><span>Interpretación y trabajo en banda</span></div></article>
-        <article class="experience-card reveal"><div class="experience-mark work-mark work-mark-dark"><img src="${estadoLarvalLogo}" alt="Logo de Estado Larval" loading="lazy"></div><div class="experience-content"><p class="card-kicker">Experiencia musical</p><h3>Baterista, vocalista y músico</h3><p>Estado Larval</p><span>Banda y fundación independiente de jam</span></div></article>
+      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> <b ${i18n('experience.eyebrow')}></b></p><h2 ${i18n('experience.title')}></h2></div><p ${i18n('experience.intro')}></p></div>
+      <div class="experience-grid">${[
+        '<div class="experience-mark mentor-mark" aria-hidden="true">AJ</div>',
+        `<div class="experience-mark"><img src="${uccLogo}" ${i18n('', 'alt:education.logoAlt')} loading="lazy"></div>`,
+        `<div class="experience-mark"><img src="${uccLogo}" ${i18n('', 'alt:education.logoAlt')} loading="lazy"></div>`,
+        `<div class="experience-mark work-mark work-mark-light"><img src="${rekiemLogo}" ${i18n('', 'alt:experience.rekiemAlt')} loading="lazy"></div>`,
+        `<div class="experience-mark work-mark work-mark-dark"><img src="${estadoLarvalLogo}" ${i18n('', 'alt:experience.estadoLarvalAlt')} loading="lazy"></div>`,
+      ].map((mark, index) => `
+        <article class="experience-card reveal">${mark}<div class="experience-content"><p class="card-kicker" ${i18n(`experience.items.${index}.kicker`)}></p><h3 ${i18n(`experience.items.${index}.title`)}></h3><p ${i18n(`experience.items.${index}.place`)}></p><span ${i18n(`experience.items.${index}.detail`)}></span></div></article>`).join('')}
       </div>
     </div></section>
 
     <section class="section skills" id="habilidades"><div class="container">
-      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> Caja de herramientas</p><h2>Habilidades<br><em>técnicas.</em></h2></div><p>Tecnologías y herramientas con las que he trabajado durante mi formación y proyectos personales.</p></div>
-      <div class="carousel reveal" data-carousel data-label="habilidades técnicas">
-        <div class="carousel-viewport"><div class="carousel-track skills-grid">${skills.map(([title, items], index) => `<article class="skill-card"><span class="skill-index">0${index + 1}</span><h3>${title}</h3><div class="skill-items">${items.map((item) => {
-        const skill = typeof item === 'string' ? { name: item } : item
-        return `<div class="skill-item ${skill.icon ? 'has-logo' : ''} ${skill.monochrome ? 'is-monochrome' : ''}">${skill.icon ? `<img src="${skill.icon}" alt="" loading="lazy">` : ''}<b>${skill.name}</b></div>`
-      }).join('')}</div></article>`).join('')}</div></div>
-        ${carouselControls('habilidades técnicas')}
+      <div class="section-heading section-heading-row reveal"><div><p class="eyebrow"><span></span> <b ${i18n('skills.eyebrow')}></b></p><h2 ${i18n('skills.title')}></h2></div><p ${i18n('skills.intro')}></p></div>
+      <div class="carousel reveal" data-carousel>
+        <div class="carousel-viewport"><div class="carousel-track skills-grid">${skills.map((items, index) => `<article class="skill-card"><span class="skill-index">0${index + 1}</span><h3 ${i18n(`skills.categories.${index}`)}></h3><div class="skill-items">${items.map((skill) => `<div class="skill-item has-logo ${skill.monochrome ? 'is-monochrome' : ''}"><img src="${skill.icon}" alt="" loading="lazy"><b>${skill.name}</b></div>`).join('')}</div></article>`).join('')}</div></div>
+        ${carouselControls('skills')}
       </div>
       <article class="skill-card language-card reveal">
           <span class="skill-index">07</span>
-          <h3>Idiomas</h3>
-          <div class="language-list">
-            <div class="language-item"><span>Español</span><strong>Nativo</strong></div>
-            <div class="language-item"><span>Inglés</span><strong>B2</strong></div>
+          <h3 ${i18n('skills.languagesTitle')}></h3>
+          <div class="language-list">${translations.es.skills.languages.map((_, index) => `
+            <div class="language-item"><span ${i18n(`skills.languages.${index}.0`)}></span><strong ${i18n(`skills.languages.${index}.1`)}></strong></div>`).join('')}
           </div>
       </article>
     </div></section>
 
     <section class="section hobbies" id="hobbies"><div class="container hobbies-grid">
-      <div class="section-heading reveal"><p class="eyebrow"><span></span> Fuera del código</p><h2>Mis<br><em>hobbies.</em></h2></div>
+      <div class="section-heading reveal"><p class="eyebrow"><span></span> <b ${i18n('hobbies.eyebrow')}></b></p><h2 ${i18n('hobbies.title')}></h2></div>
       <article class="hobbies-card reveal">
-        <p>Mis pasatiempos combinan la música, la lectura y el deporte de manera directa y variada:</p>
-        <ul>
-          <li><strong>Música y energía:</strong> Toco el bajo, la batería y la guitarra, y también me gusta cantar. Además, disfruto mucho escuchar música agresiva y saltar para descargar energía.</li>
-          <li><strong>Lectura por curiosidad:</strong> Leo un poco de todo: desde filosofía, historia y teoría musical hasta novelas de cualquier tipo o cualquier tema suelto que despierte mi curiosidad.</li>
-          <li><strong>Deportes:</strong> Me mantengo activo jugando al vóleibol y al ping-pong, combinando el juego en equipo con la rapidez y los reflejos.</li>
+        <p ${i18n('hobbies.intro')}></p>
+        <ul>${translations.es.hobbies.items.map((_, index) => `
+          <li><strong ${i18n(`hobbies.items.${index}.0`)}></strong> <span ${i18n(`hobbies.items.${index}.1`)}></span></li>`).join('')}
         </ul>
       </article>
     </div></section>
 
     <section class="section credentials" id="credenciales"><div class="container credentials-inner">
-      <div class="credentials-heading reveal"><p class="eyebrow"><span></span> Aprendizaje continuo</p><h2>Certificados</h2><p>Reconocimientos y experiencias que han acompañado mi formación académica, tecnológica y creativa.</p></div>
-      <div class="carousel reveal" data-carousel data-label="certificados">
-        <div class="carousel-viewport"><div class="carousel-track certificate-grid">${certificates.map((certificate) => `
+      <div class="credentials-heading reveal"><p class="eyebrow"><span></span> <b ${i18n('credentials.eyebrow')}></b></p><h2 ${i18n('credentials.title')}></h2><p ${i18n('credentials.intro')}></p></div>
+      <div class="carousel reveal" data-carousel>
+        <div class="carousel-viewport"><div class="carousel-track certificate-grid">${certificates.map((certificate, index) => `
         <article class="certificate-card">
-          <div class="certificate-media ${(certificate.images?.length ?? 1) > 1 ? 'certificate-gallery' : ''}">
-            ${(certificate.images ?? [certificate.image]).map((image, index) => `
-            <a class="certificate-preview" href="${image}" target="_blank" rel="noopener" aria-label="Abrir ${certificate.title}${certificate.images ? `, documento ${index + 1}` : ''}">
-              <img src="${image}" alt="${certificate.title}${certificate.images ? `, documento ${index + 1}` : ''}" loading="lazy">
-              <span>Ver ${certificate.images ? `documento ${index + 1}` : 'certificado'} ${icon('external')}</span>
+          <div class="certificate-media ${certificate.images.length > 1 ? 'certificate-gallery' : ''}">
+            ${certificate.images.map((image, imageIndex) => `
+            <a class="certificate-preview" href="${image}" target="_blank" rel="noopener" data-certificate="${index}" data-document="${certificate.images.length > 1 ? imageIndex + 1 : ''}">
+              <img src="${image}" alt="" loading="lazy">
+              <span><span class="certificate-preview-label"></span> ${icon('external')}</span>
             </a>`).join('')}
           </div>
-          <div class="certificate-content"><span>${certificate.year}</span><h3>${certificate.title}</h3><p>${certificate.issuer}</p></div>
+          <div class="certificate-content"><span>${certificate.year}</span><h3 ${i18n(`credentials.items.${index}.title`)}></h3><p ${i18n(`credentials.items.${index}.issuer`)}></p></div>
         </article>`).join('')}</div></div>
-        ${carouselControls('certificados')}
+        ${carouselControls('certificates')}
       </div>
     </div></section>
 
     <section class="section contact" id="contacto"><div class="container contact-card reveal">
-      <p class="eyebrow light"><span></span> Contacto</p><h2>¿Creamos algo<br><em>juntos?</em></h2><p>Estoy abierto a conversar sobre software, proyectos creativos, música y nuevas oportunidades de aprendizaje.</p>
+      <p class="eyebrow light"><span></span> <b ${i18n('contact.eyebrow')}></b></p><h2 ${i18n('contact.title')}></h2><p ${i18n('contact.text')}></p>
       <a class="contact-email" href="mailto:andrescamilomaya07@gmail.com">andrescamilomaya07@gmail.com ${icon('arrow')}</a>
       <div class="contact-links"><a href="tel:+573164066498">${icon('phone')}<span>316 406 6498</span></a><a href="https://www.linkedin.com/in/andrés-camilo-maya-rosero-4b5702359/" target="_blank" rel="noopener">${icon('linkedin')}<span>LinkedIn</span></a><a href="https://github.com/Andres-Maya" target="_blank" rel="noopener">${icon('github')}<span>GitHub</span></a></div>
     </div></section>
   </main>
-  <footer><div class="container footer-inner"><p>© <span id="year"></span> Andrés Camilo Maya Rosero</p><p>Diseñado y desarrollado en Pasto, Colombia.</p><a href="#inicio">Volver arriba ↑</a></div></footer>
+  <footer><div class="container footer-inner"><p>© <span id="year"></span> Andrés Camilo Maya Rosero</p><p ${i18n('footer.made')}></p><a href="#inicio" ${i18n('footer.top')}></a></div></footer>
 `
 
 const menuButton = document.querySelector('#menuButton')
@@ -301,13 +254,72 @@ const navbar = document.querySelector('#navbar')
 const musicParallax = document.querySelector('#musicParallax')
 const musicBackground = document.querySelector('.music-background')
 const themeToggle = document.querySelector('#themeToggle')
+const languageToggle = document.querySelector('#languageToggle')
 
 const syncThemeToggle = () => {
   const isDark = document.documentElement.dataset.theme === 'dark'
+  const label = t(isDark ? 'nav.toLight' : 'nav.toDark')
   themeToggle.setAttribute('aria-pressed', String(isDark))
-  themeToggle.setAttribute('aria-label', isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro')
-  themeToggle.title = isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+  themeToggle.setAttribute('aria-label', label)
+  themeToggle.title = label
 }
+
+const syncMenuButton = () => {
+  const isOpen = navLinks.classList.contains('is-open')
+  menuButton.classList.toggle('is-open', isOpen)
+  menuButton.setAttribute('aria-expanded', String(isOpen))
+  menuButton.setAttribute('aria-label', t(isOpen ? 'nav.closeMenu' : 'nav.openMenu'))
+}
+
+const applyLanguage = () => {
+  document.documentElement.lang = language
+  document.title = t('meta.title')
+  document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'))
+  document.querySelectorAll('[data-i18n]').forEach((element) => {
+    element.innerHTML = t(element.dataset.i18n)
+  })
+  document.querySelectorAll('[data-i18n-attr]').forEach((element) => {
+    element.dataset.i18nAttr.split(';').forEach((pair) => {
+      const [attribute, key] = pair.split(':')
+      element.setAttribute(attribute, t(key))
+    })
+  })
+  document.querySelectorAll('.certificate-preview').forEach((preview) => {
+    const title = t(`credentials.items.${preview.dataset.certificate}.title`)
+    const documentNumber = preview.dataset.document
+    const suffix = documentNumber ? `, ${t('credentials.document')} ${documentNumber}` : ''
+    preview.setAttribute('aria-label', `${t('credentials.open')} ${title}${suffix}`)
+    preview.querySelector('img').alt = `${title}${suffix}`
+    preview.querySelector('.certificate-preview-label').textContent = documentNumber ? `${t('credentials.viewDocument')} ${documentNumber}` : t('credentials.viewCertificate')
+  })
+  languageToggle.querySelectorAll('[data-language]').forEach((option) => {
+    option.classList.toggle('is-active', option.dataset.language === language)
+  })
+  syncThemeToggle()
+  syncMenuButton()
+}
+
+// Repite la animación de entrada de los bloques visibles: los oculta sin transición y los vuelve a mostrar.
+const replayReveal = () => {
+  const visibleElements = [...document.querySelectorAll('.reveal.is-visible')]
+  visibleElements.forEach((element) => {
+    element.style.transition = 'none'
+    element.classList.remove('is-visible')
+  })
+  void document.body.offsetHeight
+  visibleElements.forEach((element) => {
+    element.style.transition = ''
+    element.classList.add('is-visible')
+  })
+}
+
+languageToggle.addEventListener('click', () => {
+  language = language === 'es' ? 'en' : 'es'
+  try { localStorage.setItem('portfolio-lang', language) } catch (_) {}
+  applyLanguage()
+  replayReveal()
+})
+applyLanguage()
 
 themeToggle.addEventListener('click', () => {
   const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'
@@ -317,17 +329,15 @@ themeToggle.addEventListener('click', () => {
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', nextTheme === 'dark' ? '#0b0e14' : '#f7f5ef')
   syncThemeToggle()
 })
-syncThemeToggle()
 document.querySelector('meta[name="theme-color"]')?.setAttribute('content', document.documentElement.dataset.theme === 'dark' ? '#0b0e14' : '#f7f5ef')
 
 menuButton.addEventListener('click', () => {
-  const isOpen = navLinks.classList.toggle('is-open')
-  menuButton.classList.toggle('is-open', isOpen)
-  menuButton.setAttribute('aria-expanded', String(isOpen))
-  menuButton.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú')
+  navLinks.classList.toggle('is-open')
+  syncMenuButton()
 })
 navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-  navLinks.classList.remove('is-open'); menuButton.classList.remove('is-open'); menuButton.setAttribute('aria-expanded', 'false')
+  navLinks.classList.remove('is-open')
+  syncMenuButton()
 }))
 window.addEventListener('scroll', () => navbar.classList.toggle('is-scrolled', window.scrollY > 24), { passive: true })
 

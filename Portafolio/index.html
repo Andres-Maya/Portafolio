@@ -8,6 +8,14 @@
     <title>Andrés Camilo Maya Rosero | Portafolio</title>
     <script>
       try {
+        const savedLanguage = localStorage.getItem('portfolio-lang')
+        document.documentElement.lang = savedLanguage === 'en' || savedLanguage === 'es'
+          ? savedLanguage
+          : (navigator.language || '').toLowerCase().startsWith('es') ? 'es' : 'en'
+      } catch (_) {
+        document.documentElement.lang = 'es'
+      }
+      try {
         const savedTheme = localStorage.getItem('portfolio-theme')
         const theme = savedTheme === 'light' ? 'light' : 'dark'
         document.documentElement.dataset.theme = theme
@@ -31,6 +39,10 @@
       </div>
     </div>
     <script>
+      if (document.documentElement.lang === 'en') {
+        document.getElementById('pageLoader').setAttribute('aria-label', 'Loading')
+        document.querySelector('.page-loader-label').textContent = 'Loading'
+      }
       var pageLoaderKeyboard = document.getElementById('pageLoaderKeyboard')
       var pageLoaderKeys = []
       for (var i = 0; i < 3; i++) {

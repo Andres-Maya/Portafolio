@@ -1520,3 +1520,56 @@ body,.section,.navbar,footer{transition:background-color .35s ease,color .35s ea
     .experience-content h3{font-size:19px}
     .hobbies-card{padding:28px 23px}
 }
+
+/* Selector de idioma ES / EN. */
+.eyebrow b,
+.scroll-hint b{font-weight:inherit}
+.language-toggle{
+    height:40px;
+    flex:0 0 auto;
+    display:inline-flex;
+    align-items:center;
+    gap:2px;
+    padding:4px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(255,255,255,.18);
+    color:var(--muted);
+    font-family:var(--head);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.04em;
+    cursor:pointer;
+    transition:border-color .25s,background .25s
+}
+.language-toggle span{
+    min-width:28px;
+    padding:6px 0;
+    border-radius:999px;
+    text-align:center;
+    transition:background .25s,color .25s
+}
+.language-toggle span.is-active{background:var(--accent);color:#ffffff}
+.language-toggle:hover{border-color:var(--accent)}
+.language-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+[data-theme="dark"] .language-toggle{background:rgba(255,255,255,.04)}
+[data-theme="dark"] .language-toggle span.is-active{color:#000000}
+.nav-inner .language-toggle{margin-right:-18px}
+@media(max-width:760px){
+    .nav-inner{gap:18px}
+    .nav-inner .language-toggle{margin-right:-8px}
+}
+
+/* Tarjeta de contacto blanca en modo claro. */
+[data-theme="light"] .contact{background:var(--cream)}
+[data-theme="light"] .contact-card{
+    border:1px solid var(--line);
+    background:#ffffff;
+    color:var(--ink);
+    box-shadow:0 24px 60px color-mix(in srgb,var(--ink) 8%,transparent)
+}
+[data-theme="light"] .contact-card:after{color:color-mix(in srgb,var(--accent) 7%,transparent)}
+[data-theme="light"] .contact-card>p:not(.eyebrow){color:var(--muted)}
+[data-theme="light"] .contact-links{border-top-color:var(--line)}
+[data-theme="light"] .contact-links a{color:var(--muted)}
+[data-theme="light"] .contact-links a:hover{color:var(--ink)}
