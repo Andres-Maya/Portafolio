@@ -153,7 +153,7 @@ document.querySelector('#app').innerHTML = `
           </div>
         </div>
       </div>
-      <a class="scroll-hint" href="#perfil"><span></span> <b ${i18n('hero.scroll')}></b></a>
+      
     </section>
 
     <section class="section about" id="perfil"><div class="container">

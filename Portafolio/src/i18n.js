@@ -39,7 +39,6 @@ export const translations = {
       facts: [['5°', 'Semestre'], ['2', 'Lenguajes'], ['B2', 'Inglés']],
       portraitAlt: 'Retrato de Andrés Camilo Maya Rosero',
       caption: 'Software &amp; Música',
-      scroll: 'Descubre más',
     },
     about: {
       eyebrow: 'Perfil',
