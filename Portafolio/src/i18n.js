@@ -55,12 +55,13 @@ export const translations = {
       title: 'Proyectos<br><em>destacados.</em>',
       intro: 'Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.',
       all: 'Ver todos los proyectos en GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup' },
       items: [
         {
-          label: 'Proyecto full-stack destacado', title: 'Plataforma de consumo de IA',
-          description: 'Aplicación para consumir servicios de IA mediante una cadena de proxies. Incluye chat, estimación de tokens, control de cuotas, planes de usuario y dashboard de consumo.',
-          tags: ['React', 'Spring Boot', 'Java', 'Docker', 'DDD'],
+          label: 'App móvil + IA + audio', title: 'SmartTune',
+          description: 'Afinador inteligente de instrumentos musicales para Android. Detecta la nota en tiempo real con el algoritmo YIN, identifica el instrumento con un modelo de IA (YAMNet) y guía la afinación cuerda por cuerda. Incluye un mockup web interactivo.',
+          imageAlt: 'Interfaz de SmartTune mostrando la nota Do sostenido 4, frecuencia detectada y desviación en cents',
+          tags: ['Kotlin', 'Jetpack Compose', 'TensorFlow Lite', 'Procesamiento de audio', 'JavaScript'],
         },
         {
           label: 'Música + estructuras de datos', title: 'Waveline Music Player',
@@ -205,12 +206,13 @@ export const translations = {
       title: 'Featured<br><em>projects.</em>',
       intro: 'A selection of public projects that reflects what I’ve learned about software development, architecture and design.',
       all: 'See all projects on GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository' },
       items: [
         {
-          label: 'Featured full-stack project', title: 'AI Consumption Platform',
-          description: 'Application for consuming AI services through a chain of proxies. It includes chat, token estimation, quota control, user plans and a usage dashboard.',
-          tags: ['React', 'Spring Boot', 'Java', 'Docker', 'DDD'],
+          label: 'Mobile app + AI + audio', title: 'SmartTune',
+          description: 'Smart musical instrument tuner for Android. It detects pitch in real time with the YIN algorithm, identifies the instrument with an AI model (YAMNet) and guides tuning string by string. Includes an interactive web mockup.',
+          imageAlt: 'SmartTune interface showing the note C sharp 4, detected frequency and deviation in cents',
+          tags: ['Kotlin', 'Jetpack Compose', 'TensorFlow Lite', 'Audio processing', 'JavaScript'],
         },
         {
           label: 'Music + data structures', title: 'Waveline Music Player',
