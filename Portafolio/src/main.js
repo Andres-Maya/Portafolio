@@ -16,15 +16,14 @@ import cvFile from './assets/pdf/AndresCV.pdf'
 import smartTunerPreview from './assets/projects/SmatTuner.png'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
+import tailwindLogo from './assets/skills/tailwindcss.svg'
 import javascriptLogo from './assets/skills/javascript.svg'
-import typescriptLogo from './assets/skills/typescript.svg'
 import claudeLogo from './assets/skills/claude.svg'
 import pythonLogo from './assets/skills/python.svg'
 import javaLogo from './assets/skills/java.svg'
 import djangoLogo from './assets/skills/django.svg'
 import nodejsLogo from './assets/skills/nodejs.svg'
 import springBootLogo from './assets/skills/springboot.svg'
-import jwtLogo from './assets/skills/jwt.svg'
 import ollamaLogo from './assets/skills/ollama.svg'
 import mysqlLogo from './assets/skills/mysql.svg'
 import mongodbLogo from './assets/skills/mongodb.svg'
@@ -33,8 +32,6 @@ import gitLogo from './assets/skills/git.svg'
 import githubLogo from './assets/skills/github.svg'
 import vercelLogo from './assets/skills/vercel.svg'
 import codexLogo from './assets/skills/codex.svg'
-import visualStudioCodeLogo from './assets/skills/visualstudiocode.svg'
-import intellijIdeaLogo from './assets/skills/intellijidea.svg'
 import opencodeLogo from './assets/skills/opencode.svg'
 import { translations, languages } from './i18n.js'
 
@@ -71,12 +68,12 @@ const certificates = [
 ]
 
 const skills = [
-  [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }, { name: 'TypeScript', icon: typescriptLogo }],
-  [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Node.js', icon: nodejsLogo }],
-  [{ name: 'Spring Boot', icon: springBootLogo }, { name: 'JWT', icon: jwtLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }],
-  [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }, { name: 'Docker', icon: dockerLogo }],
+  [{ name: 'Python', icon: pythonLogo }, { name: 'Java', icon: javaLogo }, { name: 'JavaScript', icon: javascriptLogo }],
+  [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Tailwind CSS', icon: tailwindLogo }],
+  [{ name: 'Node.js', icon: nodejsLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Spring Boot', icon: springBootLogo }],
+  [{ name: 'Docker', icon: dockerLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }, { name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }],
+  [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }],
   [{ name: 'Ollama', icon: ollamaLogo, monochrome: true }, { name: 'Claude', icon: claudeLogo }, { name: 'Codex', icon: codexLogo, monochrome: true }, { name: 'OpenCode', icon: opencodeLogo, monochrome: true }],
-  [{ name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }, { name: 'Visual Studio Code', icon: visualStudioCodeLogo }, { name: 'IntelliJ IDEA', icon: intellijIdeaLogo }],
 ]
 
 let language = languages.includes(document.documentElement.lang) ? document.documentElement.lang : 'es'
