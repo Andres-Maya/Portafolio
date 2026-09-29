@@ -55,7 +55,7 @@ export const translations = {
       title: 'Proyectos<br><em>destacados.</em>',
       intro: 'Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.',
       all: 'Ver todos los proyectos en GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup', webDemo: 'Probar versión web', webRepo: 'Repositorio de la versión web' },
       items: [
         {
           label: 'App móvil + IA + audio', title: 'SmartTune',
@@ -64,9 +64,10 @@ export const translations = {
           tags: ['Kotlin', 'Jetpack Compose', 'TensorFlow Lite', 'Procesamiento de audio', 'JavaScript'],
         },
         {
-          label: 'Música + estructuras de datos', title: 'Waveline Music Player',
-          description: 'API REST para administrar canciones y listas de reproducción. Modela el dominio con TypeScript, Express y una lista doblemente enlazada, aplicando separación por capas.',
-          tags: ['TypeScript', 'Node.js', 'Express', 'REST API'],
+          label: 'App de escritorio + IA + audio', title: 'StemLab',
+          description: 'Programa de escritorio para separar y grabar pistas musicales. Separa una canción en voz, batería, bajo y otros instrumentos con IA (Demucs), permite grabar nuevas pistas, aplicar efectos y mezclar. Incluye una versión web desplegada en Vercel.',
+          imageAlt: 'Interfaz de StemLab con una canción separada en pistas de voz, batería y bajo, y el mezclador con efectos',
+          tags: ['C++', 'JUCE', 'Python', 'Demucs', 'TypeScript'],
         },
         {
           label: 'Arquitectura de software', title: 'Plataforma Contable',
@@ -206,7 +207,7 @@ export const translations = {
       title: 'Featured<br><em>projects.</em>',
       intro: 'A selection of public projects that reflects what I’ve learned about software development, architecture and design.',
       all: 'See all projects on GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository', webDemo: 'Try the web version', webRepo: 'Web version repository' },
       items: [
         {
           label: 'Mobile app + AI + audio', title: 'SmartTune',
@@ -215,9 +216,10 @@ export const translations = {
           tags: ['Kotlin', 'Jetpack Compose', 'TensorFlow Lite', 'Audio processing', 'JavaScript'],
         },
         {
-          label: 'Music + data structures', title: 'Waveline Music Player',
-          description: 'REST API for managing songs and playlists. It models the domain with TypeScript, Express and a doubly linked list, following a layered architecture.',
-          tags: ['TypeScript', 'Node.js', 'Express', 'REST API'],
+          label: 'Desktop app + AI + audio', title: 'StemLab',
+          description: 'Desktop program for separating and recording music tracks. It splits a song into vocals, drums, bass and other instruments with AI (Demucs), lets you record new tracks, apply effects and mix. Includes a web version deployed on Vercel.',
+          imageAlt: 'StemLab interface with a song split into vocal, drum and bass tracks, and the mixer with effects',
+          tags: ['C++', 'JUCE', 'Python', 'Demucs', 'TypeScript'],
         },
         {
           label: 'Software architecture', title: 'Accounting Platform',

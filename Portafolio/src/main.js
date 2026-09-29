@@ -14,6 +14,7 @@ import picnicFestCertificate from './assets/certificates/CertificadoSolistaPrime
 import aiInitiationCertificate from './assets/certificates/Certificado asistencia curso iniciación a la IA.png'
 import cvFile from './assets/pdf/AndresCV.pdf'
 import smartTunerPreview from './assets/projects/SmatTuner.png'
+import stemLabPreview from './assets/projects/StemLab.png'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
 import tailwindLogo from './assets/skills/tailwindcss.svg'
@@ -53,7 +54,7 @@ const icon = (name) => {
 
 const projects = [
   { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']] },
-  { number: '02', links: [['repo', 'https://github.com/Andres-Maya/TallerReproductorDeMusica']] },
+  { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']] },
   { number: '03', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
   { number: '04', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
@@ -167,7 +168,7 @@ document.querySelector('#app').innerHTML = `
         <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project, index) => `
         <article class="project-card">
           <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label" ${i18n(`projects.items.${index}.label`)}></span></div>
-          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', 'aria-label:projects.links.demo')}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy"><span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
+          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', `aria-label:projects.links.${project.demoLabel ?? 'demo'}`)}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy"><span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
           <h3 ${i18n(`projects.items.${index}.title`)}></h3><p ${i18n(`projects.items.${index}.description`)}></p>
           <div class="tag-list">${translations.es.projects.items[index].tags.map((_, tagIndex) => `<span ${i18n(`projects.items.${index}.tags.${tagIndex}`)}></span>`).join('')}</div>
           <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener"><span ${i18n(`projects.links.${label}`)}></span> ${icon('external')}</a>`).join('')}</div>
