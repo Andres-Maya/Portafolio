@@ -121,7 +121,7 @@ export const translations = {
         ['Música y energía:', 'Toco el bajo, la batería y la guitarra, y también me gusta cantar. Además, disfruto mucho escuchar música agresiva y saltar para descargar energía.'],
         ['Lectura por curiosidad:', 'Leo un poco de todo: desde filosofía, historia y teoría musical hasta novelas de cualquier tipo o cualquier tema suelto que despierte mi curiosidad.'],
         ['Deportes:', 'Me mantengo activo jugando al vóleibol y al ping-pong, combinando el juego en equipo con la rapidez y los reflejos.'],
-        ['Dibujo y poesía:', 'Me gusta dibujar y escribir poesía; son mi forma de expresar ideas y emociones con calma, lejos de la pantalla.'],
+        ['Dibujo y poesía:', 'Me gusta dibujar y escribir poesía; son una manera de mostrar mi forma de ver la realidad.'],
       ],
     },
     credentials: {
@@ -274,7 +274,7 @@ export const translations = {
         ['Music and energy:', 'I play bass, drums and guitar, and I also love to sing. I really enjoy listening to aggressive music and jumping around to release energy.'],
         ['Reading out of curiosity:', 'I read a bit of everything: from philosophy, history and music theory to novels of any kind or any random topic that sparks my curiosity.'],
         ['Sports:', 'I stay active playing volleyball and ping-pong, combining teamwork with speed and reflexes.'],
-        ['Drawing and poetry:', 'I enjoy drawing and writing poetry; they are my way of expressing ideas and emotions calmly, away from the screen.'],
+        ['Drawing and poetry:', 'I enjoy drawing and writing poetry; they are a way of showing how I see reality.'],
       ],
     },
     credentials: {
