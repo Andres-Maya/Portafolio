@@ -1356,7 +1356,8 @@ body,.section,.navbar,footer{transition:background-color .35s ease,color .35s ea
 .contact-card.reveal{
     transition:opacity .65s ease,transform .65s cubic-bezier(.22,.8,.3,1),background-color .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease
 }
-.project-card.reveal.is-visible:hover{
+.project-card.reveal.is-visible:hover,
+.education-card.reveal.is-visible:hover{
     transform:translateY(-5px)
 }
 [data-theme="dark"] .navbar.is-scrolled{background:rgba(11,14,20,.88);box-shadow:0 1px rgba(255,255,255,.08)}[data-theme="dark"] .brand-mark{background:#e8b84b;color:#090b0f}[data-theme="dark"] .nav-links a{color:#c1c8c3}[data-theme="dark"] .nav-cv:hover{background:var(--ink);color:#0b0e14}[data-theme="dark"] .theme-toggle{background:rgba(255,255,255,.04)}[data-theme="dark"] .menu-button{background:#e8b84b}[data-theme="dark"] .menu-button span{background:#090b0f}[data-theme="dark"] .nav-links.is-open{background:#111620}
@@ -1415,7 +1416,9 @@ body,.section,.navbar,footer{transition:background-color .35s ease,color .35s ea
 .button-primary{background:var(--accent);color:#ffffff}
 .button-primary:hover{background:color-mix(in srgb,var(--accent) 84%,#000000)}
 .project-card:hover,
+.education-card:hover,
 .certificate-card:hover{border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
+.education-card:hover{box-shadow:0 20px 44px color-mix(in srgb,var(--ink) 9%,transparent)}
 .project-card:before{background:var(--accent-soft)}
 .education{background:var(--accent-soft)}
 .education-year{background:var(--accent-soft);color:var(--accent)}

@@ -99,8 +99,8 @@ export const translations = {
       estadoLarvalAlt: 'Logo de Estado Larval',
       items: [
         { kicker: 'Monitoría académica', title: 'Monitoría de idiomas', place: 'Armando Javier Arteaga Unigarro', detail: 'Profesor independiente' },
-        { kicker: 'Publicidad audiovisual · 2025', title: 'Publicidad audiovisual', place: 'Universidad Cooperativa de Colombia', detail: 'Producción y comunicación audiovisual' },
-        { kicker: 'Moderación · 2025', title: 'Moderador de seminarios de semestre', place: 'Universidad Cooperativa de Colombia', detail: 'Presentación y acompañamiento académico' },
+        { kicker: 'Publicidad audiovisual · 2025', title: 'Publicidad audiovisual', place: 'Universidad Cooperativa de Colombia', detail: 'Comunicación audiovisual' },
+        { kicker: 'Moderación · 2025', title: 'Moderador de seminarios de semestre', place: 'Universidad Cooperativa de Colombia', detail: 'Presentador' },
         { kicker: 'Experiencia musical', title: 'Bajista', place: 'Banda de rock “RËKIËM”', detail: 'Interpretación y trabajo en banda' },
         { kicker: 'Experiencia musical', title: 'Baterista, vocalista y músico', place: 'Estado Larval', detail: 'Banda y fundación independiente de jam' },
       ],
@@ -251,8 +251,8 @@ export const translations = {
       estadoLarvalAlt: 'Estado Larval logo',
       items: [
         { kicker: 'Academic tutoring', title: 'Language tutor', place: 'Armando Javier Arteaga Unigarro', detail: 'Independent teacher' },
-        { kicker: 'Audiovisual advertising · 2025', title: 'Audiovisual advertising', place: 'Universidad Cooperativa de Colombia', detail: 'Audiovisual production and communication' },
-        { kicker: 'Moderation · 2025', title: 'Semester seminar moderator', place: 'Universidad Cooperativa de Colombia', detail: 'Presenting and academic support' },
+        { kicker: 'Audiovisual advertising · 2025', title: 'Audiovisual advertising', place: 'Universidad Cooperativa de Colombia', detail: 'Audiovisual communication' },
+        { kicker: 'Moderation · 2025', title: 'Semester seminar moderator', place: 'Universidad Cooperativa de Colombia', detail: 'Presenter' },
         { kicker: 'Musical experience', title: 'Bassist', place: 'Rock band “RËKIËM”', detail: 'Performing and playing in a band' },
         { kicker: 'Musical experience', title: 'Drummer, vocalist and musician', place: 'Estado Larval', detail: 'Independent jam band and foundation' },
       ],
