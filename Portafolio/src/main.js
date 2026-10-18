@@ -15,6 +15,9 @@ import aiInitiationCertificate from './assets/certificates/Certificado asistenci
 import cvFile from './assets/pdf/AndresCV.pdf'
 import smartTunerPreview from './assets/projects/SmatTuner.png'
 import stemLabPreview from './assets/projects/StemLab.png'
+import turboRatasPreviewOne from './assets/projects/TurboRatasGame1.png'
+import turboRatasPreviewTwo from './assets/projects/TurboRatasGame2.png'
+import turboRatasPreviewThree from './assets/projects/TurboRatasGame3.png'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
 import tailwindLogo from './assets/skills/tailwindcss.svg'
@@ -55,8 +58,9 @@ const icon = (name) => {
 const projects = [
   { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']] },
   { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']] },
-  { number: '03', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
-  { number: '04', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
+  { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree], demo: 'https://raceroberapocalypse.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
+  { number: '04', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
+  { number: '05', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
 
 const certificates = [
@@ -168,7 +172,7 @@ document.querySelector('#app').innerHTML = `
         <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project, index) => `
         <article class="project-card">
           <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label" ${i18n(`projects.items.${index}.label`)}></span></div>
-          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', `aria-label:projects.links.${project.demoLabel ?? 'demo'}`)}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy"><span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
+          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', `aria-label:projects.links.${project.demoLabel ?? 'demo'}`)}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy">${(project.slides ?? []).map((slide, slideIndex) => `<img class="project-slide" src="${slide}" alt="" loading="lazy" style="--slide-delay:${slideIndex * 4}s">`).join('')}<span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
           <h3 ${i18n(`projects.items.${index}.title`)}></h3><p ${i18n(`projects.items.${index}.description`)}></p>
           <div class="tag-list">${translations.es.projects.items[index].tags.map((_, tagIndex) => `<span ${i18n(`projects.items.${index}.tags.${tagIndex}`)}></span>`).join('')}</div>
           <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener"><span ${i18n(`projects.links.${label}`)}></span> ${icon('external')}</a>`).join('')}</div>

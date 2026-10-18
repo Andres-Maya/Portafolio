@@ -55,7 +55,7 @@ export const translations = {
       title: 'Proyectos<br><em>destacados.</em>',
       intro: 'Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.',
       all: 'Ver todos los proyectos en GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup', webDemo: 'Probar versión web', webRepo: 'Repositorio de la versión web' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup', webDemo: 'Probar versión web', play: 'Jugar en el navegador', webRepo: 'Repositorio de la versión web' },
       items: [
         {
           label: 'App móvil + IA + audio', title: 'SmartTune',
@@ -68,6 +68,12 @@ export const translations = {
           description: 'Programa de escritorio para separar y grabar pistas musicales. Separa una canción en voz, batería, bajo y otros instrumentos con IA (Demucs), permite grabar nuevas pistas, aplicar efectos y mezclar. Incluye una versión web desplegada en Vercel.',
           imageAlt: 'Interfaz de StemLab con una canción separada en pistas de voz, batería y bajo, y el mezclador con efectos',
           tags: ['C++', 'JUCE', 'Python', 'Demucs', 'TypeScript'],
+        },
+        {
+          label: 'Videojuego web + IA', title: 'Turbo Ratas',
+          description: 'Videojuego 2D de persecuciones en vista cenital al estilo GTA 1. Una banda de ladrones roba el Banco Central de Ciudad Cobalto y huye de la policía, una banda rival y mutantes. Una IA ajusta cada nivel a tu forma de conducir. Se juega en PC o móvil, solo o con un amigo en línea.',
+          imageAlt: 'Vista cenital de Turbo Ratas: el auto de los ladrones huye entre edificios en la Zona 2, Tierra Baldía',
+          tags: ['TypeScript', 'Three.js', 'Rapier', 'Vite', 'WebRTC'],
         },
         {
           label: 'Arquitectura de software', title: 'Plataforma Contable',
@@ -208,7 +214,7 @@ export const translations = {
       title: 'Featured<br><em>projects.</em>',
       intro: 'A selection of public projects that reflects what I’ve learned about software development, architecture and design.',
       all: 'See all projects on GitHub',
-      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository', webDemo: 'Try the web version', webRepo: 'Web version repository' },
+      links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository', webDemo: 'Try the web version', play: 'Play in the browser', webRepo: 'Web version repository' },
       items: [
         {
           label: 'Mobile app + AI + audio', title: 'SmartTune',
@@ -221,6 +227,12 @@ export const translations = {
           description: 'Desktop program for separating and recording music tracks. It splits a song into vocals, drums, bass and other instruments with AI (Demucs), lets you record new tracks, apply effects and mix. Includes a web version deployed on Vercel.',
           imageAlt: 'StemLab interface with a song split into vocal, drum and bass tracks, and the mixer with effects',
           tags: ['C++', 'JUCE', 'Python', 'Demucs', 'TypeScript'],
+        },
+        {
+          label: 'Web game + AI', title: 'Turbo Ratas',
+          description: 'Top-down 2D car chase game in the style of GTA 1. A gang of thieves robs the Central Bank of Cobalt City and flees from the police, a rival gang and mutants. An AI adapts each level to the way you drive. Playable on PC or mobile, solo or with a friend online.',
+          imageAlt: 'Top-down view of Turbo Ratas: the thieves’ car flees between buildings in Zone 2, Wasteland',
+          tags: ['TypeScript', 'Three.js', 'Rapier', 'Vite', 'WebRTC'],
         },
         {
           label: 'Software architecture', title: 'Accounting Platform',
