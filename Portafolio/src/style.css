@@ -855,12 +855,10 @@ em{
     max-height:none;
     background:#101521;
     opacity:0;
-    animation:project-slide 12s var(--slide-delay) infinite
+    transition:opacity .6s,transform .4s
 }
-@keyframes project-slide{
-    0%,33%{opacity:0}
-    38%,66%{opacity:1}
-    71%,100%{opacity:0}
+.project-preview .project-slide.is-active{
+    opacity:1
 }
 .project-preview-icon{
     position:absolute;

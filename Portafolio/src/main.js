@@ -18,6 +18,8 @@ import stemLabPreview from './assets/projects/StemLab.png'
 import turboRatasPreviewOne from './assets/projects/TurboRatasGame1.png'
 import turboRatasPreviewTwo from './assets/projects/TurboRatasGame2.png'
 import turboRatasPreviewThree from './assets/projects/TurboRatasGame3.png'
+import turboRatasPreviewFour from './assets/projects/TurboRatasGame4.png'
+import turboRatasPreviewFive from './assets/projects/TurboRatasGame5.png'
 import htmlLogo from './assets/skills/html5.svg'
 import cssLogo from './assets/skills/css3.svg'
 import tailwindLogo from './assets/skills/tailwindcss.svg'
@@ -58,7 +60,7 @@ const icon = (name) => {
 const projects = [
   { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']] },
   { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']] },
-  { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree], demo: 'https://raceroberapocalypse.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
+  { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree, turboRatasPreviewFour, turboRatasPreviewFive], demo: 'https://raceroberapocalypse.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
   { number: '04', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
   { number: '05', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
@@ -172,7 +174,7 @@ document.querySelector('#app').innerHTML = `
         <div class="carousel-viewport"><div class="carousel-track project-grid">${projects.map((project, index) => `
         <article class="project-card">
           <div class="project-top"><span class="project-number">${project.number}</span><span class="project-label" ${i18n(`projects.items.${index}.label`)}></span></div>
-          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', `aria-label:projects.links.${project.demoLabel ?? 'demo'}`)}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy">${(project.slides ?? []).map((slide, slideIndex) => `<img class="project-slide" src="${slide}" alt="" loading="lazy" style="--slide-delay:${slideIndex * 4}s">`).join('')}<span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
+          ${project.image ? `<a class="project-preview" href="${project.demo}" target="_blank" rel="noopener" ${i18n('', `aria-label:projects.links.${project.demoLabel ?? 'demo'}`)}><img src="${project.image}" ${i18n('', `alt:projects.items.${index}.imageAlt`)} loading="lazy">${(project.slides ?? []).map((slide) => `<img class="project-slide" src="${slide}" alt="" loading="lazy">`).join('')}<span class="project-preview-icon" aria-hidden="true">${icon('external')}</span></a>` : ''}
           <h3 ${i18n(`projects.items.${index}.title`)}></h3><p ${i18n(`projects.items.${index}.description`)}></p>
           <div class="tag-list">${translations.es.projects.items[index].tags.map((_, tagIndex) => `<span ${i18n(`projects.items.${index}.tags.${tagIndex}`)}></span>`).join('')}</div>
           <div class="project-links">${project.links.map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener"><span ${i18n(`projects.links.${label}`)}></span> ${icon('external')}</a>`).join('')}</div>
@@ -377,6 +379,20 @@ const observer = new IntersectionObserver((entries) => entries.forEach((entry) =
   entry.target.classList.toggle('is-visible', entry.isIntersecting)
 }), { threshold: 0.12, rootMargin: '0px 0px -5% 0px' })
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element))
+
+// Alterna las capturas extra de un proyecto; la imagen principal queda debajo como base.
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.project-preview').forEach((preview) => {
+    const slides = [...preview.querySelectorAll('.project-slide')]
+    if (!slides.length) return
+    let current = -1
+    setInterval(() => {
+      slides[current]?.classList.remove('is-active')
+      current = current + 1 < slides.length ? current + 1 : -1
+      slides[current]?.classList.add('is-active')
+    }, 4000)
+  })
+}
 
 document.querySelectorAll('[data-carousel]').forEach((carousel) => {
   const viewport = carousel.querySelector('.carousel-viewport')
