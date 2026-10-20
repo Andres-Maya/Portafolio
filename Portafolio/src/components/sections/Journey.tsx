@@ -55,7 +55,7 @@ function pluckBuffer(ctx: AudioContext, frequency: number) {
   return buffer
 }
 
-function playBassNote(frequency: number) {
+function playBassNote(frequency: number, volume = 0.55) {
   try {
     audioContext ??= new AudioContext()
     const ctx = audioContext
@@ -66,7 +66,7 @@ function playBassNote(frequency: number) {
     tone.type = 'lowpass'
     tone.frequency.value = 950
     const gain = ctx.createGain()
-    gain.gain.setValueAtTime(0.55, ctx.currentTime)
+    gain.gain.setValueAtTime(volume, ctx.currentTime)
     gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.2)
     source.connect(tone).connect(gain).connect(ctx.destination)
     source.start()
@@ -77,35 +77,80 @@ function playBassNote(frequency: number) {
 
 // Cuerdas al aire del bajo: La al ir a la experiencia laboral, Mi al volver.
 const notes: Record<View, number> = { work: 55, academic: 41.2 }
+const maxPull = 26
+
+// Curva de la cuerda con su desplazamiento máximo `peak` (px) a la altura `y` (0-100).
+const curve = (peak: number, y = 50) => `M12 0Q${12 + 2 * peak} ${y} 12 100`
+const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 function BassString({ view, onToggle, label }: { view: View; onToggle: () => void; label: string }) {
   const string = useRef<SVGPathElement>(null)
   const echo = useRef<SVGPathElement>(null)
+  const hitArea = useRef<HTMLSpanElement>(null)
   const previousView = useRef(view)
+  const frame = useRef(0)
+  const pull = useRef<{ x: number; y: number } | null>(null)
 
-  // Al cambiar de lado la cuerda se pulsa: suena y vibra con oscilación amortiguada.
+  const shape = (main: string, ghost = main) => {
+    string.current?.setAttribute('d', main)
+    echo.current?.setAttribute('d', ghost)
+  }
+
+  // Oscilación amortiguada; al soltarla parte del punto estirado (coseno), al cambiar de lado desde reposo (seno).
+  const vibrate = (amplitude: number, y: number, fromRest: boolean) => {
+    cancelAnimationFrame(frame.current)
+    if (reducedMotion()) return shape(curve(0))
+    const start = performance.now()
+    const draw = (now: number) => {
+      const t = (now - start) / 1000
+      const phase = 2 * Math.PI * 13 * t
+      const offset = t < 1.6 ? amplitude * Math.exp(-t / 0.45) * (fromRest ? Math.sin(phase) : Math.cos(phase)) : 0
+      shape(curve(offset, y), curve(-offset, y))
+      if (offset !== 0) frame.current = requestAnimationFrame(draw)
+    }
+    frame.current = requestAnimationFrame(draw)
+  }
+
+  // Al cambiar de lado la cuerda se pulsa: suena y vibra.
   useEffect(() => {
     if (previousView.current === view) return
     previousView.current = view
     playBassNote(notes[view])
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const start = performance.now()
-    let frame = 0
-    const draw = (now: number) => {
-      const t = (now - start) / 1000
-      const offset = t < 1.6 ? 12 * Math.exp(-t / 0.45) * Math.sin(2 * Math.PI * 13 * t) : 0
-      string.current?.setAttribute('d', `M12 0Q${12 + offset} 50 12 100`)
-      echo.current?.setAttribute('d', `M12 0Q${12 - offset} 50 12 100`)
-      if (offset !== 0) frame = requestAnimationFrame(draw)
-    }
-    frame = requestAnimationFrame(draw)
-    return () => {
-      cancelAnimationFrame(frame)
-      string.current?.setAttribute('d', 'M12 0Q12 50 12 100')
-      echo.current?.setAttribute('d', 'M12 0Q12 50 12 100')
-    }
+    vibrate(6, 50, true)
   }, [view])
+
+  useEffect(() => () => cancelAnimationFrame(frame.current), [])
+
+  // Mantener el clic sobre la cuerda la estira hacia el puntero; al soltarla suena según la fuerza.
+  const pointerPosition = (event: React.PointerEvent) => {
+    const rect = hitArea.current!.getBoundingClientRect()
+    const x = Math.max(-maxPull, Math.min(maxPull, event.clientX - (rect.left + rect.width / 2)))
+    const y = Math.max(5, Math.min(95, ((event.clientY - rect.top) / rect.height) * 100))
+    return { x, y }
+  }
+
+  const onPointerDown = (event: React.PointerEvent<HTMLSpanElement>) => {
+    if (event.button !== 0) return
+    event.currentTarget.setPointerCapture(event.pointerId)
+    cancelAnimationFrame(frame.current)
+    pull.current = pointerPosition(event)
+    shape(`M12 0L${12 + pull.current.x} ${pull.current.y}L12 100`)
+  }
+
+  const onPointerMove = (event: React.PointerEvent<HTMLSpanElement>) => {
+    if (!pull.current) return
+    pull.current = pointerPosition(event)
+    shape(`M12 0L${12 + pull.current.x} ${pull.current.y}L12 100`)
+  }
+
+  const release = (silent = false) => {
+    if (!pull.current) return
+    const { x, y } = pull.current
+    pull.current = null
+    const strength = Math.max(Math.abs(x), 4) / maxPull
+    if (!silent) playBassNote(notes[view], 0.2 + 0.45 * strength)
+    vibrate(silent ? 0 : Math.sign(x || 1) * Math.max(Math.abs(x), 4), y, false)
+  }
 
   return (
     <div
@@ -113,10 +158,20 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
       style={{ left: view === 'academic' ? 'calc(100% - var(--trunk))' : '0px' }}
     >
       {/* Cuerda: el eco opuesto dibuja la envolvente de la vibración */}
-      <svg aria-hidden="true" viewBox="0 0 24 100" preserveAspectRatio="none" className="absolute top-10 bottom-[26px] left-1/2 h-[calc(100%-66px)] w-6 -translate-x-1/2 overflow-visible fill-none [stroke-linecap:round]">
+      <svg aria-hidden="true" viewBox="0 0 24 100" preserveAspectRatio="none" className="pointer-events-none absolute top-10 bottom-[26px] left-1/2 h-[calc(100%-66px)] w-6 -translate-x-1/2 overflow-visible fill-none [stroke-linecap:round] [stroke-linejoin:round]">
         <path ref={echo} d="M12 0Q12 50 12 100" className="stroke-accent/30" strokeWidth="4" vectorEffect="non-scaling-stroke" />
         <path ref={string} d="M12 0Q12 50 12 100" className="stroke-accent" strokeWidth="4" vectorEffect="non-scaling-stroke" />
       </svg>
+      {/* Zona para agarrar la cuerda; deja el scroll vertical libre en pantallas táctiles */}
+      <span
+        ref={hitArea}
+        aria-hidden="true"
+        className="absolute top-10 bottom-[26px] left-1/2 w-8 -translate-x-1/2 cursor-grab touch-pan-y active:cursor-grabbing"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={() => release()}
+        onPointerCancel={() => release(true)}
+      />
       {/* Clavija: también funciona como botón y gira hacia el lado que se muestra */}
       <button
         type="button"
