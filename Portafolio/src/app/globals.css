@@ -238,7 +238,7 @@ html:not(:lang(en)) .page-loader-label[lang='en'] {
   }
 }
 
-/* Árbol de trayectoria: el tronco se desplaza y las ramas se recortan a su paso. */
+/* Trayectoria: la cuerda de bajo se desplaza y las ramas se recortan a su paso. */
 .journey-stage {
   --trunk: 72px;
   --branch-gap: calc(var(--trunk) / 2 - 8px);
@@ -253,14 +253,6 @@ html:not(:lang(en)) .page-loader-label[lang='en'] {
 }
 .journey-tree {
   transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.journey-leaf {
-  transform-origin: center;
-  animation: journey-sway 5s ease-in-out infinite alternate;
-}
-@keyframes journey-sway {
-  from { transform: rotate(-6deg); }
-  to { transform: rotate(6deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {

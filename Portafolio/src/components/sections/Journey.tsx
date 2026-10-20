@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from 'react'
 import { academicBranch, githubReposUrl, workBranch } from '@/lib/data'
 import { Icon } from '../Icon'
 import { useLanguage } from '../LanguageProvider'
-import { Chip, SectionHeading, cardKicker } from '../ui'
+import { Chip, SectionHeading, arrowButtonClass, cardKicker } from '../ui'
 
 type View = 'academic' | 'work'
 
-// Recorte de cada panel: visible deja respirar sombras; oculto se cierra hacia el tronco.
+// Recorte de cada panel: visible deja respirar sombras; oculto se cierra hacia la cuerda.
 const clips: Record<View, Record<'shown' | 'hidden', string>> = {
   academic: { shown: 'inset(-24px -40px -48px -40px)', hidden: 'inset(-24px calc(100% + 40px) -48px -40px)' },
   work: { shown: 'inset(-24px -40px -48px -40px)', hidden: 'inset(-24px -40px -48px calc(100% + 40px))' },
@@ -18,7 +18,7 @@ const clips: Record<View, Record<'shown' | 'hidden', string>> = {
 const cardClass =
   'min-w-0 flex-1 rounded-2xl border border-line bg-paper/92 p-5 shadow-[0_18px_44px_color-mix(in_srgb,var(--ink)_7%,transparent)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[color-mix(in_srgb,var(--accent)_38%,var(--line))] sm:p-6 dark:bg-[rgba(17,17,17,.92)]'
 
-// Rama que une una tarjeta con el tronco: línea + nudo.
+// Rama que une una tarjeta con la cuerda: línea + nudo.
 function Branch({ side }: { side: View }) {
   const line = <span className="h-0.5 w-[calc(var(--trunk)/2+4px)] bg-accent/45" />
   const knot = <span className="size-4 shrink-0 rounded-full border-[3px] border-accent bg-paper shadow-[0_0_0_4px_color-mix(in_srgb,var(--accent)_16%,transparent)]" />
@@ -29,33 +29,123 @@ function Branch({ side }: { side: View }) {
   )
 }
 
-function Tree({ view, onToggle, label }: { view: View; onToggle: () => void; label: string }) {
+// Síntesis Karplus-Strong de una cuerda pulsada con el dedo; los buffers se reutilizan por nota.
+let audioContext: AudioContext | null = null
+const pluckBuffers = new Map<number, AudioBuffer>()
+
+function pluckBuffer(ctx: AudioContext, frequency: number) {
+  const cached = pluckBuffers.get(frequency)
+  if (cached) return cached
+  const length = Math.floor(ctx.sampleRate * 2.4)
+  const buffer = ctx.createBuffer(1, length, ctx.sampleRate)
+  const data = buffer.getChannelData(0)
+  const ring = new Float32Array(Math.round(ctx.sampleRate / frequency))
+  ring.forEach((_, i) => (ring[i] = Math.random() * 2 - 1))
+  // Suaviza el ruido inicial para que suene a dedo y no a púa.
+  for (let pass = 0; pass < 3; pass++) {
+    for (let i = 0; i < ring.length; i++) ring[i] = (ring[i] + ring[(i + 1) % ring.length]) / 2
+  }
+  for (let i = 0, index = 0; i < length; i++) {
+    const next = (index + 1) % ring.length
+    data[i] = ring[index]
+    ring[index] = 0.997 * 0.5 * (ring[index] + ring[next])
+    index = next
+  }
+  pluckBuffers.set(frequency, buffer)
+  return buffer
+}
+
+function playBassNote(frequency: number) {
+  try {
+    audioContext ??= new AudioContext()
+    const ctx = audioContext
+    if (ctx.state === 'suspended') void ctx.resume()
+    const source = ctx.createBufferSource()
+    source.buffer = pluckBuffer(ctx, frequency)
+    const tone = ctx.createBiquadFilter()
+    tone.type = 'lowpass'
+    tone.frequency.value = 950
+    const gain = ctx.createGain()
+    gain.gain.setValueAtTime(0.55, ctx.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 2.2)
+    source.connect(tone).connect(gain).connect(ctx.destination)
+    source.start()
+  } catch {
+    // Sin Web Audio la cuerda solo vibra.
+  }
+}
+
+// Cuerdas al aire del bajo: La al ir a la experiencia laboral, Mi al volver.
+const notes: Record<View, number> = { work: 55, academic: 41.2 }
+
+function BassString({ view, onToggle, label }: { view: View; onToggle: () => void; label: string }) {
+  const string = useRef<SVGPathElement>(null)
+  const echo = useRef<SVGPathElement>(null)
+  const previousView = useRef(view)
+
+  // Al cambiar de lado la cuerda se pulsa: suena y vibra con oscilación amortiguada.
+  useEffect(() => {
+    if (previousView.current === view) return
+    previousView.current = view
+    playBassNote(notes[view])
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const start = performance.now()
+    let frame = 0
+    const draw = (now: number) => {
+      const t = (now - start) / 1000
+      const offset = t < 1.6 ? 12 * Math.exp(-t / 0.45) * Math.sin(2 * Math.PI * 13 * t) : 0
+      string.current?.setAttribute('d', `M12 0Q${12 + offset} 50 12 100`)
+      echo.current?.setAttribute('d', `M12 0Q${12 - offset} 50 12 100`)
+      if (offset !== 0) frame = requestAnimationFrame(draw)
+    }
+    frame = requestAnimationFrame(draw)
+    return () => {
+      cancelAnimationFrame(frame)
+      string.current?.setAttribute('d', 'M12 0Q12 50 12 100')
+      echo.current?.setAttribute('d', 'M12 0Q12 50 12 100')
+    }
+  }, [view])
+
   return (
     <div
       className="journey-tree absolute top-0 bottom-0 z-[2] w-[var(--trunk)]"
       style={{ left: view === 'academic' ? 'calc(100% - var(--trunk))' : '0px' }}
       aria-hidden="true"
     >
-      {/* Tronco: más grueso y saturado hacia las raíces */}
-      <span className="absolute top-10 bottom-10 left-1/2 w-[5px] -translate-x-1/2 rounded-full bg-linear-to-b from-accent/30 via-accent/70 to-accent" />
-      {/* Copa: también funciona como botón */}
+      {/* Cuerda: el eco opuesto dibuja la envolvente de la vibración */}
+      <svg viewBox="0 0 24 100" preserveAspectRatio="none" className="absolute top-10 bottom-[26px] left-1/2 h-[calc(100%-66px)] w-6 -translate-x-1/2 overflow-visible fill-none [stroke-linecap:round]">
+        <path ref={echo} d="M12 0Q12 50 12 100" className="stroke-accent/30" strokeWidth="4" vectorEffect="non-scaling-stroke" />
+        <path ref={string} d="M12 0Q12 50 12 100" className="stroke-accent" strokeWidth="4" vectorEffect="non-scaling-stroke" />
+      </svg>
+      {/* Clavija: también funciona como botón y gira hacia el lado que se muestra */}
       <button
         type="button"
         tabIndex={-1}
         onClick={onToggle}
         title={label}
-        className="absolute top-0 left-1/2 grid size-11 -translate-x-1/2 cursor-pointer place-items-center rounded-full bg-accent text-on-accent shadow-[0_10px_26px_color-mix(in_srgb,var(--accent)_35%,transparent)] transition-transform duration-300 hover:scale-110"
+        className="absolute top-0 left-1/2 size-11 -translate-x-1/2 cursor-pointer transition-transform duration-300 hover:scale-110"
       >
-        <svg viewBox="0 0 60 60" className="pointer-events-none absolute -inset-4 size-[76px] fill-accent/25">
-          <path className="journey-leaf" d="M14 22c-6-2-9-8-8-14 7 0 12 4 13 10Z" />
-          <path className="journey-leaf [animation-delay:-2s]" d="M46 22c6-2 9-8 8-14-7 0-12 4-13 10Z" />
-          <path className="journey-leaf [animation-delay:-1s]" d="M30 6c-3-3-3-6 0-6 3 0 3 3 0 6Z" />
-        </svg>
-        <Icon name={view === 'academic' ? 'previous' : 'next'} className="relative size-5 stroke-[2.4]" />
+        <span
+          className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
+          style={{ transform: `rotate(${view === 'academic' ? 180 : 0}deg)` }}
+        >
+          <svg viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
+            <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
+            <rect x="0" y="0" width="18" height="18" rx="7" />
+            <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
+          </svg>
+          <span className="absolute inset-0 grid place-items-center rounded-full bg-accent text-on-accent shadow-[0_10px_26px_color-mix(in_srgb,var(--accent)_35%,transparent),0_0_0_4px_color-mix(in_srgb,var(--accent)_16%,transparent)]">
+            <Icon name="previous" className="size-5 stroke-[2.4]" />
+          </span>
+        </span>
       </button>
-      {/* Raíces */}
-      <svg viewBox="0 0 60 40" className="absolute bottom-0 left-1/2 h-10 w-[60px] -translate-x-1/2 fill-none stroke-accent stroke-[2.5] [stroke-linecap:round]">
-        <path d="M30 0v22M30 14c-4 8-12 12-22 14M30 14c4 8 12 12 22 14M30 22c-2 7-6 11-12 14M30 22c2 7 6 11 12 14" />
+      {/* Puente: silleta donde apoya la cuerda sobre la placa atornillada */}
+      <svg viewBox="0 0 60 30" className="absolute bottom-0 left-1/2 h-[30px] w-[60px] -translate-x-1/2">
+        <rect x="6" y="14" width="48" height="14" rx="4" className="fill-accent/20 stroke-accent" strokeWidth="2" />
+        <rect x="22" y="4" width="16" height="13" rx="3" className="fill-accent" />
+        <circle cx="14" cy="21" r="2.5" className="fill-accent-soft stroke-accent" strokeWidth="1.5" />
+        <circle cx="46" cy="21" r="2.5" className="fill-accent-soft stroke-accent" strokeWidth="1.5" />
       </svg>
     </div>
   )
@@ -107,13 +197,11 @@ export function Journey() {
     }
   }
 
-  const toggleButtonClass =
-    'inline-flex cursor-pointer items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-bold text-paper transition hover:-translate-y-0.5 hover:bg-accent hover:text-on-accent focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent'
   const panelTitleClass = 'flex items-center gap-2.5 font-head text-xl font-extrabold tracking-[-.04em] sm:text-2xl'
   const branchPadding = 'calc(var(--trunk)/2 + 20px)'
 
   return (
-    <section id="trayectoria" className="bg-accent-soft py-[85px] md:py-[125px]">
+    <section id="trayectoria" className="overflow-x-clip bg-accent-soft py-[85px] md:py-[125px]">
       <div className="wrap relative z-[6]">
         <SectionHeading eyebrow={t.journey.eyebrow} title={t.journey.title} intro={t.journey.intro} />
 
@@ -122,18 +210,17 @@ export function Journey() {
             className="journey-stage relative transition-[height] duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
             style={heights ? { height: heights[view] } : undefined}
           >
-            <Tree view={view} onToggle={toggle} label={view === 'academic' ? t.journey.showWork : t.journey.showAcademic} />
+            <BassString view={view} onToggle={toggle} label={view === 'academic' ? t.journey.showWork : t.journey.showAcademic} />
 
-            {/* Rama académica: a la izquierda del árbol */}
+            {/* Rama académica: a la izquierda de la cuerda */}
             <div ref={academicPanel} {...panelProps('academic')}>
               <div className="mb-7 flex min-h-11 flex-wrap items-center justify-between gap-3" style={{ paddingRight: branchPadding }}>
                 <h3 className={panelTitleClass}>
                   <Icon name="book" className="size-6 text-accent" />
                   {t.journey.academic}
                 </h3>
-                <button ref={academicButton} type="button" className={toggleButtonClass} onClick={toggle} aria-controls="journey-work">
-                  {t.journey.showWork}
-                  <Icon name="next" className="size-4" />
+                <button ref={academicButton} type="button" className={arrowButtonClass} onClick={toggle} aria-controls="journey-work" aria-label={t.journey.showWork} title={t.journey.showWork}>
+                  <Icon name="next" />
                 </button>
               </div>
               <ol className="grid gap-5 pb-12">
@@ -178,12 +265,11 @@ export function Journey() {
               </ol>
             </div>
 
-            {/* Rama laboral: a la derecha del árbol */}
+            {/* Rama laboral: a la derecha de la cuerda */}
             <div ref={workPanel} {...panelProps('work')}>
               <div className="mb-7 flex min-h-11 flex-wrap-reverse items-center justify-between gap-3" style={{ paddingLeft: branchPadding }}>
-                <button ref={workButton} type="button" className={toggleButtonClass} onClick={toggle} aria-controls="journey-academic">
-                  <Icon name="previous" className="size-4" />
-                  {t.journey.showAcademic}
+                <button ref={workButton} type="button" className={arrowButtonClass} onClick={toggle} aria-controls="journey-academic" aria-label={t.journey.showAcademic} title={t.journey.showAcademic}>
+                  <Icon name="previous" />
                 </button>
                 <h3 className={panelTitleClass}>
                   <Icon name="github" className="size-6 text-accent" />

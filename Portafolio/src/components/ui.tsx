@@ -40,3 +40,7 @@ export function Chip({ children, strong = false }: { children: React.ReactNode; 
 }
 
 export const cardKicker = 'mb-2 text-[10px] font-extrabold uppercase tracking-[.12em] text-accent'
+
+// Botón circular de flecha compartido por carruseles y trayectoria.
+export const arrowButtonClass =
+  'grid size-[42px] cursor-pointer place-items-center rounded-full border border-line bg-paper text-ink transition-[background-color,color,transform,opacity] duration-200 enabled:hover:-translate-y-0.5 enabled:hover:bg-ink enabled:hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-30'

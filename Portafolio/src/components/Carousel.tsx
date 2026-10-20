@@ -3,6 +3,7 @@
 import { Children, useCallback, useEffect, useRef, useState } from 'react'
 import { Icon } from './Icon'
 import { useLanguage } from './LanguageProvider'
+import { arrowButtonClass } from './ui'
 
 type CarouselName = 'projects' | 'skills' | 'certificates'
 
@@ -36,9 +37,6 @@ export function Carousel({ name, width, children }: { name: CarouselName; width:
     return () => element.removeEventListener('scroll', onScroll)
   }, [count])
 
-  const buttonClass =
-    'grid size-[42px] cursor-pointer place-items-center rounded-full border border-line bg-paper text-ink transition-[background-color,color,transform,opacity] duration-200 enabled:hover:-translate-y-0.5 enabled:hover:bg-ink enabled:hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-30'
-
   return (
     <div
       className="reveal relative"
@@ -55,13 +53,13 @@ export function Carousel({ name, width, children }: { name: CarouselName; width:
         <div className="flex w-full gap-[18px] *:shrink-0 *:grow-0 *:basis-full *:snap-center">{children}</div>
       </div>
       <div className="mt-3.5 flex items-center justify-center gap-3.5 xs:mt-[18px]">
-        <button type="button" className={buttonClass} aria-label={t.carousels[name].previous} disabled={page === 0} onClick={() => goToPage(page - 1)}>
+        <button type="button" className={arrowButtonClass} aria-label={t.carousels[name].previous} disabled={page === 0} onClick={() => goToPage(page - 1)}>
           <Icon name="previous" />
         </button>
         <span className="min-w-[46px] text-center font-head text-[11px] font-extrabold tracking-[.08em] text-muted" aria-live="polite">
           {page + 1} / {count}
         </span>
-        <button type="button" className={buttonClass} aria-label={t.carousels[name].next} disabled={page === count - 1} onClick={() => goToPage(page + 1)}>
+        <button type="button" className={arrowButtonClass} aria-label={t.carousels[name].next} disabled={page === count - 1} onClick={() => goToPage(page + 1)}>
           <Icon name="next" />
         </button>
       </div>
