@@ -254,6 +254,16 @@ html:not(:lang(en)) .page-loader-label[lang='en'] {
 .journey-tree {
   transition: left 0.9s cubic-bezier(0.65, 0, 0.35, 1);
 }
+.journey-hint-arrow {
+  animation: journey-nudge 1.6s ease-in-out infinite;
+}
+.journey-hint-back .journey-hint-arrow {
+  --nudge: -4px;
+}
+@keyframes journey-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(var(--nudge, 4px)); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html {

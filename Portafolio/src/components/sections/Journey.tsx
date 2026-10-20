@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { academicBranch, githubReposUrl, workBranch } from '@/lib/data'
 import { Icon } from '../Icon'
 import { useLanguage } from '../LanguageProvider'
-import { Chip, SectionHeading, arrowButtonClass, cardKicker } from '../ui'
+import { Chip, SectionHeading, cardKicker } from '../ui'
 
 type View = 'academic' | 'work'
 
@@ -111,26 +111,26 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
     <div
       className="journey-tree absolute top-0 bottom-0 z-[2] w-[var(--trunk)]"
       style={{ left: view === 'academic' ? 'calc(100% - var(--trunk))' : '0px' }}
-      aria-hidden="true"
     >
       {/* Cuerda: el eco opuesto dibuja la envolvente de la vibración */}
-      <svg viewBox="0 0 24 100" preserveAspectRatio="none" className="absolute top-10 bottom-[26px] left-1/2 h-[calc(100%-66px)] w-6 -translate-x-1/2 overflow-visible fill-none [stroke-linecap:round]">
+      <svg aria-hidden="true" viewBox="0 0 24 100" preserveAspectRatio="none" className="absolute top-10 bottom-[26px] left-1/2 h-[calc(100%-66px)] w-6 -translate-x-1/2 overflow-visible fill-none [stroke-linecap:round]">
         <path ref={echo} d="M12 0Q12 50 12 100" className="stroke-accent/30" strokeWidth="4" vectorEffect="non-scaling-stroke" />
         <path ref={string} d="M12 0Q12 50 12 100" className="stroke-accent" strokeWidth="4" vectorEffect="non-scaling-stroke" />
       </svg>
       {/* Clavija: también funciona como botón y gira hacia el lado que se muestra */}
       <button
         type="button"
-        tabIndex={-1}
         onClick={onToggle}
         title={label}
-        className="absolute top-0 left-1/2 size-11 -translate-x-1/2 cursor-pointer transition-transform duration-300 hover:scale-110"
+        aria-label={label}
+        aria-controls={view === 'academic' ? 'journey-work' : 'journey-academic'}
+        className="absolute top-0 left-1/2 size-11 -translate-x-1/2 cursor-pointer rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
       >
         <span
           className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
           style={{ transform: `rotate(${view === 'academic' ? 180 : 0}deg)` }}
         >
-          <svg viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
+          <svg aria-hidden="true" viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
             <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
             <rect x="0" y="0" width="18" height="18" rx="7" />
             <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
@@ -141,7 +141,7 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
         </span>
       </button>
       {/* Puente: silleta donde apoya la cuerda sobre la placa atornillada */}
-      <svg viewBox="0 0 60 30" className="absolute bottom-0 left-1/2 h-[30px] w-[60px] -translate-x-1/2">
+      <svg aria-hidden="true" viewBox="0 0 60 30" className="absolute bottom-0 left-1/2 h-[30px] w-[60px] -translate-x-1/2">
         <rect x="6" y="14" width="48" height="14" rx="4" className="fill-accent/20 stroke-accent" strokeWidth="2" />
         <rect x="22" y="4" width="16" height="13" rx="3" className="fill-accent" />
         <circle cx="14" cy="21" r="2.5" className="fill-accent-soft stroke-accent" strokeWidth="1.5" />
@@ -151,15 +151,28 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
   )
 }
 
+// Pista junto al título que señala la clavija; también cambia de lado al pulsarla.
+function Hint({ side, onClick, children }: { side: View; onClick: () => void; children: string }) {
+  const arrow = <Icon name={side === 'academic' ? 'next' : 'previous'} className="journey-hint-arrow size-3.5 shrink-0 stroke-[2.6] text-accent" />
+  return (
+    <span
+      onClick={onClick}
+      aria-hidden="true"
+      className={`journey-hint flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-muted transition-colors hover:text-ink ${side === 'work' ? 'journey-hint-back' : ''}`}
+    >
+      {side === 'work' && arrow}
+      {children}
+      {side === 'academic' && arrow}
+    </span>
+  )
+}
+
 export function Journey() {
   const { t } = useLanguage()
   const [view, setView] = useState<View>('academic')
   const [heights, setHeights] = useState<Record<View, number> | null>(null)
   const academicPanel = useRef<HTMLDivElement>(null)
   const workPanel = useRef<HTMLDivElement>(null)
-  const academicButton = useRef<HTMLButtonElement>(null)
-  const workButton = useRef<HTMLButtonElement>(null)
-  const toggled = useRef(false)
 
   // La altura del escenario sigue al panel desplegado para animar el cambio.
   useEffect(() => {
@@ -172,15 +185,7 @@ export function Journey() {
     return () => observer.disconnect()
   }, [])
 
-  // Tras cambiar de rama, el foco pasa al botón del panel recién desplegado.
-  useEffect(() => {
-    if (!toggled.current) return
-    const target = view === 'academic' ? academicButton.current : workButton.current
-    target?.focus({ preventScroll: true })
-  }, [view])
-
   const toggle = () => {
-    toggled.current = true
     setView((current) => (current === 'academic' ? 'work' : 'academic'))
   }
 
@@ -219,9 +224,7 @@ export function Journey() {
                   <Icon name="book" className="size-6 text-accent" />
                   {t.journey.academic}
                 </h3>
-                <button ref={academicButton} type="button" className={arrowButtonClass} onClick={toggle} aria-controls="journey-work" aria-label={t.journey.showWork} title={t.journey.showWork}>
-                  <Icon name="next" />
-                </button>
+                <Hint side="academic" onClick={toggle}>{t.journey.hintWork}</Hint>
               </div>
               <ol className="grid gap-5 pb-12">
                 {t.journey.academicItems.map((item, index) => {
@@ -268,9 +271,7 @@ export function Journey() {
             {/* Rama laboral: a la derecha de la cuerda */}
             <div ref={workPanel} {...panelProps('work')}>
               <div className="mb-7 flex min-h-11 flex-wrap-reverse items-center justify-between gap-3" style={{ paddingLeft: branchPadding }}>
-                <button ref={workButton} type="button" className={arrowButtonClass} onClick={toggle} aria-controls="journey-academic" aria-label={t.journey.showAcademic} title={t.journey.showAcademic}>
-                  <Icon name="previous" />
-                </button>
+                <Hint side="work" onClick={toggle}>{t.journey.hintAcademic}</Hint>
                 <h3 className={panelTitleClass}>
                   <Icon name="github" className="size-6 text-accent" />
                   {t.journey.work}
