@@ -25,6 +25,7 @@ const es = {
     projects: { previous: 'Anterior: proyectos destacados', next: 'Siguiente: proyectos destacados' },
     skills: { previous: 'Anterior: habilidades técnicas', next: 'Siguiente: habilidades técnicas' },
     certificates: { previous: 'Anterior: certificados', next: 'Siguiente: certificados' },
+    testimonials: { previous: 'Anterior: testimonios', next: 'Siguiente: testimonios' },
   },
   hero: {
     eyebrow: 'Hola, soy Andrés',
@@ -91,12 +92,24 @@ const es = {
   testimonials: {
     eyebrow: 'Testimonios',
     title: 'Lo que dicen<br><em>de mi trabajo.</em>',
-    quote: 'Andrés es un trabajador responsable y dedicado. Su carácter sociable, su empatía y su sentido del deber le impulsan a realizar una labor excelente de manera afable. Busca soluciones óptimas e innovadoras a problemas gracias a su creatividad, curiosidad intelectual y perspicacia. Su madurez emocional y perspectiva de vida amoldan a su etapa como adolescente, dentro de los parámetros normales. Muestra un futuro prometedor como adulto.',
-    note: '',
-    author: 'Armando Javier Arteaga Unigarro',
-    role: 'Profesor independiente',
-    ratingLabel: 'Calificación: 4,3 de 5 estrellas',
-    rating: '4,3',
+    ratingLabel: 'Calificación: {rating} de 5 estrellas',
+    photoAlt: 'Foto de {author}',
+    items: [
+      {
+        quote: 'Andrés es un trabajador responsable y dedicado. Su carácter sociable, su empatía y su sentido del deber le impulsan a realizar una labor excelente de manera afable. Busca soluciones óptimas e innovadoras a problemas gracias a su creatividad, curiosidad intelectual y perspicacia. Su madurez emocional y perspectiva de vida amoldan a su etapa como adolescente, dentro de los parámetros normales. Muestra un futuro prometedor como adulto.',
+        note: '',
+        author: 'Armando Javier Arteaga Unigarro',
+        role: 'Profesor independiente',
+        rating: '4,3',
+      },
+      {
+        quote: 'Andrés Camilo es muy dedicado para lograr los retos que se propone, podría calificarlo como disciplinado. Respecto a su portafolio y proyectos presentados son fáciles de acceder, se entienden y las personas que necesiten la información que plasma tienen todas las herramientas para interpretar y entender el propósito.',
+        note: '',
+        author: 'Ana Lucía Rosero Chaparro',
+        role: '',
+        rating: '5',
+      },
+    ],
   },
   journey: {
     eyebrow: 'Trayectoria',
@@ -258,6 +271,7 @@ const en: Dictionary = {
     projects: { previous: 'Previous: featured projects', next: 'Next: featured projects' },
     skills: { previous: 'Previous: technical skills', next: 'Next: technical skills' },
     certificates: { previous: 'Previous: certificates', next: 'Next: certificates' },
+    testimonials: { previous: 'Previous: testimonials', next: 'Next: testimonials' },
   },
   hero: {
     eyebrow: 'Hi, I’m Andrés',
@@ -324,12 +338,24 @@ const en: Dictionary = {
   testimonials: {
     eyebrow: 'Testimonials',
     title: 'What people say<br><em>about my work.</em>',
-    quote: 'Andrés is a responsible and dedicated worker. A sociable character, empathy and a sense of duty lead to excellent, good-natured work. Andrés seeks optimal and innovative solutions to problems, driven by creativity, intellectual curiosity and insight. Emotional maturity and outlook on life fit the teenage years, within normal parameters. Andrés shows a promising future as an adult.',
-    note: 'Translated from the original Spanish.',
-    author: 'Armando Javier Arteaga Unigarro',
-    role: 'Independent teacher',
-    ratingLabel: 'Rating: 4.3 out of 5 stars',
-    rating: '4.3',
+    ratingLabel: 'Rating: {rating} out of 5 stars',
+    photoAlt: 'Photo of {author}',
+    items: [
+      {
+        quote: 'Andrés is a responsible and dedicated worker. A sociable character, empathy and a sense of duty lead to excellent, good-natured work. Andrés seeks optimal and innovative solutions to problems, driven by creativity, intellectual curiosity and insight. Emotional maturity and outlook on life fit the teenage years, within normal parameters. Andrés shows a promising future as an adult.',
+        note: 'Translated from the original Spanish.',
+        author: 'Armando Javier Arteaga Unigarro',
+        role: 'Independent teacher',
+        rating: '4.3',
+      },
+      {
+        quote: 'Andrés Camilo is very dedicated to achieving the challenges he sets for himself; I would describe him as disciplined. His portfolio and the projects he presents are easy to access and easy to understand, and anyone who needs the information he shares has every tool to interpret it and understand its purpose.',
+        note: 'Translated from the original Spanish.',
+        author: 'Ana Lucía Rosero Chaparro',
+        role: '',
+        rating: '5',
+      },
+    ],
   },
   journey: {
     eyebrow: 'Journey',

@@ -5,7 +5,7 @@ import { Icon } from './Icon'
 import { useLanguage } from './LanguageProvider'
 import { arrowButtonClass } from './ui'
 
-type CarouselName = 'projects' | 'skills' | 'certificates'
+type CarouselName = 'projects' | 'skills' | 'certificates' | 'testimonials'
 
 // Carrusel de una tarjeta por página con scroll-snap, flechas y teclado.
 export function Carousel({ name, width, children }: { name: CarouselName; width: string; children: React.ReactNode }) {
