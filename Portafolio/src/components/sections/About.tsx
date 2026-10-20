@@ -11,7 +11,7 @@ export function About() {
 
   return (
     <section id="sobre-mi" className="bg-paper py-[85px] md:py-[125px]">
-      <div className="wrap relative z-[6] grid items-start gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:gap-16">
+      <div className="wrap relative z-[6] grid grid-cols-1 items-start gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,.95fr)] lg:gap-16">
         <div>
           <div className="reveal mb-[42px] md:mb-12">
             <Eyebrow>{t.about.eyebrow}</Eyebrow>

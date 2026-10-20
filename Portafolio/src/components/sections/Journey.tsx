@@ -88,6 +88,7 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
   const echo = useRef<SVGPathElement>(null)
   const hitArea = useRef<HTMLSpanElement>(null)
   const previousView = useRef(view)
+  const plucked = useRef(false)
   const frame = useRef(0)
   const pull = useRef<{ x: number; y: number } | null>(null)
 
@@ -111,17 +112,18 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
     frame.current = requestAnimationFrame(draw)
   }
 
-  // Al cambiar de lado la cuerda se pulsa: suena y vibra.
+  // Al cambiar de lado con la clavija la cuerda se pulsa: suena y vibra (si se pulsó la cuerda ya sonó al soltarla).
   useEffect(() => {
     if (previousView.current === view) return
     previousView.current = view
+    if (plucked.current) return void (plucked.current = false)
     playBassNote(notes[view])
     vibrate(6, 50, true)
   }, [view])
 
   useEffect(() => () => cancelAnimationFrame(frame.current), [])
 
-  // Mantener el clic sobre la cuerda la estira hacia el puntero; al soltarla suena según la fuerza.
+  // Tocar la cuerda (o estirarla y soltarla) la hace sonar según la fuerza y cambia de lado.
   const pointerPosition = (event: React.PointerEvent) => {
     const rect = hitArea.current!.getBoundingClientRect()
     const x = Math.max(-maxPull, Math.min(maxPull, event.clientX - (rect.left + rect.width / 2)))
@@ -147,9 +149,12 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
     if (!pull.current) return
     const { x, y } = pull.current
     pull.current = null
-    const strength = Math.max(Math.abs(x), 4) / maxPull
-    if (!silent) playBassNote(notes[view], 0.2 + 0.45 * strength)
-    vibrate(silent ? 0 : Math.sign(x || 1) * Math.max(Math.abs(x), 4), y, false)
+    if (silent) return vibrate(0, y, false)
+    const amplitude = Math.max(Math.abs(x), 6)
+    playBassNote(notes[view === 'academic' ? 'work' : 'academic'], 0.2 + 0.45 * (amplitude / maxPull))
+    vibrate(Math.sign(x || 1) * amplitude, y, false)
+    plucked.current = true
+    onToggle()
   }
 
   return (
@@ -172,29 +177,31 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
         onPointerUp={() => release()}
         onPointerCancel={() => release(true)}
       />
-      {/* Clavija: también funciona como botón y gira hacia el lado que se muestra */}
-      <button
-        type="button"
-        onClick={onToggle}
-        title={label}
-        aria-label={label}
-        aria-controls={view === 'academic' ? 'journey-work' : 'journey-academic'}
-        className="absolute top-0 left-1/2 size-11 -translate-x-1/2 cursor-pointer rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-      >
-        <span
-          className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
-          style={{ transform: `rotate(${view === 'academic' ? 180 : 0}deg)` }}
+      {/* Clavija: baja por la cuerda junto con el scroll (sticky) hasta llegar al puente; también funciona como botón */}
+      <div className="pointer-events-none absolute top-0 bottom-[34px] left-1/2 w-11 -translate-x-1/2">
+        <button
+          type="button"
+          onClick={onToggle}
+          title={label}
+          aria-label={label}
+          aria-controls={view === 'academic' ? 'journey-work' : 'journey-academic'}
+          className="pointer-events-auto sticky top-[calc(50svh-22px)] block size-11 cursor-pointer rounded-full transition-transform duration-300 hover:scale-110 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          <svg aria-hidden="true" viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
-            <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
-            <rect x="0" y="0" width="18" height="18" rx="7" />
-            <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
-          </svg>
-          <span className="absolute inset-0 grid place-items-center rounded-full bg-accent text-on-accent shadow-[0_10px_26px_color-mix(in_srgb,var(--accent)_35%,transparent),0_0_0_4px_color-mix(in_srgb,var(--accent)_16%,transparent)]">
-            <Icon name="previous" className="size-5 stroke-[2.4]" />
+          <span
+            className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
+            style={{ transform: `rotate(${view === 'academic' ? 180 : 0}deg)` }}
+          >
+            <svg aria-hidden="true" viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
+              <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
+              <rect x="0" y="0" width="18" height="18" rx="7" />
+              <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
+            </svg>
+            <span className="absolute inset-0 grid place-items-center rounded-full bg-accent text-on-accent shadow-[0_10px_26px_color-mix(in_srgb,var(--accent)_35%,transparent),0_0_0_4px_color-mix(in_srgb,var(--accent)_16%,transparent)]">
+              <Icon name="previous" className="size-5 stroke-[2.4]" />
+            </span>
           </span>
-        </span>
-      </button>
+        </button>
+      </div>
       {/* Puente: silleta donde apoya la cuerda sobre la placa atornillada */}
       <svg aria-hidden="true" viewBox="0 0 60 30" className="absolute bottom-0 left-1/2 h-[30px] w-[60px] -translate-x-1/2">
         <rect x="6" y="14" width="48" height="14" rx="4" className="fill-accent/20 stroke-accent" strokeWidth="2" />
