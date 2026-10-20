@@ -213,19 +213,24 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
   )
 }
 
-// Pista junto al título que señala la clavija; también cambia de lado al pulsarla.
-function Hint({ side, onClick, children }: { side: View; onClick: () => void; children: string }) {
-  const arrow = <Icon name={side === 'academic' ? 'next' : 'previous'} className="journey-hint-arrow size-3.5 shrink-0 stroke-[2.6] text-accent" />
+// Indicación grande junto a la cuerda: arriba apunta a la clavija y abajo al puente; también cambia de lado.
+function StringCallout({ view, position, onClick }: { view: View; position: 'top' | 'bottom'; onClick: () => void }) {
+  const { t } = useLanguage()
+  const stringOnRight = view === 'academic'
   return (
-    <span
+    <div
       onClick={onClick}
       aria-hidden="true"
-      className={`journey-hint flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-muted transition-colors hover:text-ink ${side === 'work' ? 'journey-hint-back' : ''}`}
+      className={`reveal flex cursor-pointer items-center gap-2 ${stringOnRight ? 'text-right' : 'flex-row-reverse text-left'} justify-end ${position === 'top' ? 'mb-6' : 'mt-4'}`}
     >
-      {side === 'work' && arrow}
-      {children}
-      {side === 'academic' && arrow}
-    </span>
+      <span className="leading-tight">
+        <strong className="block font-head text-2xl font-extrabold tracking-[-.04em] text-accent sm:text-[28px]">{t.journey.tapString}</strong>
+        <span className="text-base font-semibold sm:text-lg">{stringOnRight ? t.journey.hintWork : t.journey.hintAcademic}</span>
+      </span>
+      <span className="flex w-[var(--trunk)] shrink-0 justify-center">
+        <Icon name="arrow" className={`size-8 stroke-[2.6] text-accent ${position === 'top' ? 'journey-bob rotate-90' : 'journey-bob-up -rotate-90'}`} />
+      </span>
+    </div>
   )
 }
 
@@ -272,9 +277,10 @@ export function Journey() {
       <div className="wrap relative z-[6]">
         <SectionHeading eyebrow={t.journey.eyebrow} title={t.journey.title} intro={t.journey.intro} />
 
-        <div className="reveal">
+        <div className="journey-stage">
+          <StringCallout view={view} position="top" onClick={toggle} />
           <div
-            className="journey-stage relative transition-[height] duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
+            className="relative transition-[height] duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
             style={heights ? { height: heights[view] } : undefined}
           >
             <BassString view={view} onToggle={toggle} label={view === 'academic' ? t.journey.showWork : t.journey.showAcademic} />
@@ -286,13 +292,12 @@ export function Journey() {
                   <Icon name="book" className="size-6 text-accent" />
                   {t.journey.academic}
                 </h3>
-                <Hint side="academic" onClick={toggle}>{t.journey.hintWork}</Hint>
               </div>
               <ol className="grid gap-5 pb-12">
                 {t.journey.academicItems.map((item, index) => {
                   const { logo, certificate } = academicBranch[index]
                   return (
-                    <li key={item.title} className="flex items-start">
+                    <li key={item.title} className="reveal flex items-start">
                       <article className={`${cardClass} flex items-start gap-4 sm:gap-5`}>
                         {logo && (
                           <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-[#e8e8e8] sm:size-[76px]">
@@ -333,7 +338,6 @@ export function Journey() {
             {/* Rama laboral: a la derecha de la cuerda */}
             <div ref={workPanel} {...panelProps('work')}>
               <div className="mb-7 flex min-h-11 flex-wrap-reverse items-center justify-between gap-3" style={{ paddingLeft: branchPadding }}>
-                <Hint side="work" onClick={toggle}>{t.journey.hintAcademic}</Hint>
                 <h3 className={panelTitleClass}>
                   <Icon name="github" className="size-6 text-accent" />
                   {t.journey.work}
@@ -343,7 +347,7 @@ export function Journey() {
                 {t.journey.workItems.map((item, index) => {
                   const { collaboration, tags, links } = workBranch[index]
                   return (
-                    <li key={item.title} className="flex items-start">
+                    <li key={item.title} className="reveal flex items-start">
                       <Branch side="work" />
                       <article className={cardClass}>
                         <div className="flex flex-wrap items-center justify-between gap-2">
@@ -385,9 +389,10 @@ export function Journey() {
               </ol>
             </div>
           </div>
+          <StringCallout view={view} position="bottom" onClick={toggle} />
         </div>
 
-        <a className="reveal mx-auto mt-6 flex w-fit items-center gap-3 border-b border-ink pb-[5px] text-xs font-extrabold" href={githubReposUrl} target="_blank" rel="noopener">
+        <a className="reveal mx-auto mt-10 flex w-fit items-center gap-3 border-b border-ink pb-[5px] text-xs font-extrabold" href={githubReposUrl} target="_blank" rel="noopener">
           <span>{t.journey.allRepos}</span>
           <Icon name="arrow" />
         </a>

@@ -53,7 +53,7 @@ export function Testimonials() {
             return (
               <article
                 key={testimonial.author}
-                className="relative grid overflow-hidden rounded-[22px] border border-line bg-cream shadow-[0_24px_60px_color-mix(in_srgb,var(--ink)_8%,transparent)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] dark:bg-[rgba(17,17,17,.9)]"
+                className="relative grid grid-rows-[auto_1fr] overflow-hidden rounded-[22px] border border-line bg-cream shadow-[0_24px_60px_color-mix(in_srgb,var(--ink)_8%,transparent)] md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:grid-rows-1 dark:bg-[rgba(17,17,17,.9)]"
               >
                 {/* En celular la foto se ve completa con su proporción; en escritorio llena la columna izquierda */}
                 <div className="relative overflow-hidden bg-line md:min-h-[440px]">
