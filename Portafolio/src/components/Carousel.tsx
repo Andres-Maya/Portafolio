@@ -1,13 +1,14 @@
 'use client'
 
 import { Children, useCallback, useEffect, useRef, useState } from 'react'
+import { useTrackpadSwipe } from '@/lib/useTrackpadSwipe'
 import { Icon } from './Icon'
 import { useLanguage } from './LanguageProvider'
 import { arrowButtonClass } from './ui'
 
 type CarouselName = 'projects' | 'skills' | 'certificates' | 'testimonials'
 
-// Carrusel de una tarjeta por página con scroll-snap, flechas y teclado.
+// Carrusel de una tarjeta por página con scroll-snap, flechas, teclado, deslizamiento táctil y trackpad.
 export function Carousel({ name, width, children }: { name: CarouselName; width: string; children: React.ReactNode }) {
   const { t } = useLanguage()
   const viewport = useRef<HTMLDivElement>(null)
@@ -21,6 +22,8 @@ export function Carousel({ name, width, children }: { name: CarouselName; width:
     if (element && item) element.scrollTo({ left: item.offsetLeft - element.offsetLeft, behavior: 'smooth' })
     setPage(target)
   }, [count])
+
+  useTrackpadSwipe(viewport, (direction) => goToPage(page + direction))
 
   useEffect(() => {
     const element = viewport.current
@@ -50,7 +53,7 @@ export function Carousel({ name, width, children }: { name: CarouselName; width:
         className="mx-auto snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         style={{ width: `min(100%, ${width})` }}
       >
-        <div className="flex w-full gap-[18px] *:shrink-0 *:grow-0 *:basis-full *:snap-center">{children}</div>
+        <div className="flex w-full gap-[18px] *:shrink-0 *:grow-0 *:basis-full *:snap-center *:snap-always">{children}</div>
       </div>
       <div className="mt-3.5 flex items-center justify-center gap-3.5 xs:mt-[18px]">
         <button type="button" className={arrowButtonClass} aria-label={t.carousels[name].previous} disabled={page === 0} onClick={() => goToPage(page - 1)}>

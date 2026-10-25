@@ -83,6 +83,18 @@ const maxPull = 26
 const curve = (peak: number, y = 50) => `M12 0Q${12 + 2 * peak} ${y} 12 100`
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+// Llave de afinación: distancia (px) de su centro al centro del botón, y altura del centro del botón en reposo.
+// Al soltarse queda centrada a esa altura y su eje toca justo el inicio de la cuerda.
+const pegRadius = 33
+const pegRest = 22
+// Ángulo de la llave (0 = a la izquierda del botón, 90 = encima, 180 = a la derecha) según el lado de la cuerda.
+const pegSide = (view: View) => (view === 'academic' ? 180 : 0)
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t ** 3 : 1 - (2 - 2 * t) ** 3 / 2)
+const pegTransform = (angle: number, travel: number) => {
+  const radians = (angle * Math.PI) / 180
+  return `translate(${-pegRadius * Math.cos(radians)}px, ${pegRest + travel - pegRadius * Math.sin(radians)}px) rotate(${angle}deg)`
+}
+
 function BassString({ view, onToggle, label }: { view: View; onToggle: () => void; label: string }) {
   const string = useRef<SVGPathElement>(null)
   const echo = useRef<SVGPathElement>(null)
@@ -91,6 +103,12 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
   const plucked = useRef(false)
   const frame = useRef(0)
   const pull = useRef<{ x: number; y: number } | null>(null)
+  const tree = useRef<HTMLDivElement>(null)
+  const peg = useRef<HTMLDivElement>(null)
+  const pegButton = useRef<HTMLButtonElement>(null)
+  const pegTurn = useRef({ from: pegSide(view), to: pegSide(view), start: 0, angle: pegSide(view) })
+  const placePeg = useRef(() => {})
+  const [pegStart] = useState(() => pegTransform(pegSide(view), 0))
 
   const shape = (main: string, ghost = main) => {
     string.current?.setAttribute('d', main)
@@ -122,6 +140,49 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
   }, [view])
 
   useEffect(() => () => cancelAnimationFrame(frame.current), [])
+
+  // Mientras el botón baja por la cuerda, la llave rodea su círculo hasta quedar encima y ahí se suelta,
+  // quedándose en el extremo superior de la cuerda; al volver el botón arriba la recoge de nuevo.
+  useEffect(() => {
+    const key = peg.current
+    const button = pegButton.current
+    if (!tree.current || !key || !button) return
+    let raf = 0
+    const place = () => {
+      raf = 0
+      const turn = pegTurn.current
+      const progress = reducedMotion() ? 1 : Math.min(1, (performance.now() - turn.start) / 900)
+      const side = turn.from + (turn.to - turn.from) * easeInOut(progress)
+      const travel = Math.min(Math.max(button.offsetTop, 0), pegRadius)
+      turn.angle = side
+      const angle = side + (90 - side) * (travel / pegRadius)
+      key.style.transform = pegTransform(angle, travel)
+      if (progress < 1) raf = requestAnimationFrame(place)
+    }
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(place)
+    }
+    placePeg.current = schedule
+    schedule()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    const observer = new ResizeObserver(schedule)
+    observer.observe(tree.current)
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      observer.disconnect()
+    }
+  }, [])
+
+  // Al cambiar de lado la llave gira alrededor del botón hacia el otro lado (si sigue sujeta a él).
+  useEffect(() => {
+    const turn = pegTurn.current
+    if (turn.to === pegSide(view)) return
+    pegTurn.current = { from: turn.angle, to: pegSide(view), start: performance.now(), angle: turn.angle }
+    placePeg.current()
+  }, [view])
 
   // Tocar la cuerda (o estirarla y soltarla) la hace sonar según la fuerza y cambia de lado.
   const pointerPosition = (event: React.PointerEvent) => {
@@ -159,6 +220,7 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
 
   return (
     <div
+      ref={tree}
       className="journey-tree absolute top-0 bottom-0 z-[2] w-[var(--trunk)]"
       style={{ left: view === 'academic' ? 'calc(100% - var(--trunk))' : '0px' }}
     >
@@ -177,9 +239,18 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
         onPointerUp={() => release()}
         onPointerCancel={() => release(true)}
       />
+      {/* Llave de afinación: su origen es el centro del árbol a la altura del inicio; la posición la calcula placePeg */}
+      <div ref={peg} aria-hidden="true" className="pointer-events-none absolute top-0 left-1/2 size-0" style={{ transform: pegStart }}>
+        <svg viewBox="0 0 26 18" className="absolute -top-[9px] -left-[9px] h-[18px] w-[26px] fill-accent">
+          <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
+          <rect x="0" y="0" width="18" height="18" rx="7" />
+          <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
+        </svg>
+      </div>
       {/* Clavija: baja por la cuerda junto con el scroll (sticky) hasta llegar al puente; también funciona como botón */}
       <div className="pointer-events-none absolute top-0 bottom-[34px] left-1/2 w-11 -translate-x-1/2">
         <button
+          ref={pegButton}
           type="button"
           onClick={onToggle}
           title={label}
@@ -191,11 +262,6 @@ function BassString({ view, onToggle, label }: { view: View; onToggle: () => voi
             className="absolute inset-0 transition-transform duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
             style={{ transform: `rotate(${view === 'academic' ? 180 : 0}deg)` }}
           >
-            <svg aria-hidden="true" viewBox="0 0 26 18" className="absolute top-1/2 right-[calc(100%-6px)] h-[18px] w-[26px] -translate-y-1/2 fill-accent">
-              <rect x="15" y="6.5" width="11" height="5" rx="1.5" />
-              <rect x="0" y="0" width="18" height="18" rx="7" />
-              <circle cx="9" cy="9" r="3" className="fill-accent-soft" />
-            </svg>
             <span className="absolute inset-0 grid place-items-center rounded-full bg-accent text-on-accent shadow-[0_10px_26px_color-mix(in_srgb,var(--accent)_35%,transparent),0_0_0_4px_color-mix(in_srgb,var(--accent)_16%,transparent)]">
               <Icon name="previous" className="size-5 stroke-[2.4]" />
             </span>
