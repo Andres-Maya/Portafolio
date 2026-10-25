@@ -218,8 +218,8 @@ const es = {
       skills: ['Batería', 'Percusión', 'Bajo', 'Guitarra', 'Voz', 'Teoría musical'],
       bandsTitle: 'Bandas y fundaciones',
       bands: [
-        { title: 'Bajista', place: 'Banda de rock “RËKIËM”', detail: 'Interpretación y trabajo en banda', alt: 'Logo de la banda RËKIËM' },
-        { title: 'Baterista, vocalista y otros', place: 'Estado Larval', detail: 'Banda y fundación independiente de jam', alt: 'Logo de Estado Larval' },
+        { title: 'Bajista', place: 'RËKIËM', detail: 'Banda de hard rock y covers de Héroes del Silencio, Enanitos Verdes y otros', alt: 'Logo de la banda RËKIËM' },
+        { title: 'Baterista, vocalista y otros', place: 'Estado Larval', detail: 'Banda de punk rock, rock alternativo y punk alternativo, y fundación independiente de jam', alt: 'Logo de Estado Larval' },
         { title: 'Baterista, vocalista, vocalista de texturas y vocalista polivalente', place: 'NuPolaris', detail: 'Nu metal alternativo, thrash metal, heavy metal, metal progresivo y shoegaze', alt: 'Logo de la banda NuPolaris' },
       ],
       bandInstagram: 'Ver Instagram de',
@@ -516,8 +516,8 @@ const en: Dictionary = {
       skills: ['Drums', 'Percussion', 'Bass', 'Guitar', 'Vocals', 'Music theory'],
       bandsTitle: 'Bands and foundations',
       bands: [
-        { title: 'Bassist', place: 'Rock band “RËKIËM”', detail: 'Performing and playing in a band', alt: 'RËKIËM band logo' },
-        { title: 'Drummer, vocalist and more', place: 'Estado Larval', detail: 'Independent jam band and foundation', alt: 'Estado Larval logo' },
+        { title: 'Bassist', place: 'RËKIËM', detail: 'Hard rock band playing covers of Héroes del Silencio, Enanitos Verdes and more', alt: 'RËKIËM band logo' },
+        { title: 'Drummer, vocalist and more', place: 'Estado Larval', detail: 'Punk rock, alternative rock and alternative punk band, and independent jam foundation', alt: 'Estado Larval logo' },
         { title: 'Drummer, vocalist, texture vocalist and versatile vocalist', place: 'NuPolaris', detail: 'Alternative nu metal, thrash metal, heavy metal, progressive metal and shoegaze', alt: 'NuPolaris band logo' },
       ],
       bandInstagram: 'See the Instagram of',
