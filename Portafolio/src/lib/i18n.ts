@@ -212,14 +212,14 @@ const es = {
     music: {
       title: 'Música',
       paragraphs: [
-        'En la música interpreto batería, guitarra, bajo y voz, con formación en teoría musical. Ese lado creativo influye en mi forma de comunicar, trabajar en equipo y resolver problemas.',
+        'En la música interpreto batería, percusión, guitarra, bajo y voz, con formación en teoría musical. Ese lado creativo influye en mi forma de comunicar, trabajar en equipo y resolver problemas.',
         'Además, disfruto mucho escuchar música agresiva y saltar para descargar energía.',
       ],
-      skills: ['Batería', 'Bajo', 'Guitarra', 'Voz', 'Teoría musical'],
+      skills: ['Batería', 'Percusión', 'Bajo', 'Guitarra', 'Voz', 'Teoría musical'],
       bandsTitle: 'Bandas y fundaciones',
       bands: [
         { title: 'Bajista', place: 'Banda de rock “RËKIËM”', detail: 'Interpretación y trabajo en banda', alt: 'Logo de la banda RËKIËM' },
-        { title: 'Baterista, vocalista y músico', place: 'Estado Larval', detail: 'Banda y fundación independiente de jam', alt: 'Logo de Estado Larval' },
+        { title: 'Baterista, percusionista, vocalista y músico', place: 'Estado Larval', detail: 'Banda y fundación independiente de jam', alt: 'Logo de Estado Larval' },
       ],
       bandInstagram: 'Ver Instagram de',
       awardKicker: 'Reconocimiento · 2023',
@@ -509,14 +509,14 @@ const en: Dictionary = {
     music: {
       title: 'Music',
       paragraphs: [
-        'In music I play drums, guitar, bass and sing, with training in music theory. That creative side shapes the way I communicate, work in teams and solve problems.',
+        'In music I play drums, percussion, guitar, bass and sing, with training in music theory. That creative side shapes the way I communicate, work in teams and solve problems.',
         'I also really enjoy listening to aggressive music and jumping around to release energy.',
       ],
-      skills: ['Drums', 'Bass', 'Guitar', 'Vocals', 'Music theory'],
+      skills: ['Drums', 'Percussion', 'Bass', 'Guitar', 'Vocals', 'Music theory'],
       bandsTitle: 'Bands and foundations',
       bands: [
         { title: 'Bassist', place: 'Rock band “RËKIËM”', detail: 'Performing and playing in a band', alt: 'RËKIËM band logo' },
-        { title: 'Drummer, vocalist and musician', place: 'Estado Larval', detail: 'Independent jam band and foundation', alt: 'Estado Larval logo' },
+        { title: 'Drummer, percussionist, vocalist and musician', place: 'Estado Larval', detail: 'Independent jam band and foundation', alt: 'Estado Larval logo' },
       ],
       bandInstagram: 'See the Instagram of',
       awardKicker: 'Award · 2023',
