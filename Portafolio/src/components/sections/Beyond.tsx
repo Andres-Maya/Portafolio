@@ -160,53 +160,29 @@ export function Beyond() {
             </a>
           </article>
 
-          {/* Escritura y dibujo + Instagram */}
-          <article className={`${cardClass} flex flex-col`}>
-            <CardTitle icon="pen">{art.title}</CardTitle>
-            <p className="mb-5 leading-[1.72] text-muted">{art.text}</p>
-            <a
-              href={instagramUrl}
-              target="_blank"
-              rel="noopener"
-              className="group mx-auto mt-auto block w-full max-w-[230px] overflow-hidden rounded-[20px] bg-white p-3 shadow-[0_14px_34px_color-mix(in_srgb,var(--ink)_12%,transparent)] transition-transform duration-300 hover:-translate-y-1"
-            >
-              <Image src={instagramQr} alt={art.qrAlt} className="h-auto w-full" sizes="230px" placeholder="blur" />
-            </a>
-            <p className="mt-4 text-center text-xs leading-[1.6] text-muted">{art.instagram}</p>
-            <a className="mx-auto mt-3 inline-flex items-center gap-2 text-sm font-extrabold text-accent" href={instagramUrl} target="_blank" rel="noopener">
-              <Icon name="instagram" className="size-4" />
-              @andresmayk_999
-            </a>
-          </article>
-
-          {/* Lectura */}
-          <article className={`${cardClass} lg:col-span-2`}>
-            <CardTitle icon="book">{reading.title}</CardTitle>
-            <p className="mb-6 leading-[1.72] text-muted">{reading.text}</p>
-            <p className={cardKicker}>{reading.favorites}</p>
-            <div className="mt-4 grid grid-cols-3 gap-3 sm:gap-6">
-              {reading.books.map((book, index) => (
-                <a key={book.author} className="group block" href={bookSearchUrl(book.title, book.author)} target="_blank" rel="noopener">
-                  <figure>
-                    <div className="overflow-hidden rounded-lg shadow-[0_16px_30px_color-mix(in_srgb,var(--ink)_18%,transparent)] transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:-rotate-1">
-                      <Image src={books[index]} alt={`${reading.coverAlt} ${book.title}`} className="aspect-[2/3] h-auto w-full object-cover" sizes="(max-width: 560px) 30vw, 220px" />
-                    </div>
-                    <figcaption className="mt-3">
-                      <strong className="block font-head text-[13px] leading-tight tracking-[-.02em] group-hover:text-accent sm:text-[15px]">{book.title}</strong>
-                      <span className="text-[11px] text-muted sm:text-xs">{book.author}</span>
-                      <span className="mt-1.5 flex items-center gap-1 text-[11px] font-extrabold text-accent">
-                        {reading.find}
-                        <Icon name="external" className="size-3" />
-                      </span>
-                    </figcaption>
-                  </figure>
+          {/* Columna junto a Música: escritura y dibujo, deportes, mascotas e idiomas */}
+          <div className="flex flex-col gap-5">
+            <article className={cardClass}>
+              <CardTitle icon="pen">{art.title}</CardTitle>
+              <p className="mb-5 leading-[1.72] text-muted">{art.text}</p>
+              <div className="flex items-center gap-4">
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener"
+                  className="block w-[108px] shrink-0 overflow-hidden rounded-2xl bg-white p-2 shadow-[0_14px_34px_color-mix(in_srgb,var(--ink)_12%,transparent)] transition-transform duration-300 hover:-translate-y-1"
+                >
+                  <Image src={instagramQr} alt={art.qrAlt} className="h-auto w-full" sizes="108px" placeholder="blur" />
                 </a>
-              ))}
-            </div>
-          </article>
-
-          {/* Deportes, mascotas e idiomas */}
-          <div className="grid content-start gap-5">
+                <div className="min-w-0">
+                  <p className="text-xs leading-[1.6] text-muted">{art.instagram}</p>
+                  <a className="mt-2 inline-flex items-center gap-2 text-sm font-extrabold text-accent" href={instagramUrl} target="_blank" rel="noopener">
+                    <Icon name="instagram" className="size-4" />
+                    @andresmayk_999
+                  </a>
+                </div>
+              </div>
+            </article>
             <article className={cardClass}>
               <CardTitle icon="ball">{sports.title}</CardTitle>
               <p className="leading-[1.72] text-muted">{sports.text}</p>
@@ -231,6 +207,34 @@ export function Beyond() {
               </div>
             </article>
           </div>
+
+          {/* Lectura: texto a un lado y portadas al otro para no alargar la sección */}
+          <article className={`${cardClass} grid items-center gap-6 lg:col-span-3 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:gap-12`}>
+            <div>
+              <CardTitle icon="book">{reading.title}</CardTitle>
+              <p className="mb-6 leading-[1.72] text-muted">{reading.text}</p>
+              <p className={`${cardKicker} mb-0`}>{reading.favorites}</p>
+            </div>
+            <div className="grid max-w-[560px] grid-cols-3 gap-3 sm:gap-6 lg:justify-self-end">
+              {reading.books.map((book, index) => (
+                <a key={book.author} className="group block" href={bookSearchUrl(book.title, book.author)} target="_blank" rel="noopener">
+                  <figure>
+                    <div className="overflow-hidden rounded-lg shadow-[0_16px_30px_color-mix(in_srgb,var(--ink)_18%,transparent)] transition-transform duration-300 group-hover:-translate-y-1.5 group-hover:-rotate-1">
+                      <Image src={books[index]} alt={`${reading.coverAlt} ${book.title}`} className="aspect-[2/3] h-auto w-full object-cover" sizes="(max-width: 560px) 30vw, 170px" />
+                    </div>
+                    <figcaption className="mt-3">
+                      <strong className="block font-head text-[13px] leading-tight tracking-[-.02em] group-hover:text-accent sm:text-[15px]">{book.title}</strong>
+                      <span className="text-[11px] text-muted sm:text-xs">{book.author}</span>
+                      <span className="mt-1.5 flex items-center gap-1 text-[11px] font-extrabold text-accent">
+                        {reading.find}
+                        <Icon name="external" className="size-3" />
+                      </span>
+                    </figcaption>
+                  </figure>
+                </a>
+              ))}
+            </div>
+          </article>
 
           {/* Comunicación y experiencias fuera del software */}
           <article className={`${cardClass} lg:col-span-3`}>
