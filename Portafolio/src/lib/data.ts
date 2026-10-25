@@ -70,7 +70,7 @@ export type Project = {
 export const projects: Project[] = [
   { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']] },
   { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']] },
-  { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree, turboRatasPreviewFour, turboRatasPreviewFive], demo: 'https://raceroberapocalypse.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
+  { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree, turboRatasPreviewFour, turboRatasPreviewFive], demo: 'https://race-rober-game.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
   { number: '04', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
   { number: '05', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
