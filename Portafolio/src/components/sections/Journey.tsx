@@ -306,6 +306,7 @@ export function Journey() {
   const [heights, setHeights] = useState<Record<View, number> | null>(null)
   const academicPanel = useRef<HTMLDivElement>(null)
   const workPanel = useRef<HTMLDivElement>(null)
+  const stage = useRef<HTMLDivElement>(null)
 
   // La altura del escenario sigue al panel desplegado para animar el cambio.
   useEffect(() => {
@@ -320,6 +321,11 @@ export function Journey() {
 
   const toggle = () => {
     setView((current) => (current === 'academic' ? 'work' : 'academic'))
+    // Si ya se pasó el inicio de la trayectoria, vuelve a él: la otra lista puede ser más corta y quedar fuera de la vista.
+    const element = stage.current
+    if (element && element.getBoundingClientRect().top < parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop || '0')) {
+      element.scrollIntoView({ block: 'start' })
+    }
   }
 
   const panelProps = (side: View) => {
@@ -343,7 +349,7 @@ export function Journey() {
       <div className="wrap relative z-[6]">
         <SectionHeading eyebrow={t.journey.eyebrow} title={t.journey.title} intro={t.journey.intro} />
 
-        <div className="journey-stage">
+        <div ref={stage} className="journey-stage">
           <StringCallout view={view} position="top" onClick={toggle} />
           <div
             className="relative transition-[height] duration-[900ms] ease-[cubic-bezier(.65,0,.35,1)]"
