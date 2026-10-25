@@ -30,6 +30,7 @@ import springBootLogo from '@/assets/skills/springboot.svg'
 import ollamaLogo from '@/assets/skills/ollama.svg'
 import mysqlLogo from '@/assets/skills/mysql.svg'
 import mongodbLogo from '@/assets/skills/mongodb.svg'
+import postgresqlLogo from '@/assets/skills/postgresql.svg'
 import dockerLogo from '@/assets/skills/docker.svg'
 import gitLogo from '@/assets/skills/git.svg'
 import githubLogo from '@/assets/skills/github.svg'
@@ -80,7 +81,7 @@ export const skills: Skill[][] = [
   [{ name: 'HTML', icon: htmlLogo }, { name: 'CSS', icon: cssLogo }, { name: 'Tailwind CSS', icon: tailwindLogo }],
   [{ name: 'Node.js', icon: nodejsLogo }, { name: 'Django', icon: djangoLogo }, { name: 'Spring Boot', icon: springBootLogo }],
   [{ name: 'Docker', icon: dockerLogo }, { name: 'Vercel', icon: vercelLogo, monochrome: true }, { name: 'Git', icon: gitLogo }, { name: 'GitHub', icon: githubLogo, monochrome: true }],
-  [{ name: 'MySQL', icon: mysqlLogo }, { name: 'MongoDB', icon: mongodbLogo }],
+  [{ name: 'MySQL', icon: mysqlLogo }, { name: 'PostgreSQL', icon: postgresqlLogo }, { name: 'MongoDB', icon: mongodbLogo }],
   [{ name: 'Ollama', icon: ollamaLogo, monochrome: true }, { name: 'Claude', icon: claudeLogo }, { name: 'Codex', icon: codexLogo, monochrome: true }, { name: 'OpenCode', icon: opencodeLogo, monochrome: true }],
 ]
 
