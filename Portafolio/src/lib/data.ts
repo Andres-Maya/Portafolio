@@ -1,7 +1,8 @@
 import type { StaticImageData } from 'next/image'
 import uccLogo from '@/assets/education/logo_ucc.png'
-import rekiemLogo from '@/assets/work/RËKIËM.png'
-import estadoLarvalLogo from '@/assets/work/Estado_Larval.png'
+import rekiemLogo from '@/assets/music/RËKIËM.png'
+import estadoLarvalLogo from '@/assets/music/Estado_Larval.png'
+import nuPolarisLogo from '@/assets/music/NuPolaris.jpg'
 import tecnodesafioCertificate from '@/assets/certificates/CertificadoTecnodesafio2019.jpeg'
 import heritageCertificate from '@/assets/certificates/CertificadoInvestigacionParaLaRecuperaciónDelPatrimonioBibliográfico.jpeg'
 import scienceClubsCertificate from '@/assets/certificates/Certificado5taEdicionClubesDeCienciaColombia.jpeg'
@@ -43,14 +44,14 @@ import cobroDeSangreCover from '@/assets/adittional_items/cobro_de_sangre.png'
 import laVidaMeViveCover from '@/assets/adittional_items/la_vida_me_vive_amargando_la_vida.png'
 import type { Dictionary } from './i18n'
 
-export { uccLogo, rekiemLogo, estadoLarvalLogo, instagramQr }
+export { uccLogo, rekiemLogo, estadoLarvalLogo, nuPolarisLogo, instagramQr }
 
 export const cvFile = '/AndresCV.pdf'
 export const githubUrl = 'https://github.com/Andres-Maya'
 export const githubReposUrl = 'https://github.com/Andres-Maya?tab=repositories'
 export const instagramUrl = 'https://www.instagram.com/andresmayk_999/'
 // Instagram de cada banda (mismo orden que beyond.music.bands).
-export const bandInstagrams = ['https://www.instagram.com/rekiem_band/?hl=es', 'https://www.instagram.com/estado.larval/?hl=es']
+export const bandInstagrams = ['https://www.instagram.com/rekiem_band/?hl=es', 'https://www.instagram.com/estado.larval/?hl=es', 'https://www.instagram.com/nupolaris/']
 
 // Búsqueda web del libro por título y autor.
 export const bookSearchUrl = (title: string, author: string) => `https://www.google.com/search?q=${encodeURIComponent(`"${title}" ${author} libro`)}`

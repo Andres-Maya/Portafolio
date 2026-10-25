@@ -1,7 +1,7 @@
 'use client'
 
 import Image, { type StaticImageData } from 'next/image'
-import { bandInstagrams, bookSearchUrl, books, estadoLarvalLogo, extraCertificates, instagramQr, instagramUrl, picnicFest, rekiemLogo, uccLogo } from '@/lib/data'
+import { bandInstagrams, bookSearchUrl, books, estadoLarvalLogo, extraCertificates, instagramQr, instagramUrl, nuPolarisLogo, picnicFest, rekiemLogo, uccLogo } from '@/lib/data'
 import { Carousel } from '../Carousel'
 import { Icon, type IconName } from '../Icon'
 import { useLanguage } from '../LanguageProvider'
@@ -104,6 +104,7 @@ export function Beyond() {
   const bandMarks = [
     <div key="rekiem" className={`${markClass} bg-white`}><Image src={rekiemLogo} alt={music.bands[0].alt} className="size-full object-contain p-2.5" sizes="84px" /></div>,
     <div key="larval" className={`${markClass} bg-black`}><Image src={estadoLarvalLogo} alt={music.bands[1].alt} className="size-full object-contain p-2.5" sizes="84px" /></div>,
+    <div key="nupolaris" className={`${markClass} bg-black`}><Image src={nuPolarisLogo} alt={music.bands[2].alt} className="size-full object-cover" sizes="84px" /></div>,
   ]
 
   return (
