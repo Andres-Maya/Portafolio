@@ -55,7 +55,7 @@ const es = {
     title: 'Proyectos<br><em>destacados.</em>',
     intro: 'Una selección de proyectos públicos que refleja mi aprendizaje en desarrollo, arquitectura y diseño de software.',
     all: 'Ver todos los proyectos en GitHub',
-    links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup', webDemo: 'Probar versión web', play: 'Jugar en el navegador', webRepo: 'Repositorio de la versión web', docs: 'Documentación', projects: 'Ver proyectos' },
+    links: { frontend: 'Frontend', backend: 'Backend', repo: 'Ver repositorio', demo: 'Probar mockup interactivo', simulator: 'Repositorio del mockup', webDemo: 'Probar versión web', play: 'Jugar en el navegador', webRepo: 'Repositorio de la versión web', docs: 'Documentación', projects: 'Ver proyectos', docsSimulator: 'Ver documentación y simulador', apk: 'Descargar APK', exe: 'Descargar para Windows (.exe)', phoneApk: 'APK del teléfono', watchApk: 'APK del reloj' },
     items: [
       {
         label: 'App móvil + IA + audio', title: 'SmartTune',
@@ -74,6 +74,12 @@ const es = {
         description: 'Videojuego 2D de persecuciones en vista cenital al estilo GTA 1. Una banda de ladrones roba el Banco Central de Ciudad Cobalto y huye de la policía, una banda rival y mutantes. Una IA ajusta cada nivel a tu forma de conducir. Se juega en PC o móvil, solo o con un amigo en línea.',
         imageAlt: 'Vista cenital de Turbo Ratas: el auto de los ladrones huye entre edificios en la Zona 2, Tierra Baldía',
         tags: ['TypeScript', 'Three.js', 'Rapier', 'Vite', 'WebRTC'],
+      },
+      {
+        label: 'App móvil + reloj + IA', title: 'WalkSecurity',
+        description: 'App de seguridad personal para teléfono y reloj Wear OS. El reloj vibra cuando entras en una zona estimada como riesgosa por un modelo de IA y un botón SOS envía tu ubicación por SMS a tus contactos de confianza. Incluye API en Spring Boot y un sitio de documentación con simulador del reloj.',
+        imageAlt: 'Pantallas del reloj de WalkSecurity: zona segura, precaución, alerta y envío de SOS',
+        tags: ['Kotlin', 'Wear OS', 'Jetpack Compose', 'Spring Boot', 'scikit-learn'],
       },
       {
         label: 'Arquitectura de software', title: 'Plataforma Contable',
@@ -353,7 +359,7 @@ const en: Dictionary = {
     title: 'Featured<br><em>projects.</em>',
     intro: 'A selection of public projects that reflects what I’ve learned about software development, architecture and design.',
     all: 'See all projects on GitHub',
-    links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository', webDemo: 'Try the web version', play: 'Play in the browser', webRepo: 'Web version repository', docs: 'Documentation', projects: 'See projects' },
+    links: { frontend: 'Frontend', backend: 'Backend', repo: 'View repository', demo: 'Try the interactive mockup', simulator: 'Mockup repository', webDemo: 'Try the web version', play: 'Play in the browser', webRepo: 'Web version repository', docs: 'Documentation', projects: 'See projects', docsSimulator: 'View docs and simulator', apk: 'Download APK', exe: 'Download for Windows (.exe)', phoneApk: 'Phone APK', watchApk: 'Watch APK' },
     items: [
       {
         label: 'Mobile app + AI + audio', title: 'SmartTune',
@@ -372,6 +378,12 @@ const en: Dictionary = {
         description: 'Top-down 2D car chase game in the style of GTA 1. A gang of thieves robs the Central Bank of Cobalt City and flees from the police, a rival gang and mutants. An AI adapts each level to the way you drive. Playable on PC or mobile, solo or with a friend online.',
         imageAlt: 'Top-down view of Turbo Ratas: the thieves’ car flees between buildings in Zone 2, Wasteland',
         tags: ['TypeScript', 'Three.js', 'Rapier', 'Vite', 'WebRTC'],
+      },
+      {
+        label: 'Mobile app + watch + AI', title: 'WalkSecurity',
+        description: 'Personal safety app for phone and Wear OS smartwatch. The watch vibrates when you enter an area an AI model estimates as risky, and an SOS button texts your location to trusted contacts. Includes a Spring Boot API and a documentation site with a watch simulator.',
+        imageAlt: 'WalkSecurity watch screens: safe zone, caution, alert and SOS sending',
+        tags: ['Kotlin', 'Wear OS', 'Jetpack Compose', 'Spring Boot', 'scikit-learn'],
       },
       {
         label: 'Software architecture', title: 'Accounting Platform',

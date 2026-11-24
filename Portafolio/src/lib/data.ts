@@ -18,6 +18,7 @@ import turboRatasPreviewTwo from '@/assets/projects/TurboRatasGame2.png'
 import turboRatasPreviewThree from '@/assets/projects/TurboRatasGame3.png'
 import turboRatasPreviewFour from '@/assets/projects/TurboRatasGame4.png'
 import turboRatasPreviewFive from '@/assets/projects/TurboRatasGame5.png'
+import walkSecurityPreview from '@/assets/projects/WalkSecurity.png'
 import htmlLogo from '@/assets/skills/html5.svg'
 import cssLogo from '@/assets/skills/css3.svg'
 import tailwindLogo from '@/assets/skills/tailwindcss.svg'
@@ -65,14 +66,20 @@ export type Project = {
   demo?: string
   demoLabel?: LinkLabel
   links: [LinkLabel, string][]
+  // Instaladores descargables (APK o EXE) que se muestran como botones en la card.
+  downloads?: [LinkLabel, string][]
 }
 
+// Los enlaces /releases/latest/ apuntan siempre a la última versión publicada en GitHub.
+const latestRelease = (repo: string, file: string) => `https://github.com/Andres-Maya/${repo}/releases/latest/download/${file}`
+
 export const projects: Project[] = [
-  { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']] },
-  { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']] },
+  { number: '01', image: smartTunerPreview, demo: 'https://smart-tuner-web-simulator.vercel.app/', links: [['repo', 'https://github.com/Andres-Maya/SmartTuner'], ['simulator', 'https://github.com/Andres-Maya/SmartTuner_Web_Simulator']], downloads: [['apk', latestRelease('SmartTuner', 'SmartTuner.apk')]] },
+  { number: '02', image: stemLabPreview, demo: 'https://stem-lab-web.vercel.app/', demoLabel: 'webDemo', links: [['repo', 'https://github.com/Andres-Maya/StemLab'], ['webRepo', 'https://github.com/Andres-Maya/StemLabWeb']], downloads: [['exe', latestRelease('StemLab', 'StemLab-Setup.exe')]] },
   { number: '03', image: turboRatasPreviewOne, slides: [turboRatasPreviewTwo, turboRatasPreviewThree, turboRatasPreviewFour, turboRatasPreviewFive], demo: 'https://race-rober-game.vercel.app/', demoLabel: 'play', links: [['repo', 'https://github.com/Andres-Maya/RaceRoberGame']] },
-  { number: '04', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
-  { number: '05', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
+  { number: '04', image: walkSecurityPreview, demo: 'https://walksecurity.vercel.app/', demoLabel: 'docsSimulator', links: [['repo', 'https://github.com/Andres-Maya/WalkSecurity'], ['docs', 'https://walksecurity.vercel.app/']], downloads: [['phoneApk', 'https://walksecurity.vercel.app/downloads/walksecurity-telefono.apk'], ['watchApk', 'https://walksecurity.vercel.app/downloads/walksecurity-reloj.apk']] },
+  { number: '05', links: [['repo', 'https://github.com/Andres-Maya/PLataformaContable']] },
+  { number: '06', links: [['repo', 'https://github.com/Andres-Maya/SistemaNotificacionUniversitaria']] },
 ]
 
 export type Skill = { name: string; icon: StaticImageData; monochrome?: boolean }

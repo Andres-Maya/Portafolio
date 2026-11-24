@@ -79,6 +79,21 @@ export function Projects() {
                 <div className="relative z-[1] mt-3 flex flex-wrap gap-2">
                   {item.tags.map((tag) => <Chip key={tag}>{tag}</Chip>)}
                 </div>
+                {project.downloads && (
+                  <div className="relative z-[1] mt-[18px] flex flex-wrap gap-2.5">
+                    {project.downloads.map(([label, url]) => (
+                      <a
+                        key={url}
+                        className="inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-xs font-extrabold text-on-accent shadow-[0_10px_24px_color-mix(in_srgb,var(--accent)_28%,transparent)] transition-transform duration-200 hover:-translate-y-0.5"
+                        href={url}
+                        download
+                      >
+                        <Icon name="download" className="size-[15px] stroke-[2.4]" />
+                        <span>{t.projects.links[label]}</span>
+                      </a>
+                    ))}
+                  </div>
+                )}
                 <div className="relative z-[1] mt-auto flex flex-wrap gap-[18px] pt-[18px]">
                   {project.links.map(([label, url]) => (
                     <a key={url} className="inline-flex items-center gap-[7px] text-xs font-extrabold text-accent" href={url} target="_blank" rel="noopener">
