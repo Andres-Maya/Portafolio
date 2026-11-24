@@ -51,7 +51,7 @@ export const githubUrl = 'https://github.com/Andres-Maya'
 export const githubReposUrl = 'https://github.com/Andres-Maya?tab=repositories'
 export const instagramUrl = 'https://www.instagram.com/andresmayk_999/'
 // Instagram de cada banda (mismo orden que beyond.music.bands).
-export const bandInstagrams = ['https://www.instagram.com/rekiem_band/?hl=es', 'https://www.instagram.com/estado.larval/?hl=es', 'https://www.instagram.com/nupolaris/']
+export const bandInstagrams = ['https://www.instagram.com/rekiem_band/?hl=es', 'https://www.instagram.com/estado.larval/?hl=es', 'https://www.instagram.com/nupolaris_/']
 
 // Búsqueda web del libro por título y autor.
 export const bookSearchUrl = (title: string, author: string) => `https://www.google.com/search?q=${encodeURIComponent(`"${title}" ${author} libro`)}`
