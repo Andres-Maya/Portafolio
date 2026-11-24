@@ -369,7 +369,7 @@ export function Journey() {
                 {t.journey.academicItems.map((item, index) => {
                   const { logo, certificate } = academicBranch[index]
                   return (
-                    <li key={item.title} className="reveal flex items-start">
+                    <li key={index} className="reveal flex items-start">
                       <article className={`${cardClass} flex items-start gap-4 sm:gap-5`}>
                         {logo && (
                           <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-xl border border-line bg-[#e8e8e8] sm:size-[76px]">
@@ -419,7 +419,7 @@ export function Journey() {
                 {t.journey.workItems.map((item, index) => {
                   const { collaboration, tags, links } = workBranch[index]
                   return (
-                    <li key={item.title} className="reveal flex items-start">
+                    <li key={index} className="reveal flex items-start">
                       <Branch side="work" />
                       <article className={cardClass}>
                         <div className="flex flex-wrap items-center justify-between gap-2">

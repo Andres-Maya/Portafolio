@@ -126,7 +126,7 @@ export function Beyond() {
             <div className="mt-3 grid gap-3.5 md:grid-cols-2">
               {music.bands.map((band, index) => (
                 <ExperienceRow
-                  key={band.title}
+                  key={bandInstagrams[index]}
                   mark={bandMarks[index]}
                   kicker={music.title}
                   title={band.title}
@@ -198,8 +198,8 @@ export function Beyond() {
             <article className={cardClass}>
               <CardTitle icon="globe">{languages.title}</CardTitle>
               <div className="grid gap-2.5">
-                {languages.items.map(([language, level]) => (
-                  <div key={language} className="flex items-center justify-between gap-5 rounded-[7px] bg-cream px-[15px] py-[13px] dark:bg-white/5">
+                {languages.items.map(([language, level], index) => (
+                  <div key={index} className="flex items-center justify-between gap-5 rounded-[7px] bg-cream px-[15px] py-[13px] dark:bg-white/5">
                     <span className="text-xs font-semibold text-muted">{language}</span>
                     <strong className="font-head text-[13px] text-accent">{level}</strong>
                   </div>
@@ -242,7 +242,7 @@ export function Beyond() {
             <p className="mb-6 max-w-[620px] leading-[1.72] text-muted">{experience.intro}</p>
             <div className="grid gap-3.5 lg:grid-cols-3">
               {experience.items.map((item, index) => (
-                <ExperienceRow key={item.title} mark={experienceMarks[index]} {...item} />
+                <ExperienceRow key={index} mark={experienceMarks[index]} {...item} />
               ))}
             </div>
           </article>
