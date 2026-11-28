@@ -10,6 +10,7 @@ import cambridgeDiplomaOne from '@/assets/certificates/DiplomaCambridge1.jpeg'
 import cambridgeDiplomaTwo from '@/assets/certificates/DiplomaCambridge2.jpeg'
 import cambridgeDiplomaThree from '@/assets/certificates/DiplomaCambridge3.jpeg'
 import picnicFestCertificate from '@/assets/certificates/CertificadoSolistaPrimerPuestoBatallaBandasPicnicFest.jpeg.jpg'
+import entreMareasCertificate from '@/assets/certificates/CertificadoMusicaAfroEntreMareasYMontanias.jpeg'
 import aiInitiationCertificate from '@/assets/certificates/Certificado asistencia curso iniciación a la IA.png'
 import smartTunerPreview from '@/assets/projects/SmatTuner.png'
 import stemLabPreview from '@/assets/projects/StemLab.png'
@@ -115,11 +116,13 @@ export const workBranch: { collaboration?: boolean; tags: string[]; links: Branc
 
 // Certificados que no tienen que ver directamente con software (mismo orden que beyond.credentials.items).
 export const extraCertificates: { year: string; images: StaticImageData[] }[] = [
+  { year: '2026', images: [entreMareasCertificate] },
   { year: '2025', images: [cambridgeDiplomaOne, cambridgeDiplomaTwo, cambridgeDiplomaThree] },
   { year: '2023', images: [picnicFestCertificate] },
   { year: '2015', images: [heritageCertificate] },
 ]
 
-export const picnicFest = picnicFestCertificate
+// Certificados de la tarjeta de Música (mismo orden que beyond.music.awards).
+export const musicAwards = [entreMareasCertificate, picnicFestCertificate]
 
 export const books = [bloodMeridianCover, cobroDeSangreCover, laVidaMeViveCover]

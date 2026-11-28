@@ -1,7 +1,7 @@
 'use client'
 
 import Image, { type StaticImageData } from 'next/image'
-import { bandInstagrams, bookSearchUrl, books, estadoLarvalLogo, extraCertificates, instagramQr, instagramUrl, nuPolarisLogo, picnicFest, rekiemLogo, uccLogo } from '@/lib/data'
+import { bandInstagrams, bookSearchUrl, books, estadoLarvalLogo, extraCertificates, instagramQr, instagramUrl, musicAwards, nuPolarisLogo, rekiemLogo, uccLogo } from '@/lib/data'
 import { Carousel } from '../Carousel'
 import { Icon, type IconName } from '../Icon'
 import { useLanguage } from '../LanguageProvider'
@@ -136,28 +136,32 @@ export function Beyond() {
                 />
               ))}
             </div>
-            {/* Diploma del primer puesto */}
-            <a
-              className="group/award mt-5 grid items-center gap-4 rounded-2xl border border-dashed border-accent/50 p-4 transition-colors hover:bg-accent-soft sm:grid-cols-[220px_1fr] sm:gap-6 dark:hover:bg-accent/10"
-              href={picnicFest.src}
-              target="_blank"
-              rel="noopener"
-            >
-              <span className="block overflow-hidden rounded-xl border border-line bg-white shadow-[0_12px_28px_color-mix(in_srgb,var(--ink)_14%,transparent)]">
-                <Image src={picnicFest} alt={music.awardAlt} className="h-auto w-full transition-transform duration-300 group-hover/award:scale-[1.03]" sizes="(max-width: 560px) 90vw, 220px" />
-              </span>
-              <span className="min-w-0">
-                <span className={`${cardKicker} flex items-center gap-2`}>
-                  <Icon name="award" className="size-4" />
-                  {music.awardKicker}
+            {/* Certificados y diplomas musicales */}
+            {music.awards.map((award, index) => (
+              <a
+                key={musicAwards[index].src}
+                className="group/award mt-5 grid items-center gap-4 rounded-2xl border border-dashed border-accent/50 p-4 transition-colors hover:bg-accent-soft sm:grid-cols-[220px_1fr] sm:gap-6 dark:hover:bg-accent/10"
+                href={musicAwards[index].src}
+                target="_blank"
+                rel="noopener"
+              >
+                <span className="block overflow-hidden rounded-xl border border-line bg-white shadow-[0_12px_28px_color-mix(in_srgb,var(--ink)_14%,transparent)]">
+                  <Image src={musicAwards[index]} alt={award.alt} className="h-auto w-full transition-transform duration-300 group-hover/award:scale-[1.03]" sizes="(max-width: 560px) 90vw, 220px" />
                 </span>
-                <strong className="block font-head text-lg leading-snug tracking-[-.03em]">{music.award}</strong>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold text-accent">
-                  {music.awardView}
-                  <Icon name="external" className="size-[13px]" />
+                <span className="min-w-0">
+                  <span className={`${cardKicker} flex items-center gap-2`}>
+                    <Icon name="award" className="size-4" />
+                    {award.kicker}
+                  </span>
+                  <strong className="block font-head text-lg leading-snug tracking-[-.03em]">{award.title}</strong>
+                  <span className="mt-1.5 block text-xs leading-[1.55] text-muted">{award.detail}</span>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-extrabold text-accent">
+                    {award.view}
+                    <Icon name="external" className="size-[13px]" />
+                  </span>
                 </span>
-              </span>
-            </a>
+              </a>
+            ))}
           </article>
 
           {/* Columna junto a Música: escritura y dibujo, deportes, mascotas e idiomas */}

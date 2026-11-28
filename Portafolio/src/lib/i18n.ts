@@ -229,10 +229,23 @@ const es = {
         { title: 'Baterista, vocalista, vocalista de texturas y vocalista polivalente', place: 'NuPolaris', detail: 'Nu metal alternativo, thrash metal, heavy metal, metal progresivo y shoegaze', alt: 'Logo de la banda NuPolaris' },
       ],
       bandInstagram: 'Ver Instagram de',
-      awardKicker: 'Reconocimiento · 2023',
-      award: 'Primer puesto como músico solista · Batalla de Bandas Francisco Ponce · Colectivo Picnic Fest',
-      awardAlt: 'Diploma de primer puesto como músico solista en la Batalla de Bandas Francisco Ponce',
-      awardView: 'Ver diploma',
+      // Mismo orden que musicAwards en data.ts.
+      awards: [
+        {
+          kicker: 'Formación artística · 2026',
+          title: 'Música afro y del Pacífico colombiano · Proyecto Entre Mareas y Montañas',
+          detail: 'Culminé satisfactoriamente el proceso de formación artística en música con la Fundación Cultural Vía Libre, en un proyecto que busca visibilizar las manifestaciones afro del Pacífico sur, ganador de la convocatoria CLANES del Ministerio de las Culturas, las Artes y los Saberes. Pasto, Nariño.',
+          alt: 'Certificado de formación artística en música del proyecto Entre Mareas y Montañas, Fundación Cultural Vía Libre',
+          view: 'Ver certificado',
+        },
+        {
+          kicker: 'Reconocimiento · 2023',
+          title: 'Primer puesto como músico solista · Batalla de Bandas Francisco Ponce',
+          detail: 'Colectivo Picnic Fest',
+          alt: 'Diploma de primer puesto como músico solista en la Batalla de Bandas Francisco Ponce',
+          view: 'Ver diploma',
+        },
+      ],
     },
     art: {
       title: 'Escritura y dibujo',
@@ -284,6 +297,7 @@ const es = {
       viewDocument: 'Ver documento',
       viewCertificate: 'Ver certificado',
       items: [
+        { title: 'Música afro y del Pacífico colombiano · Entre Mareas y Montañas', issuer: 'Fundación Cultural Vía Libre · Convocatoria CLANES, Ministerio de las Culturas, las Artes y los Saberes' },
         { title: 'Diploma de inglés B2–C1', issuer: 'Cambridge Academy of Languages · British Council Aptis' },
         { title: 'Primer puesto como músico solista · Batalla de Bandas Francisco Ponce', issuer: 'Colectivo Picnic Fest' },
         { title: 'Investigación para la Recuperación del Patrimonio Bibliográfico', issuer: 'Alcaldía Municipal de Túquerres' },
@@ -533,10 +547,22 @@ const en: Dictionary = {
         { title: 'Drummer, vocalist, texture vocalist and versatile vocalist', place: 'NuPolaris', detail: 'Alternative nu metal, thrash metal, heavy metal, progressive metal and shoegaze', alt: 'NuPolaris band logo' },
       ],
       bandInstagram: 'See the Instagram of',
-      awardKicker: 'Award · 2023',
-      award: 'First place as solo musician · Francisco Ponce Battle of the Bands · Colectivo Picnic Fest',
-      awardAlt: 'First-place diploma as solo musician at the Francisco Ponce Battle of the Bands',
-      awardView: 'View diploma',
+      awards: [
+        {
+          kicker: 'Artistic training · 2026',
+          title: 'Afro and Colombian Pacific music · Entre Mareas y Montañas project',
+          detail: 'I successfully completed the artistic training process in music with Fundación Cultural Vía Libre, in a project that seeks to make the Afro cultural expressions of the southern Pacific visible, winner of the CLANES call of Colombia’s Ministry of Cultures, Arts and Knowledge. Pasto, Nariño.',
+          alt: 'Artistic music training certificate from the Entre Mareas y Montañas project, Fundación Cultural Vía Libre',
+          view: 'View certificate',
+        },
+        {
+          kicker: 'Award · 2023',
+          title: 'First place as solo musician · Francisco Ponce Battle of the Bands',
+          detail: 'Colectivo Picnic Fest',
+          alt: 'First-place diploma as solo musician at the Francisco Ponce Battle of the Bands',
+          view: 'View diploma',
+        },
+      ],
     },
     art: {
       title: 'Writing and drawing',
@@ -588,6 +614,7 @@ const en: Dictionary = {
       viewDocument: 'View document',
       viewCertificate: 'View certificate',
       items: [
+        { title: 'Afro and Colombian Pacific music · Entre Mareas y Montañas', issuer: 'Fundación Cultural Vía Libre · CLANES call, Ministry of Cultures, Arts and Knowledge' },
         { title: 'B2–C1 English diploma', issuer: 'Cambridge Academy of Languages · British Council Aptis' },
         { title: 'First place as solo musician · Francisco Ponce Battle of the Bands', issuer: 'Colectivo Picnic Fest' },
         { title: 'Research for the Recovery of Bibliographic Heritage', issuer: 'Municipal Mayor’s Office of Túquerres' },
